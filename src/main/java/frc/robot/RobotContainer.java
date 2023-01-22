@@ -1,9 +1,10 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-//import frc.robot.commands.AutoCommand;
+import frc.robot.commands.AutoCommand;
 //import frc.robot.commands.IntakeCommand;
 //import frc.robot.commands.RelayCommand;
 //import frc.robot.commands.ShootCommand;
@@ -51,7 +52,8 @@ public class RobotContainer {
     //manipButtonLeft.whileHeld(new WinchReverseCommand(m_Endgame));
   }
 
-  //public Command getAutonomousCommand() {
-    //return new AutoCommand(m_DriveTrain, m_Shooter);
+  public Command getAutonomousCommand() {
+    return new AutoCommand(m_DriveTrain);
      
   }
+}
