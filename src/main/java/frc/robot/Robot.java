@@ -9,8 +9,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-//import frc.robot.subsystems.Shooter;
-//import edu.wpi.first.wpilibj.PneumaticHub;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.subsystems.DriveTrain;
 
 
@@ -18,6 +17,7 @@ public class Robot extends TimedRobot {
   AHRS ahrs;
   
   private Command m_autonomousCommand;
+  private Command m_waitcommand;
   private RobotContainer m_robotContainer;
   //Shooter m_shooter;
   //PneumaticHub pneumaticHub = new PneumaticHub(20);
@@ -37,7 +37,6 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotPeriodic() {
-    //SmartDashboard.putNumber("Pressure", pneumaticHub.getPressure(0));
     CommandScheduler.getInstance().run();
   }
 
@@ -54,11 +53,11 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     
-    //m_robotContainer.m_DriveTrain.gyro.reset();
-
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    m_waitcommand = new WaitCommand(5);
     
     if (m_autonomousCommand != null) {
+      m_waitcommand.schedule();
       m_autonomousCommand.schedule();
     }
    }

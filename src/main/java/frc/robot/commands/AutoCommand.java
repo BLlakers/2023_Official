@@ -4,13 +4,10 @@ import java.util.function.DoubleSupplier;
 import com.revrobotics.CANSparkMax;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
 import frc.robot.subsystems.DriveTrain;
-// import frc.robot.subsystems.Shooter;
 
 public class AutoCommand extends CommandBase {
   DriveTrain m_DriveTrain; // Creates an object DriveTrain 
-  // Shooter m_Shooter; // Creates an object Shooter
   DoubleSupplier leftY; // Creates a Variable for the Left joystick Y position (fake controller)
   DoubleSupplier leftX; // Creates a Variable for the Left joystick X position (fake controller)
   DoubleSupplier rightX; // Creates a Variable for the right joystick X position (fake controller)
@@ -18,7 +15,6 @@ public class AutoCommand extends CommandBase {
 
   public AutoCommand(DriveTrain _DriveTrain) { // Creates a contrusctor for auto command (How things get set up)
     m_DriveTrain = _DriveTrain;
-   // m_Shooter = _Shooter;
     addRequirements(m_DriveTrain);
   }
 
@@ -30,6 +26,9 @@ public class AutoCommand extends CommandBase {
     m_DriveTrain.blDrive.setIdleMode(CANSparkMax.IdleMode.kBrake);
     m_DriveTrain.flDrive.setIdleMode(CANSparkMax.IdleMode.kBrake);
     counter = 0; // Sets counter = 0
+
+    m_DriveTrain.drive(() -> 0, () -> 0, () -> 0);
+
   }
 
   @Override
@@ -38,9 +37,22 @@ public class AutoCommand extends CommandBase {
     leftX = () -> 0; // Tells controller not to move
     rightX = () -> 0; // Tells controller not to move (No RightY because it doesn't do anything)
 
-   // double distance = m_Shooter.getDistance();
-   // double botRPM = /* m_Shooter.getEquationRPM(distance) */3750;
-   //System.out.println(m_DriveTrain.brDrive.getEncoder().getPosition()); // Drives until the encoder is at 52 Rotations on the motor 
+  double w1ca = (-1 * m_DriveTrain.getPosition(m_DriveTrain.frEncoder.get(), 267.4)) + 360;
+  //double w2ca = (-1 * m_DriveTrain.getPosition(m_DriveTrain.flEncoder.get(), 120.7)) + 360;
+  //double w3ca = (-1 * m_DriveTrain.getPosition(m_DriveTrain.blEncoder.get(), 64.7)) + 360;
+  //double w4ca = (-1 * m_DriveTrain.getPosition(m_DriveTrain.brEncoder.get(), 335.2)) + 360;
+
+  //System.out.println(w1ca);   
+  //System.out.println(w2ca);
+  //System.out.println(w3ca);
+  //System.out.println(w4ca);
+    
+if (w1ca > 5 && w1ca < 175) {
+  m_DriveTrain.drive(() -> 0, () -> 0, () -> 0);
+} else if (w1ca > 185 && w1ca < 355) {
+  m_DriveTrain.drive(() -> 0, () -> 0, () -> 0);
+} 
+   
     if (Math.abs(m_DriveTrain.brDrive.getEncoder().getPosition()) < 8.14) { // Drives until the encoder is at rotations on the motor. 1 motor rotation = 8.14 wheel rotation 
       m_DriveTrain.drive(leftY, leftX, rightX);
     } else {
