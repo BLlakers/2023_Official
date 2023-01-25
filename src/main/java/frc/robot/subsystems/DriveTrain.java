@@ -3,10 +3,10 @@ package frc.robot.subsystems;
 
 import java.util.function.DoubleSupplier;
 
-//import com.kauailabs.navx.frc.AHRS;
+import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -34,7 +34,7 @@ public class DriveTrain extends SubsystemBase {
   double leftY;
   double leftX;
   double rightX;
-  //public AHRS gyro = new AHRS(SPI.Port.kMXP);
+  public AHRS gyro = new AHRS(SPI.Port.kMXP);
 
   public DriveTrain() {
     flDrive.setInverted(false);
@@ -470,6 +470,6 @@ public class DriveTrain extends SubsystemBase {
 
   @Override
   public void periodic() {
-
+    System.out.println(gyro.getAngle());
   }
 }
