@@ -1,5 +1,8 @@
 package frc.robot.commands;
+import java.io.Serial;
 import java.util.function.DoubleSupplier;
+
+import javax.swing.text.Position;
 
 import com.revrobotics.CANSparkMax;
 
@@ -21,6 +24,9 @@ public class AutoCommand extends CommandBase {
   @Override
   public void initialize() { // Runs once at the beginning of the command 
     m_DriveTrain.brDrive.getEncoder().setPosition(0); // Sets the position of the encoder 
+    m_DriveTrain.frDrive.getEncoder().setPosition(0);
+    m_DriveTrain.blDrive.getEncoder().setPosition(0);
+    m_DriveTrain.flDrive.getEncoder().setPosition(0);
     m_DriveTrain.brDrive.setIdleMode(CANSparkMax.IdleMode.kBrake); // Lines 30-33 Setting SparkMax Mode (Break = completely still) (Coast = Move with extra momentum)
     m_DriveTrain.frDrive.setIdleMode(CANSparkMax.IdleMode.kBrake);
     m_DriveTrain.blDrive.setIdleMode(CANSparkMax.IdleMode.kBrake);
@@ -37,32 +43,43 @@ public class AutoCommand extends CommandBase {
     leftX = () -> 0; // Tells controller not to move
     rightX = () -> 0; // Tells controller not to move (No RightY because it doesn't do anything)
 
-  double w1ca = (-1 * m_DriveTrain.getPosition(m_DriveTrain.frEncoder.get(), 267.4)) + 360;
-  //double w2ca = (-1 * m_DriveTrain.getPosition(m_DriveTrain.flEncoder.get(), 120.7)) + 360;
-  //double w3ca = (-1 * m_DriveTrain.getPosition(m_DriveTrain.blEncoder.get(), 64.7)) + 360;
-  //double w4ca = (-1 * m_DriveTrain.getPosition(m_DriveTrain.brEncoder.get(), 335.2)) + 360;
+  double w1ca = (-1 * m_DriveTrain.getPosition(m_DriveTrain.frEncoder.get(), 261.4)) + 360;
+  double w2ca = (-1 * m_DriveTrain.getPosition(m_DriveTrain.flEncoder.get(), 120.7)) + 360;
+  double w3ca = (-1 * m_DriveTrain.getPosition(m_DriveTrain.blEncoder.get(), 64.7)) + 360;
+  double w4ca = (-1 * m_DriveTrain.getPosition(m_DriveTrain.brEncoder.get(), 331.2)) + 360;
 
   //System.out.println(w1ca);   
   //System.out.println(w2ca);
   //System.out.println(w3ca);
   //System.out.println(w4ca);
-    
-if (w1ca > 5 && w1ca < 175) {
+  System.out.println(Math.abs(m_DriveTrain.brDrive.getEncoder().getPosition()));
+if ((w1ca > 7 && w1ca < 173) || (w1ca > 187 && w1ca < 353)) {
+ m_DriveTrain.drive(() -> 0, () -> 0, () -> 0);
+}
+else if ((w2ca > 7 && w2ca < 173) || (w2ca > 187 && w2ca < 353)) {
   m_DriveTrain.drive(() -> 0, () -> 0, () -> 0);
-} else if (w1ca > 185 && w1ca < 355) {
+ }
+else if ((w3ca > 7 && w3ca < 173) || (w3ca > 187 && w3ca < 353)) {
   m_DriveTrain.drive(() -> 0, () -> 0, () -> 0);
-} 
-   
-    if (Math.abs(m_DriveTrain.brDrive.getEncoder().getPosition()) < 8.14) { // Drives until the encoder is at rotations on the motor. 1 motor rotation = 8.14 wheel rotation 
+ }
+else if ((w4ca > 7 && w4ca < 173) || (w4ca > 187 && w4ca < 353)) {
+  m_DriveTrain.drive(() -> 0, () -> 0, () -> 0);
+ }// else if (w1ca > 187 && w1ca < 353) {
+ //m_DriveTrain.drive(() -> 0, () -> 0, () -> 0);
+//} 
+ else {  
+ 
+  if (Math.abs(m_DriveTrain.brDrive.getEncoder().getPosition()) < 8.14) { // Drives until the encoder is at rotations on the motor. 1 motor rotation = 8.14 wheel rotation 
       m_DriveTrain.drive(leftY, leftX, rightX);
     } else {
       m_DriveTrain.drive(() -> 0, () -> 0, () -> 0);
      // m_Shooter.shoot(1750, botRPM);
       //if (m_Shooter.shooterReady(1750, botRPM)) {
       //  m_Shooter.ballUp();
-        counter = counter + 1;
+        counter = counter + 1; 
       }
-    }
+    } 
+   }
 
 
 
