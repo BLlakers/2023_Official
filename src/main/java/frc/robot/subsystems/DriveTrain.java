@@ -34,7 +34,7 @@ public class DriveTrain extends SubsystemBase {
   double leftY;
   double leftX;
   double rightX;
-  public AHRS gyro = new AHRS(SPI.Port.kMXP);
+  AHRS gyro = new AHRS(SPI.Port.kMXP);
 
   public DriveTrain() {
     flDrive.setInverted(false);
@@ -470,6 +470,6 @@ public class DriveTrain extends SubsystemBase {
 
   @Override
   public void periodic() {
-    System.out.println(gyro.getAngle());
+   System.out.println(gyro.getAngle());
   }
 }
