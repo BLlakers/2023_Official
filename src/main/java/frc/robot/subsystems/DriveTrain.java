@@ -470,6 +470,7 @@ public class DriveTrain extends SubsystemBase {
 
   @Override
   public void periodic() {
-   System.out.println(gyro.getAngle());
+  // System.out.println(gyro.getAngle());
+  System.out.println(gyro.getYaw()); 
   }
 }
