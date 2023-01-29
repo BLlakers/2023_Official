@@ -42,13 +42,11 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
-    m_waitcommand = new WaitCommand(5);
     
     if (m_autonomousCommand != null) {
-      m_waitcommand.schedule();
       m_autonomousCommand.schedule();
-    }
    }
+  }
 
   @Override
   public void autonomousPeriodic() {
