@@ -43,11 +43,10 @@ public class RobotContainer {
 
   public Command getAutonomousCommand() {
     Command autoSeq = Commands.sequence(
-    Commands.waitSeconds(3.0),
-    new AutoCommand(m_DriveTrain)
+    Commands.waitSeconds(1.0),
+    new AutoCommand(m_DriveTrain, m_chooser.getSelected();)
     );
     
     return autoSeq;
-    //return new AutoCommand(m_DriveTrain);
   }
 }
