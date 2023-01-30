@@ -3,12 +3,14 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 // import edu.wpi.first.wpilibj.DriverStation;
-// import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 // import frc.robot.subsystems.DriveTrain;
-
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 
 public class Robot extends TimedRobot {
   
@@ -87,4 +89,18 @@ public class Robot extends TimedRobot {
   public void simulationPeriodic() {
 
   }
+
+  public void cameraTest() {
+    NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+    NetworkTableEntry tx = table.getEntry("tx");
+    double y = 1.234;
+    double x = tx.getDouble(0.0);
+
+    SmartDashboard.putNumber("LimelightX", x);
+    System.out.println(y);
+
+  }
+  //the function should be wokting, but the function wont run
+  //frc.robot.Robot.cameraTest(table);
+
 }
