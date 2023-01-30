@@ -1,9 +1,13 @@
 package frc.robot.commands;
 
-import frc.robot.subsystems.DriveTrain;
-import edu.wpi.first.wpilibj2.command.CommandBase;
-import com.revrobotics.CANSparkMax;
+// import java.io.Serial;
 import java.util.function.DoubleSupplier;
+// import javax.swing.text.Position;
+
+import com.revrobotics.CANSparkMax;
+
+import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.DriveTrain;
 
 public class AutoCommand extends CommandBase {
   DriveTrain m_DriveTrain; // Creates an object DriveTrain 
@@ -12,7 +16,6 @@ public class AutoCommand extends CommandBase {
   DoubleSupplier rightX; // Creates a Variable for the right joystick X position (fake controller)
   double counter; // Creates a Variable that counts the amount of time we keep the shooter on
   int m_AutoMode; // If AutoMode = 1 then run routine 1, if AutoMode = to 2 then run 2, if AutoMode equal to 3 run routine 3, otherwise don't run. 
-
   public AutoCommand(DriveTrain _DriveTrain, int _AutoMode) { // Creates a contrusctor for auto command (How things get set up)
     m_DriveTrain = _DriveTrain;
     m_AutoMode = _AutoMode;
@@ -127,7 +130,7 @@ else if ((w4ca > 7 && w4ca < 173) || (w4ca > 187 && w4ca < 353)) { // If The bac
 //} 
  else {  
  
-  if (Math.abs(m_DriveTrain.brDrive.getEncoder().getPosition()) < 106) { // Drives until the encoder is at rotations on the motor. 1 motor rotation = 8.14 wheel rotation 
+  if (Math.abs(m_DriveTrain.brDrive.getEncoder().getPosition()) < 67) { // Drives until the encoder is at rotations on the motor. 1 motor rotation = 8.14 wheel rotation 
       m_DriveTrain.drive(leftY, leftX, rightX);
     } else {
       m_DriveTrain.drive(() -> 0, () -> 0, () -> 0);
