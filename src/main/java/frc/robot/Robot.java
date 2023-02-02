@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
+//import edu.wpi.first.wpilibj2.command.WaitCommand;
 // import frc.robot.subsystems.DriveTrain;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
@@ -15,7 +15,7 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 public class Robot extends TimedRobot {
   
   private Command m_autonomousCommand;
-  private Command m_waitcommand;
+  //private Command m_waitcommand;
   private RobotContainer m_robotContainer;
   
   
