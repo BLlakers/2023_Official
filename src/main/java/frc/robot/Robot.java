@@ -67,7 +67,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
-    
+    cameraTest();
   }
 
   @Override
@@ -90,17 +90,17 @@ public class Robot extends TimedRobot {
 
   }
 
+  
   public void cameraTest() {
     NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
     NetworkTableEntry tx = table.getEntry("tx");
-    double y = 1.234;
+    NetworkTableEntry ty = table.getEntry("ty");
     double x = tx.getDouble(0.0);
+    double y = ty.getDouble(0.0);
 
-    SmartDashboard.putNumber("LimelightX", x);
-    System.out.println(y);
 
+    SmartDashboard.putNumber("Limelight X", x);
+    SmartDashboard.putNumber("Limelight Y", y);
+    //System.out.println(x, cameraTest());
   }
-  //the function should be wokting, but the function wont run
-  //frc.robot.Robot.cameraTest(table);
-
 }

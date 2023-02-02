@@ -10,10 +10,12 @@ import frc.robot.commands.SwerveDriveCommand;
 import frc.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.subsystems.Manipulator;
 
 
 public class RobotContainer {
   DriveTrain m_DriveTrain = new DriveTrain();
+  Manipulator m_Manipulator = new Manipulator();
   XboxController driverController = new XboxController(Constants.DriverControllerChannel);
   XboxController manipController = new XboxController(Constants.ManipControllerChannel);
   JoystickButton manipButtonA = new JoystickButton(manipController, Constants.buttonA);
