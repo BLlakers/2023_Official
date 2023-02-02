@@ -81,7 +81,7 @@ else if ((w4ca > 7 && w4ca < 173) || (w4ca > 187 && w4ca < 353)) { // If The bac
 //} 
  else {  
  
-  if (Math.abs(m_DriveTrain.brDrive.getEncoder().getPosition()) < 8.14) { // Drives until the encoder is at rotations on the motor. 1 motor rotation = 8.14 wheel rotation 
+  if (Math.abs(m_DriveTrain.brDrive.getEncoder().getPosition()) < 125.0597) { // Drives until the encoder is at rotations on the motor. 1 motor rotation = 8.14 wheel rotation 
       m_DriveTrain.drive(leftY, leftX, rightX);
     } else {
       m_DriveTrain.drive(() -> 0, () -> 0, () -> 0);
