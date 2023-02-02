@@ -26,7 +26,7 @@ public final class Constants {
     public static int flEncoderChannel = 1;
     public static int frEncoderChannel = 2;
     public static int brEncoderChannel = 3;
-    public static double spinTolerance = 5;
+    public static double spinTolerance = 4.2;
     public static double length = 0.58;
     public static double width = 0.58;    
 
