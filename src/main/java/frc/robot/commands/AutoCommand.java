@@ -7,6 +7,7 @@ import java.util.function.DoubleSupplier;
 import com.revrobotics.CANSparkMax;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.DriveTrain;
 
 public class AutoCommand extends CommandBase {
@@ -130,7 +131,7 @@ else if ((w4ca > 7 && w4ca < 173) || (w4ca > 187 && w4ca < 353)) { // If The bac
 //} 
  else {  
  
-  if (Math.abs(m_DriveTrain.brDrive.getEncoder().getPosition()) < 67) { // Drives until the encoder is at rotations on the motor. 1 motor rotation = 8.14 wheel rotation 
+  if (Math.abs(m_DriveTrain.brDrive.getEncoder().getPosition()) < 57.2) { // Drives until the encoder is at rotations on the motor. 1 motor rotation = 8.14 wheel rotation (11 inches = wheel) 
       m_DriveTrain.drive(leftY, leftX, rightX);
     } else {
       m_DriveTrain.drive(() -> 0, () -> 0, () -> 0);
@@ -164,23 +165,25 @@ else if ((w4ca > 7 && w4ca < 173) || (w4ca > 187 && w4ca < 353)) { // If The bac
 // The purpose of the following set of instructions is to re-center the wheels to face forward, based on the sensors coming from the swerve drive.
 // If The front right wheel is > 7 degress and < 173 OR > 187 and < 353 it will tell the robot to not move foward and it will re center the wheels 
 
-if ((w1ca > 7 && w1ca < 173) || (w1ca > 187 && w1ca < 353)) { // If The front right wheel is > 7 degress and < 173 OR > 187 and < 353 it will tell the robot to not move foward and it will re center the wheels 
+double align_tol = Constants.spinTolerance;
+
+if ((w1ca > align_tol && w1ca < (180-align_tol)) || (w1ca > (180+align_tol) && w1ca < (360-align_tol))) { // If The front right wheel is > 7 degress and < 173 OR > 187 and < 353 it will tell the robot to not move foward and it will re center the wheels 
  m_DriveTrain.drive(() -> 0, () -> 0, () -> 0); // says not to drive 
 }
-else if ((w2ca > 7 && w2ca < 173) || (w2ca > 187 && w2ca < 353)) { // If The front left wheel is > 7 degress and < 173 OR > 187 and < 353 it will tell the robot to not move foward and it will re center the wheels 
+else if ((w2ca > align_tol && w2ca < (180-align_tol)) || (w2ca > (180+align_tol) && w2ca < (360-align_tol))) { // If The front left wheel is > 7 degress and < 173 OR > 187 and < 353 it will tell the robot to not move foward and it will re center the wheels 
   m_DriveTrain.drive(() -> 0, () -> 0, () -> 0); // says not to drive
  }
-else if ((w3ca > 7 && w3ca < 173) || (w3ca > 187 && w3ca < 353)) { // If The back left wheel is > 7 degress and < 173 OR > 187 and < 353 it will tell the robot to not move foward and it will re center the wheels 
+else if ((w3ca > align_tol && w3ca < (180-align_tol)) || (w3ca > (180+align_tol) && w3ca < (360-align_tol))) { // If The back left wheel is > 7 degress and < 173 OR > 187 and < 353 it will tell the robot to not move foward and it will re center the wheels 
   m_DriveTrain.drive(() -> 0, () -> 0, () -> 0); // says not to drive
  }
-else if ((w4ca > 7 && w4ca < 173) || (w4ca > 187 && w4ca < 353)) { // If The back right wheel is > 7 degress and < 173 OR > 187 and < 353 it will tell the robot to not move foward and it will re center the wheels 
+else if ((w4ca > align_tol && w4ca < (180-align_tol)) || (w4ca > (180+align_tol) && w4ca < (360-align_tol))) { // If The back right wheel is > 7 degress and < 173 OR > 187 and < 353 it will tell the robot to not move foward and it will re center the wheels 
   m_DriveTrain.drive(() -> 0, () -> 0, () -> 0); // says not to drive 
  }// else if (w1ca > 187 && w1ca < 353) {
  //m_DriveTrain.drive(() -> 0, () -> 0, () -> 0);
 //} 
  else {  
  
-  if (Math.abs(m_DriveTrain.brDrive.getEncoder().getPosition()) < 40.7) { // Drives until the encoder is at rotations on the motor. 1 motor rotation = 8.14 wheel rotation 
+  if (Math.abs(m_DriveTrain.brDrive.getEncoder().getPosition()) < 125.0597) { // Drives until the encoder is at rotations on the motor. 1 motor rotation = 8.14 wheel rotation 
       m_DriveTrain.drive(leftY, leftX, rightX);
     } else {
       m_DriveTrain.drive(() -> 0, () -> 0, () -> 0);
