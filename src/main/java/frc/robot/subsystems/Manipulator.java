@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 
 public class Manipulator extends SubsystemBase{
-  private final Manipulator manipController = new Manipulator();
+
 // product-specific voltage->pressure conversion, see product manual
 // in this case, 250(V/5)-25
 // the scale parameter in the AnalogPotentiometer constructor is scaled from 1 instead of 5,
@@ -46,9 +46,10 @@ Compressor phCompressor = new Compressor(30, PneumaticsModuleType.REVPH);
   
   @Override
   public void periodic() {
-  phCompressor.enableAnalog(100,110);
+  phCompressor.enableAnalog(50,60);
   System.out.println("hello");
   System.out.println(hellotest);
+
     }
   
 }
