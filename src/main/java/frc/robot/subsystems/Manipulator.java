@@ -1,7 +1,8 @@
 
 package frc.robot.subsystems;
 
-import java.util.function.DoubleSupplier;
+import frc.robot.Constants;
+
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -27,7 +28,7 @@ private final DoubleSolenoid m_DoubleSolenoid = new DoubleSolenoid(PneumaticsMod
   private static final int kDoubleSolenoidReverse = 3;
 // scaled values in psi units
 double psi = pressureTransducer.get();  
-Compressor phCompressor = new Compressor(30, PneumaticsModuleType.REVPH);
+Compressor phCompressor = new Compressor(Constants.PHChannel, PneumaticsModuleType.REVPH);
 
   double current = phCompressor.getPressure();
 

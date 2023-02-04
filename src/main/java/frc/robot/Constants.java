@@ -1,7 +1,10 @@
 package frc.robot;
 
 public final class Constants {
-    
+    //Robot
+    public static int PHChannel = 30;
+    public static int PDHChannel = 99; //Not yet assigned
+
     //Controller
     public static int DriverControllerChannel = 0;
     public static int ManipControllerChannel = 1;

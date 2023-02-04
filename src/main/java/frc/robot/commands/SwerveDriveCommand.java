@@ -4,7 +4,6 @@ package frc.robot.commands;
 import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
 import com.revrobotics.CANSparkMax;
 import frc.robot.subsystems.DriveTrain;
 
@@ -12,17 +11,17 @@ public class SwerveDriveCommand extends CommandBase {
   DoubleSupplier m_leftY;
   DoubleSupplier m_leftX;
   DoubleSupplier m_rightX;
-  double leftY;
-  double leftX;
-  double rightX;
+  // double leftY;
+  // double leftX;
+  // double rightX;
   DriveTrain m_DriveTrain;
-  double x;
-  double y;
-  double rot;
-  double w1ca;
-  double w2ca;
-  double w3ca;
-  double w4ca;
+  // double x;
+  // double y;
+  // double rot;
+  // double w1ca;
+  // double w2ca;
+  // double w3ca;
+  // double w4ca;
 
   public SwerveDriveCommand(DoubleSupplier _leftY, DoubleSupplier _leftX, DoubleSupplier _rightX, DriveTrain _dTrain) {
     m_leftY = _leftY;
