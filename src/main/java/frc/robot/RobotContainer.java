@@ -19,34 +19,62 @@ public class RobotContainer {
   Manipulator m_Manipulator = new Manipulator();
   XboxController driverController = new XboxController(Constants.DriverControllerChannel);
   XboxController manipController = new XboxController(Constants.ManipControllerChannel);
-  JoystickButton manipButtonA = new JoystickButton(manipController, Constants.buttonA);
-  JoystickButton manipButtonB = new JoystickButton(manipController, Constants.buttonB);
-  JoystickButton manipButtonX = new JoystickButton(manipController, Constants.buttonX);
-  JoystickButton manipButtonY = new JoystickButton(manipController, Constants.buttonY);
-  JoystickButton manipButtonRight = new JoystickButton(manipController, Constants.buttonRight);
-  JoystickButton manipButtonLeft = new JoystickButton(manipController, Constants.buttonLeft);
-  JoystickButton manipButtonOptions = new JoystickButton(manipController, 7);
-  JoystickButton manipButtonStart = new JoystickButton(manipController, 8);
+  JoystickButton driverButtonA = new JoystickButton(driverController, Constants.buttonA);
+  //2022 Code
+  //JoystickButton manipButtonA = new JoystickButton(manipController, Constants.buttonA);
+  //JoystickButton manipButtonB = new JoystickButton(manipController, Constants.buttonB);
+  //JoystickButton manipButtonX = new JoystickButton(manipController, Constants.buttonX);
+  //JoystickButton manipButtonY = new JoystickButton(manipController, Constants.buttonY);
+  //JoystickButton manipButtonRight = new JoystickButton(manipController, Constants.buttonRight);
+  //JoystickButton manipButtonLeft = new JoystickButton(manipController, Constants.buttonLeft);
+  //JoystickButton manipButtonOptions = new JoystickButton(manipController, 7);
+  //JoystickButton manipButtonStart = new JoystickButton(manipController, 8);
   
   // A chooser for autonomous commands
   SendableChooser<Integer> m_chooser = new SendableChooser<>();
 
 
   public RobotContainer() {  
+    configureShuffleboard();
+    configureBindings();
+  }
+
+    /**
+   * Use this method to define your trigger->command mappings. Triggers can be created via the
+   * {@link Trigger#Trigger(java.util.function.BooleanSupplier)} constructor with an arbitrary
+   * predicate, or via the named factories in {@link
+   * edu.wpi.first.wpilibj2.command.button.CommandGenericHID}'s subclasses for {@link
+   * CommandXboxController Xbox}/{@link edu.wpi.first.wpilibj2.command.button.CommandPS4Controller
+   * PS4} controllers or {@link edu.wpi.first.wpilibj2.command.button.CommandJoystick Flight
+   * joysticks}.
+   */
+  private void configureBindings() {
+    // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
+    ///new Trigger(m_exampleSubsystem::exampleCondition)
+    ///    .onTrue(new ExampleCommand(m_exampleSubsystem));
+
+    // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
+    // cancelling on release.
+    ///m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
+
     m_DriveTrain.setDefaultCommand(new SwerveDriveCommand (() -> driverController.getLeftY(),
-     () -> driverController.getLeftX(), () -> driverController.getRightX(), m_DriveTrain));
+    () -> driverController.getLeftX(), () -> driverController.getRightX(), m_DriveTrain));
 
-    // Add commands to the autonomous command chooser
-    m_chooser.setDefaultOption("Auto 1", 1);
-    m_chooser.addOption("Auto 2", 2);
-    m_chooser.addOption("Auto 3", 3);
+    driverButtonA.toggleOnTrue(m_Manipulator.toggleGripper());
+  }
 
-    SmartDashboard.putData(m_chooser);
+  private void configureShuffleboard(){
+        // Add commands to the autonomous command chooser
+        m_chooser.setDefaultOption("Auto 1", 1);
+        m_chooser.addOption("Auto 2", 2);
+        m_chooser.addOption("Auto 3", 3);
+    
+        SmartDashboard.putData(m_chooser);
   }
 
   public Command getAutonomousCommand() {
     Command autoSeq = Commands.sequence(
-    Commands.waitSeconds(3.0),
+    Commands.waitSeconds(1.0),
     new AutoCommand(m_DriveTrain, m_chooser.getSelected()));
 
     return autoSeq;

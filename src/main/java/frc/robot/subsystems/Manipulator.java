@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 
 
 
@@ -23,9 +24,9 @@ double scale = 250;
 double offset = -25;
 AnalogPotentiometer pressureTransducer = new AnalogPotentiometer(/* the AnalogIn port*/ 2, scale, offset);
 private final DoubleSolenoid m_DoubleSolenoid = new DoubleSolenoid(PneumaticsModuleType.REVPH, 0, 7);
-  private static final int kSolenoidButton = 1;
-  private static final int kDoubleSolenoidForward = 2;
-  private static final int kDoubleSolenoidReverse = 3;
+private static final int kSolenoidButton = 1;
+private static final int kDoubleSolenoidForward = 2;
+private static final int kDoubleSolenoidReverse = 3;
 // scaled values in psi units
 double psi = pressureTransducer.get();  
 Compressor phCompressor = new Compressor(Constants.PHChannel, PneumaticsModuleType.REVPH);
@@ -53,5 +54,18 @@ Compressor phCompressor = new Compressor(Constants.PHChannel, PneumaticsModuleTy
 
     }
   
+
+
+public CommandBase toggleGripper() {
+  // Inline construction of command goes here.
+  // Subsystem::RunOnce implicitly requires `this` subsystem.
+  return runOnce(
+      () -> {
+        /* one-time action goes here */
+        //WP  - Add code here to toggle the gripper solenoid
+        System.out.println("Toggled gripper solenoid");
+      });
+  }
+
 }
 
