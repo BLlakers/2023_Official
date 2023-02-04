@@ -127,6 +127,7 @@ public class DriveTrain extends SubsystemBase {
     double D = vy + omega * Constants.length * .6;
 
     // Finds Speeds for Each of the Wheels
+    //WP - When this was in the swerve drive command all lines were * 0.5
     double w1s = Math.sqrt(Math.pow(B, 2) + Math.pow(C, 2)) * .6;
     double w2s = Math.sqrt(Math.pow(B, 2) + Math.pow(D, 2)) * .6;
     double w3s = Math.sqrt(Math.pow(A, 2) + Math.pow(D, 2)) * .6;
@@ -138,21 +139,21 @@ public class DriveTrain extends SubsystemBase {
     double w3a = (Math.atan2(A, D) * (180 / Math.PI)) + 180;
     double w4a = (Math.atan2(A, C) * (180 / Math.PI)) + 180;
 
-    /*double yaw = gyro.getYaw() + 180;
+    //double yaw = gyro.getYaw() + 180;
 
-    if (yaw == 360) {
-      yaw = 0;
-    }
-
-    if (yaw <= 180) {
-      yaw = yaw + 180;
-    } else if (w1a > 180) {
-      yaw = yaw - 180;
-    }
-
-    if (yaw == 360) {
-      yaw = 0;
-    }*/
+    //if (yaw == 360) {
+    //  yaw = 0;
+    //}
+    //
+    //if (yaw <= 180) {
+    //  yaw = yaw + 180;
+    //} else if (w1a > 180) {
+    //  yaw = yaw - 180;
+    //}
+    //
+    //if (yaw == 360) {
+    //  yaw = 0;
+    //}
 
     // Manipulates Degree Values so 0 is on top and degree values get bigger when
     // going clockwise
@@ -194,29 +195,29 @@ public class DriveTrain extends SubsystemBase {
       w4a = w4a - 180;
     }
 
-    /*
-     * if (Math.abs(omega) < .1) {
-     * if (yaw < 180) {
-     * if (w1a == 360) {
-     * w1a = 0;
-     * }
-     * if (w2a == 360) {
-     * w2a = 0;
-     * }
-     * if (w3a == 360) {
-     * w3a = 0;
-     * }
-     * if (w4a == 360) {
-     * w4a = 0;
-     * }
-     * }
-     * 
-     * w1a = Math.abs(w1a - yaw);
-     * w2a = Math.abs(w2a - yaw);
-     * w3a = Math.abs(w3a - yaw);
-     * w4a = Math.abs(w4a - yaw);
-     * }
-     */
+    
+    // if (Math.abs(omega) < .1) {
+    // if (yaw < 180) {
+    // if (w1a == 360) {
+    // w1a = 0;
+    // }
+    // if (w2a == 360) {
+    // w2a = 0;
+    // }
+    // if (w3a == 360) {
+    // w3a = 0;
+    // }
+    // if (w4a == 360) {
+    // w4a = 0;
+    // }
+    // }
+     
+    // w1a = Math.abs(w1a - yaw);
+    // w2a = Math.abs(w2a - yaw);
+    // w3a = Math.abs(w3a - yaw);
+    // w4a = Math.abs(w4a - yaw);
+    // }
+     
 
     if (w1a == 360) {
       w1a = 0;
