@@ -20,6 +20,9 @@ public class RobotContainer {
   XboxController driverController = new XboxController(Constants.DriverControllerChannel);
   XboxController manipController = new XboxController(Constants.ManipControllerChannel);
   JoystickButton driverButtonA = new JoystickButton(driverController, Constants.buttonA);
+  JoystickButton manipButtonA = new JoystickButton(manipController, Constants.buttonA);
+  JoystickButton manipButtonB = new JoystickButton(manipController, Constants.buttonB);
+   
   //2022 Code
   //JoystickButton manipButtonA = new JoystickButton(manipController, Constants.buttonA);
   //JoystickButton manipButtonB = new JoystickButton(manipController, Constants.buttonB);
