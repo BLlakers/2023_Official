@@ -6,6 +6,7 @@ import frc.robot.Constants;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Joystick;
@@ -28,7 +29,14 @@ public class Manipulator extends SubsystemBase{
 double scale = 250;
 double offset = -25;
 AnalogPotentiometer pressureTransducer = new AnalogPotentiometer(/* the AnalogIn port*/ 2, scale, offset);
-private final DoubleSolenoid m_DoubleSolenoid = new DoubleSolenoid(PneumaticsModuleType.REVPH, 0, 7);
+//Mtprivate final DoubleSolenoid m_DoubleSolenoid = new DoubleSolenoid(PneumaticsModuleType.REVPH, 0, 7);
+
+DoubleSolenoid exampleDoublePH = new DoubleSolenoid(30, PneumaticsModuleType.REVPH, 0, 7);
+
+
+//exampleDoublePH.set(kOff);
+//exampleDoublePH.set(kForward);
+//exampleDoublePH.set(kReverse);
 
 //exampleDoublePCM.set(manipController.manipButtonA.kForward);
 //exampleDoublePCM.
@@ -57,17 +65,12 @@ Compressor phCompressor = new Compressor(Constants.PHChannel, PneumaticsModuleTy
 
   //boolean enabled = phCompressor.enabled();
   boolean pressureSwitch = phCompressor.getPressureSwitchValue();
- // boolean kForward
   @Override
   public void periodic() {
   phCompressor.enableAnalog(50,60);
   System.out.println("hello");
   System.out.println(hellotest);
   
-  //if(m_Manipulator.extends)
- // else if(manipC.getRawButtonPressed(2) == true) {
-    //solenoid_Double.set(DoubleSolenoid.Value.kReverse);
-  //}
  }
   
 
@@ -75,12 +78,15 @@ Compressor phCompressor = new Compressor(Constants.PHChannel, PneumaticsModuleTy
 public CommandBase toggleGripper() {
   // Inline construction of command goes here.
   // Subsystem::RunOnce implicitly requires `this` subsystem.
+  
   return runOnce(
       () -> {
         /* one-time action goes here */
         //WP  - Add code here to toggle the gripper solenoid
         System.out.println("Toggled gripper solenoid");
-      });
+          exampleDoublePH.toggle();
+       }
+      );
   }
 
 }
