@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
 
 
@@ -36,15 +37,14 @@ DoubleSolenoid exampleDoublePH = new DoubleSolenoid(30, PneumaticsModuleType.REV
 
 //exampleDoublePH.set(kOff);
 //exampleDoublePH.set(kForward);
-//exampleDoublePH.set(kReverse);
 
 //exampleDoublePCM.set(manipController.manipButtonA.kForward);
 //exampleDoublePCM.
 //DoublePCM.set(manipController.manipButtonB.kReverse);
 
-private static final int kSolenoidButton = 1;
-private static final int kDoubleSolenoidForward = 2;
-private static final int kDoubleSolenoidReverse = 3;
+//private static final int kSolenoidButton = 1;
+//private static final int kDoubleSolenoidForward = 2;
+//private static final int kDoubleSolenoidReverse = 3;
 
 
 // scaled values in psi units
@@ -68,8 +68,8 @@ Compressor phCompressor = new Compressor(Constants.PHChannel, PneumaticsModuleTy
   @Override
   public void periodic() {
   phCompressor.enableAnalog(50,60);
-  System.out.println("hello");
-  System.out.println(hellotest);
+  //System.out.println("hello");
+  //System.out.println(hellotest);
   
  }
   
@@ -84,7 +84,9 @@ public CommandBase toggleGripper() {
         /* one-time action goes here */
         //WP  - Add code here to toggle the gripper solenoid
         System.out.println("Toggled gripper solenoid");
-          exampleDoublePH.toggle();
+        exampleDoublePH.set(Value.kForward);
+  
+        //exampleDoublePH.toggle();
        }
       );
   }
