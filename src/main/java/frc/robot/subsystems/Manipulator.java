@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
@@ -73,10 +72,10 @@ Compressor phCompressor = new Compressor(Constants.PHChannel, PneumaticsModuleTy
   
  }
   
-public void toggle(){
-  exampleDoublePH.set(Value.kForward);
-  exampleDoublePH.set(Value.kReverse);
-}
+//public void toggle(){
+  //exampleDoublePH.set(Value.kForward);
+  // exampleDoublePH.set(Value.kReverse);
+//}
 
 public CommandBase toggleGripper() {
   // Inline construction of command goes here.
@@ -88,8 +87,21 @@ public CommandBase toggleGripper() {
         //WP  - Add code here to toggle the gripper solenoid
         System.out.println("Toggled gripper solenoid");
 
-        exampleDoublePH.toggle(exampleDoublePH.set(Value.kForward.kReverse));
-        //exampleDoublePH.set(Value.kReverse);
+        System.out.println(exampleDoublePH.get());
+        //exampleDoublePH.toggle(exampleDoublePH.set(Value.kForward.kReverse));
+        
+        if (exampleDoublePH.get() == Constants.kForward ) {
+          exampleDoublePH.set(Value.kReverse);
+        } 
+        else {
+          exampleDoublePH.set(Value.kForward);
+
+        }
+      
+        
+
+      
+        //exampleDoublePH.toggle();
         //exampleDoublePH.toggle();
        }
       );
