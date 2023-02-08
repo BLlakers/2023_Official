@@ -4,6 +4,7 @@ public final class Constants {
     //Robot
     public static int PHChannel = 30;
     public static int PDHChannel = 99; //Not yet assigned
+    public static String kForward = "kForward";
 
     //Controller
     public static int DriverControllerChannel = 0;
