@@ -73,7 +73,10 @@ Compressor phCompressor = new Compressor(Constants.PHChannel, PneumaticsModuleTy
   
  }
   
-
+public void toggle(){
+  exampleDoublePH.set(Value.kForward);
+  exampleDoublePH.set(Value.kReverse);
+}
 
 public CommandBase toggleGripper() {
   // Inline construction of command goes here.
@@ -84,8 +87,9 @@ public CommandBase toggleGripper() {
         /* one-time action goes here */
         //WP  - Add code here to toggle the gripper solenoid
         System.out.println("Toggled gripper solenoid");
-        exampleDoublePH.set(Value.kForward);
-  
+
+        exampleDoublePH.toggle(exampleDoublePH.set(Value.kForward.kReverse));
+        //exampleDoublePH.set(Value.kReverse);
         //exampleDoublePH.toggle();
        }
       );
