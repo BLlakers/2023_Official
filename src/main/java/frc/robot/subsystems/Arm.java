@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.XboxController.Button;
 
-public class Manipulator extends SubsystemBase{
+public class Arm extends SubsystemBase{
   
 // product-specific voltage->pressure conversion, see product manual
 // in this case, 250(V/5)-25

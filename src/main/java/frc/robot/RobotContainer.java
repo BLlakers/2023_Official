@@ -10,18 +10,19 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.commands.AutoCommand;
 import frc.robot.commands.SwerveDriveCommand;
-
+import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.Manipulator;
+import frc.robot.subsystems.Arm;
 
 
 public class RobotContainer {
   DriveTrain m_DriveTrain = new DriveTrain();
-  Manipulator m_Manipulator = new Manipulator();
+  Arm m_Arm = new Arm();
+  Claw m_Claw = new Claw();
   XboxController driverController = new XboxController(Constants.DriverControllerChannel);
   XboxController manipController = new XboxController(Constants.ManipControllerChannel);
-  JoystickButton driverButtonA = new JoystickButton(driverController, Constants.buttonA);
-  //JoystickButton manipButtonA = new JoystickButton(manipController, Constants.buttonA);
+  //JoystickButton driverButtonA = new JoystickButton(driverController, Constants.buttonA);
+  JoystickButton manipButtonA = new JoystickButton(manipController, Constants.buttonA);
   //JoystickButton manipButtonB = new JoystickButton(manipController, Constants.buttonB);
    
   //2022 Code
@@ -29,7 +30,7 @@ public class RobotContainer {
   //JoystickButton manipButtonB = new JoystickButton(manipController, Constants.buttonB);
   //JoystickButton manipButtonX = new JoystickButton(manipController, Constants.buttonX);
   //JoystickButton manipButtonY = new JoystickButton(manipController, Constants.buttonY);
-  //JoystickButton manipButtonRight = new JoystickButton(manipController, Constants.buttonRight);
+  JoystickButton manipButtonRight = new JoystickButton(manipController, Constants.buttonRight);
   //JoystickButton manipButtonLeft = new JoystickButton(manipController, Constants.buttonLeft);
   //JoystickButton manipButtonOptions = new JoystickButton(manipController, 7);
   //JoystickButton manipButtonStart = new JoystickButton(manipController, 8);
@@ -64,7 +65,8 @@ public class RobotContainer {
     m_DriveTrain.setDefaultCommand(new SwerveDriveCommand (() -> driverController.getLeftY(),
     () -> driverController.getLeftX(), () -> driverController.getRightX(), m_DriveTrain));
 
-    driverButtonA.toggleOnTrue(m_Manipulator.toggleGripper());
+    manipButtonA.toggleOnTrue(m_Arm.toggleGripper());
+    manipButtonRight.toggleOnTrue(m_Claw.toggleGripper());
   }
 
   private void configureShuffleboard(){
