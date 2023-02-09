@@ -90,7 +90,7 @@ public CommandBase toggleGripper() {
         System.out.println(exampleDoublePH.get());
         //exampleDoublePH.toggle(exampleDoublePH.set(Value.kForward.kReverse));
         
-        if (exampleDoublePH.get() == Constants.kForward ) {
+        if (exampleDoublePH.get() == Constants.kForward) {
           exampleDoublePH.set(Value.kReverse);
         } 
         else {
