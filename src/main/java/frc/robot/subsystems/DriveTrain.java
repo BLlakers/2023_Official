@@ -475,7 +475,7 @@ public class DriveTrain extends SubsystemBase {
   public void periodic() {
   //System.out.println(gyro.getAngle());
   //System.out.println(gyro.getYaw()); 
-  //SmartDashboard.putNumber("gyro.getYaw", gyro.getYaw());
+  SmartDashboard.putNumber("gyro.getYaw", gyro.getYaw());
   //System.out.println(brDrive.getEncoder().getPosition());
   }
 }
