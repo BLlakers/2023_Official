@@ -49,9 +49,10 @@ public CommandBase toggleGripper() {
         /* one-time action goes here */
         //WP  - Add code here to toggle the gripper solenoid
         System.out.println("Toggled gripper solenoid");
+        
         System.out.println(exampleDoublePH.get());
-        //exampleDoublePH.set(Value.kReverse);
-        exampleDoublePH.set(Value.kForward);
+        exampleDoublePH.set(Value.kReverse);
+        exampleDoublePH.toggle();
        }
       );
   }
