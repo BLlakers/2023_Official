@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.commands.AutoCommand;
 import frc.robot.commands.SwerveDriveCommand;
-//import frc.robot.subsystems.Claw;
+import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Arm;
 
@@ -18,7 +18,7 @@ import frc.robot.subsystems.Arm;
 public class RobotContainer {
   DriveTrain m_DriveTrain = new DriveTrain();
   Arm m_Arm = new Arm();
- // Claw m_Claw = new Claw();
+  Claw m_Claw = new Claw();
   XboxController driverController = new XboxController(Constants.DriverControllerChannel);
   XboxController manipController = new XboxController(Constants.ManipControllerChannel);
   //JoystickButton driverButtonA = new JoystickButton(driverController, Constants.buttonA);
@@ -66,7 +66,7 @@ public class RobotContainer {
     () -> driverController.getLeftX(), () -> driverController.getRightX(), m_DriveTrain));
 
     manipButtonA.toggleOnTrue(m_Arm.toggleGripper());
-    //manipButtonRight.toggleOnTrue(m_Claw.toggleGripper());
+    manipButtonRight.toggleOnTrue(m_Claw.toggleGripper());
   }
 
   private void configureShuffleboard(){
