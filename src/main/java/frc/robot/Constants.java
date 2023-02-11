@@ -3,8 +3,11 @@ package frc.robot;
 public final class Constants {
     //Robot
     public static int PHChannel = 30;
-    public static int PDHChannel = 99; //Not yet assigned
+    public static int PDHChannel = 20;
     public static String kForward = "kForward";
+
+    //Manipulator
+    public static int armMotorChannel = 9;
 
     //Controller
     public static int DriverControllerChannel = 0;

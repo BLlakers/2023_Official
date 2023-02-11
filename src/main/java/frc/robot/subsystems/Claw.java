@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 public class Claw extends SubsystemBase{
 
-DoubleSolenoid exampleDoublePH = new DoubleSolenoid(30, PneumaticsModuleType.REVPH, 0, 7); //NO ROBOT CODE THIS IS SOLENOID PORT
+DoubleSolenoid exampleDoublePH = new DoubleSolenoid(30, PneumaticsModuleType.REVPH, 1, 8); //NO ROBOT CODE THIS IS SOLENOID PORT
 
 @Override
 public void periodic() {

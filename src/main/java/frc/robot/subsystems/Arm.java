@@ -25,7 +25,7 @@ public class Arm extends SubsystemBase{
 //AnalogPotentiometer pressureTransducer = new AnalogPotentiometer(/* the AnalogIn port*/ 2, scale, offset);
 
 DoubleSolenoid exampleDoublePH = new DoubleSolenoid(30, PneumaticsModuleType.REVPH, 0, 7);
-CANSparkMax armRotationMtr = new CANSparkMax(Constants.flDriveMotorChannel, MotorType.kBrushless); //3
+CANSparkMax armRotationMtr = new CANSparkMax(Constants.armMotorChannel, MotorType.kBrushless);
 
 
 //exampleDoublePH.set(kOff);
