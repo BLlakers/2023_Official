@@ -23,6 +23,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
+    cameraTest();
   }
 
   @Override
@@ -93,6 +94,21 @@ public class Robot extends TimedRobot {
 
     SmartDashboard.putNumber("Limelight X", x);
     SmartDashboard.putNumber("Limelight Y", y);
-    //System.out.println(x, cameraTest());
+
+    if (13.5 <= x && 5.7 <= x) {
+      System.out.println("alligned");
+      
+    } else if (13.5 >= x && 5.7 >= x) { 
+      System.out.println("NOT alligned");
+      //this works, but i has tons of delay and i think it is because of the procesing power of the robo rio
+    } 
+    } 
+      
+
+    
   }
-}
+
+    //System.out.println(x, cameraTest());
+  
+  
+
