@@ -18,6 +18,7 @@ public class RotateArmCommand extends CommandBase {
     m_leftY = _leftY;
     m_Arm = _dArm; //Replace this with arm
     addRequirements(m_Arm);
+    //test
   }
 
   // Called when the command is initially scheduled.
