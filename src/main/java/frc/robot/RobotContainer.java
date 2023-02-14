@@ -65,8 +65,10 @@ public class RobotContainer {
     m_DriveTrain.setDefaultCommand(new SwerveDriveCommand (() -> driverController.getLeftY(),
     () -> driverController.getLeftX(), () -> driverController.getRightX(), m_DriveTrain));
 
+
     manipButtonA.toggleOnTrue(m_Arm.toggleGripper());
     manipButtonRight.toggleOnTrue(m_Claw.toggleGripper());
+    
   }
 
   private void configureShuffleboard(){
