@@ -3,7 +3,6 @@ import com.revrobotics.CANSparkMax;
 import java.util.function.DoubleSupplier;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Arm;
-import frc.robot.subsystems.DriveTrain;
 
 public class RotateArmCommand extends CommandBase {
   DoubleSupplier m_leftY;
@@ -16,12 +15,13 @@ public class RotateArmCommand extends CommandBase {
   @Override
 
   public void initialize() {
-        m_Arm.armRotationMtr.setIdleMode(CANSparkMax.IdleMode.kBrake);
+      m_Arm.armRotationMtr.setIdleMode(CANSparkMax.IdleMode.kBrake);
       }
       @Override
     
     public void execute () {
-        System.out.println(m_leftY.getAsDouble());
+     m_Arm.armRotationMtr.set(m_leftY.getAsDouble());
+     System.out.println(m_leftY.getAsDouble());
     }  
     @Override
     public void end(boolean interrupted) {
