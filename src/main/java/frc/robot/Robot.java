@@ -89,20 +89,26 @@ public class Robot extends TimedRobot {
     NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
     NetworkTableEntry tx = table.getEntry("tx");
     NetworkTableEntry ty = table.getEntry("ty");
-    double x = tx.getDouble(0.0);
-    double y = ty.getDouble(0.0);
+    double camerax = tx.getDouble(0.0);
+    double cameray = ty.getDouble(0.0);
+    var aligner = 0;
 
+    SmartDashboard.putNumber("Limelight X", camerax);
+    SmartDashboard.putNumber("Limelight Y", cameray);
 
-    SmartDashboard.putNumber("Limelight X", x);
-    SmartDashboard.putNumber("Limelight Y", y);
+    if (13.5 >= camerax && camerax >= 5.7) {
+    System.out.println("alligned");
+    var one = 1;
+    SmartDashboard.putNumber("null", one);
 
-    if (13.5 <= x && 5.7 <= x) {
-    //  System.out.println("alligned");
+    } else if (13.5 <= camerax && camerax <= 5.7) { 
+      System.out.println("NOT alligned");
+      var zero = 2;
+      SmartDashboard.putNumber("null", zero);
 
-    } else if (13.5 >= x && 5.7 >= x) { 
-     // System.out.println("NOT alligned");
       //this works, but i has tons of delay and i think it is because of the procesing power of the robo rio
     } 
+   
     } 
       
 
