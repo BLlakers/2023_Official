@@ -30,7 +30,7 @@ public class RobotContainer {
   //JoystickButton manipButtonA = new JoystickButton(manipController, Constants.buttonA);
   //JoystickButton manipButtonB = new JoystickButton(manipController, Constants.buttonB);
   //JoystickButton manipButtonX = new JoystickButton(manipController, Constants.buttonX);
-  //JoystickButton manipButtonY = new JoystickButton(manipController, Constants.buttonY);
+  JoystickButton manipButtonY = new JoystickButton(manipController, Constants.buttonY);
   JoystickButton manipButtonRight = new JoystickButton(manipController, Constants.buttonRight);
   //JoystickButton manipButtonLeft = new JoystickButton(manipController, Constants.buttonLeft);
   //JoystickButton manipButtonOptions = new JoystickButton(manipController, 7);
@@ -70,7 +70,7 @@ public class RobotContainer {
 
     manipButtonA.toggleOnTrue(m_Arm.toggleGripper());
     manipButtonRight.toggleOnTrue(m_Claw.toggleGripper());
-    
+
   }
 
   private void configureShuffleboard(){
