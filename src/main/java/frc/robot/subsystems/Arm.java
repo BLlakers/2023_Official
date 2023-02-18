@@ -31,7 +31,7 @@ public CANSparkMax armRotationMtr = new CANSparkMax(Constants.armMotorChannel, M
 
 //exampleDoublePH.set(kOff);
 //exampleDoublePH.set(kForward);
-
+ 
 // scaled values in psi units
 //double psi = pressureTransducer.get();  
 Compressor phCompressor = new Compressor(Constants.PHChannel, PneumaticsModuleType.REVPH);
