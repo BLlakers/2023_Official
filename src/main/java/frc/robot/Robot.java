@@ -84,15 +84,18 @@ public class Robot extends TimedRobot {
 
   }
 
-  
   public void cameraTest() {
     NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
     NetworkTableEntry tx = table.getEntry("tx");
     NetworkTableEntry ty = table.getEntry("ty");
-    double x = tx.getDouble(0.0);
-    double y = ty.getDouble(0.0);
+    double camerax = tx.getDouble(0.0);
+    double cameray = ty.getDouble(0.0);
+    var aligncamera = camerax;
 
+    SmartDashboard.putNumber("Limelight X", camerax);
+    SmartDashboard.putNumber("Limelight Y", cameray);
 
+<<<<<<< HEAD
     SmartDashboard.putNumber("Limelight X", x);
     SmartDashboard.putNumber("Limelight Y", y);
 
@@ -101,13 +104,45 @@ public class Robot extends TimedRobot {
 
     } else if (13.5 >= x && 5.7 >= x) { 
      // System.out.println("NOT alligned");
+=======
+    if (13.5 >= camerax && 5.7 <= camerax) {
+      System.out.println("alligned");
+      try {
+        Thread.sleep(500);
+      }  catch( InterruptedException ex) {
+        Thread.currentThread().interrupt();
+      }
+
+
+      
+    } else { 
+      var angle = aligncamera - 9.6;
+      System.out.println(angle);
+    try {
+      Thread.sleep(500);
+    }  catch( InterruptedException ex) {
+      Thread.currentThread().interrupt();
+    }
+
+
+
+//test commit
+
+>>>>>>> 3f5b65892455eed62cd27e5d59bc63711a1b3ae9
       //this works, but i has tons of delay and i think it is because of the procesing power of the robo rio
     } 
+    }
+
+  
+
+      //this works, but i has tons of delay and i think it is because of the procesing power of the robo rio
     } 
+   
+   
       
 
     
-  }
+  
 
     //System.out.println(x, cameraTest());
   
