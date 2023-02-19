@@ -95,40 +95,14 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Limelight X", camerax);
     SmartDashboard.putNumber("Limelight Y", cameray);
 
-<<<<<<< HEAD
-    SmartDashboard.putNumber("Limelight X", x);
-    SmartDashboard.putNumber("Limelight Y", y);
+    SmartDashboard.putNumber("Limelight X", camerax);
+    SmartDashboard.putNumber("Limelight Y", cameray);
 
-    if (13.5 <= x && 5.7 <= x) {
+    if (13.5 <= camerax && 5.7 <= camerax) {
     //  System.out.println("alligned");
 
-    } else if (13.5 >= x && 5.7 >= x) { 
+    } else if (13.5 >= camerax && 5.7 >= camerax) { 
      // System.out.println("NOT alligned");
-=======
-    if (13.5 >= camerax && 5.7 <= camerax) {
-      System.out.println("alligned");
-      try {
-        Thread.sleep(500);
-      }  catch( InterruptedException ex) {
-        Thread.currentThread().interrupt();
-      }
-
-
-      
-    } else { 
-      var angle = aligncamera - 9.6;
-      System.out.println(angle);
-    try {
-      Thread.sleep(500);
-    }  catch( InterruptedException ex) {
-      Thread.currentThread().interrupt();
-    }
-
-
-
-//test commit
-
->>>>>>> 3f5b65892455eed62cd27e5d59bc63711a1b3ae9
       //this works, but i has tons of delay and i think it is because of the procesing power of the robo rio
     } 
     }

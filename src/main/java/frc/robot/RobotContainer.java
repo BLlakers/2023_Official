@@ -70,11 +70,7 @@ public class RobotContainer {
 
     manipButtonA.toggleOnTrue(m_Arm.toggleGripper());
     manipButtonRight.toggleOnTrue(m_Claw.toggleGripper());
-<<<<<<< HEAD
     
-=======
-
->>>>>>> 3f5b65892455eed62cd27e5d59bc63711a1b3ae9
   }
 
   private void configureShuffleboard(){
