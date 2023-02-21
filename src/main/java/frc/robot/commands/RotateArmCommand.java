@@ -1,43 +1,44 @@
-
 package frc.robot.commands;
-
-import java.util.function.DoubleSupplier;
-
-import edu.wpi.first.wpilibj2.command.CommandBase;
 import com.revrobotics.CANSparkMax;
-import frc.robot.subsystems.DriveTrain; //Replace this with the Arm subsystem
+import java.util.function.DoubleSupplier;
+import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
+import frc.robot.subsystems.Arm;
 
 public class RotateArmCommand extends CommandBase {
   DoubleSupplier m_leftY;
-  DriveTrain m_DriveTrain;  //Replace this with an Arm type and name it m_Arm
-
-  public RotateArmCommand(DoubleSupplier _leftY, DriveTrain _dTrain) { //Replace drivetrain with arm
+  Arm m_Arm; 
+  public RotateArmCommand(DoubleSupplier _leftY, Arm _Arm) {
     m_leftY = _leftY;
-    m_DriveTrain = _dTrain; //Replace this with arm
-    addRequirements(m_DriveTrain);
-  }
-
-  // Called when the command is initially scheduled.
+    m_Arm = _Arm;
+    addRequirements(m_Arm);
+    
+  } 
   @Override
+
   public void initialize() {
-    m_DriveTrain.brDrive.setIdleMode(CANSparkMax.IdleMode.kCoast); //Change this to the arm motor and setIdleMode to "kBrake"
-  }
+      m_Arm.armRotationMtr.setIdleMode(CANSparkMax.IdleMode.kBrake);
+      }
+      @Override
+    
+    public void execute () {
+    
+      double controllerValue = m_leftY.getAsDouble();
 
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
-    //Insert the code here to set the arm motor according to m_leftY joystick value
-    //To get the value from the joystick you'll need to call m_leftY.getAsDouble();
-  }
+    // lines 30 --- 34 are setting the Deadzone value of the controller. It tells the controller not to move at .1> (a small amount on the controller) and to move everywhere else. 
+     System.out.println(m_leftY.getAsDouble()); 
+     if(Math.abs(controllerValue) < Constants.deadzone) {
+      controllerValue = 0;
+     } else {
+      controllerValue = controllerValue;
+     }
+     m_Arm.armRotationMtr.set(-1 * controllerValue);
+    }  
+    @Override
+    public void end(boolean interrupted) {
+    }
+    public boolean isFinished() {
+      return false;
+    }
 
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {
-  }
-
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return false;
-  }
 }

@@ -2,9 +2,8 @@ package frc.robot;
 
 public final class Constants {
     //Robot
-    public static int PHChannel = 30;
-    public static int PDHChannel = 20;
-    public static String kForward = "kForward";
+    public static int PHChannel = 30; // REV Pneumatic Hub
+    public static int PDHChannel = 20; // REV Power Distribution Hub
 
     //Manipulator
     public static int armMotorChannel = 9;
@@ -18,7 +17,7 @@ public final class Constants {
     public static int buttonY = 4;
     public static int buttonLeft = 5;
     public static int buttonRight = 6;
-    public static double deadzone = 0.1;
+    public static double deadzone = 0.2;
 
     //Drive Train
     public static int blSteerMotorChannel = 1;
