@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 //import edu.wpi.first.networktables.NetworkTable;
 //import edu.wpi.first.networktables.NetworkTableEntry;
 //import edu.wpi.first.networktables.NetworkTableInstance;
-import frc.robot.subsystems.stuff;
+//import frc.robot.subsystems.Stuff;
 //some imports no longer needed but leaving them here untill final version
 
 public class Robot extends TimedRobot {
@@ -25,7 +25,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
-    stuff cameraTest;
+
   }
 
   @Override

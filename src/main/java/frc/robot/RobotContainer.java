@@ -7,24 +7,27 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
+import frc.robot.commands.AlignCommand;
 import frc.robot.commands.AutoCommand;
 import frc.robot.commands.RotateArmCommand;
 import frc.robot.commands.SwerveDriveCommand;
 import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Arm;
+import frc.robot.subsystems.Stuff;
 
 
 public class RobotContainer {
   DriveTrain m_DriveTrain = new DriveTrain();
   Arm m_Arm = new Arm();
   Claw m_Claw = new Claw();
+  Stuff m_Stuff = new Stuff();
+  
   XboxController driverController = new XboxController(Constants.DriverControllerChannel);
   XboxController manipController = new XboxController(Constants.ManipControllerChannel);
   //JoystickButton driverButtonA = new JoystickButton(driverController, Constants.buttonA);
   JoystickButton manipButtonA = new JoystickButton(manipController, Constants.buttonA);
-  //JoystickButton manipButtonB = new JoystickButton(manipController, Constants.buttonB);
+  JoystickButton manipButtonB = new JoystickButton(manipController, Constants.buttonB);
    
   //2022 Code
   //JoystickButton manipButtonA = new JoystickButton(manipController, Constants.buttonA);
@@ -70,7 +73,8 @@ public class RobotContainer {
 
     manipButtonA.toggleOnTrue(m_Arm.toggleGripper());
     manipButtonRight.toggleOnTrue(m_Claw.toggleGripper());
-    
+
+    manipButtonB.whileTrue(new AlignCommand(m_DriveTrain, () -> frc.robot.subsystems.Stuff.angle));
   }
 
   private void configureShuffleboard(){

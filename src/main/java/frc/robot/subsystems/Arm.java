@@ -37,7 +37,7 @@ public CANSparkMax armRotationMtr = new CANSparkMax(Constants.armMotorChannel, M
 Compressor phCompressor = new Compressor(Constants.PHChannel, PneumaticsModuleType.REVPH);
   //boolean pressureSwitch = phCompressor.getPressureSwitchValue();
   
-  @Override
+@Override
   public void periodic() {
   phCompressor.enableAnalog(50,60);
  }
