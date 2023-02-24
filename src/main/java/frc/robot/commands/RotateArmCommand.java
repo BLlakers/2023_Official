@@ -1,9 +1,13 @@
 package frc.robot.commands;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.revrobotics.CANSparkMax;
 import java.util.function.DoubleSupplier;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Arm;
+import edu.wpi.first.wpilibj.motorcontrol.PWMMotorController;
+import edu.wpi.first.wpilibj.motorcontrol.PWMTalonFX;
 
 public class RotateArmCommand extends CommandBase {
   DoubleSupplier m_leftY;
@@ -17,7 +21,7 @@ public class RotateArmCommand extends CommandBase {
   @Override
 
   public void initialize() {
-      m_Arm.armRotationMtr.setIdleMode(CANSparkMax.IdleMode.kBrake);
+    
       }
       @Override
     
@@ -32,7 +36,7 @@ public class RotateArmCommand extends CommandBase {
      } else {
       controllerValue = controllerValue;
      }
-     m_Arm.armRotationMtr.set(-1 * controllerValue);
+     m_Arm.armRotationMtr.set(ControlMode.PercentOutput, -1 * controllerValue);
     }  
     @Override
     public void end(boolean interrupted) {
