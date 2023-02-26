@@ -25,11 +25,11 @@ public class AlignCommand extends CommandBase {
     
         //turn2 must somehow become a doubble supplier and the drivetrain is off too
         //finding the turning amount needed
-        Double turn1 = 0.035; //how much the motor must turn to turn one degree
+        Double turn1 = 0.035; //how much the motor must turn to turn one degree, this number IS WRONG: it should be either 0.03555 or, i bet it is actully 0.02261
         Double turn2 = turn1 * m_angle.getAsDouble();
         //Double turn = (turn2.getAsDoubleSupplier());
-
         SmartDashboard.putNumber("command angle", m_angle.getAsDouble());
+        
         //movement for the left(left joystick thing) y on the "joystick"
         DoubleSupplier lefty;
         lefty = () -> 0.0;

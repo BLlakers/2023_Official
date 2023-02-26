@@ -1,7 +1,5 @@
 package frc.robot.subsystems;
-
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -17,6 +15,7 @@ public class Stuff extends SubsystemBase{
     @Override
     public void periodic() {
         //camera stuff, from the documentation
+        //the .lime is to look for the network table instance called lime which is the refective tape thing, .april would be the april tag thing 
         NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
         NetworkTableEntry tx = table.getEntry("tx");
         NetworkTableEntry ty = table.getEntry("ty");
