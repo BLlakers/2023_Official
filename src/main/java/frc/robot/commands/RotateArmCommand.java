@@ -38,11 +38,11 @@ public class RotateArmCommand extends CommandBase {
 
     //Limit switch is inverted logic
     if (!ArmLimitSwitch.get()) {
-      
+      m_Arm.armRotationMtr.setSelectedSensorPosition(0);
       if (controllerValue >= 0) {
-        m_Arm.armRotationMtr.set(ControlMode.PercentOutput, controllerValue);
-      } else {
         m_Arm.armRotationMtr.set(ControlMode.PercentOutput, 0 * controllerValue);
+      } else {
+        m_Arm.armRotationMtr.set(ControlMode.PercentOutput, controllerValue);
       }
 
     } else {
