@@ -9,9 +9,11 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
+import frc.robot.RobotContainer;
 import frc.robot.Constants;
+import pabeles.concurrency.IntOperatorTask.Max;
 
 public class DriveTrain extends SubsystemBase {
   public CANSparkMax flDrive = new CANSparkMax(Constants.flDriveMotorChannel, MotorType.kBrushless); //3
@@ -238,6 +240,14 @@ public class DriveTrain extends SubsystemBase {
     double w3ra = getRevPosition(w3a);
     double w4ra = getRevPosition(w4a);
 
+      
+    
+    //Limits speed 
+    w1s = w1s * .75;
+    w2s = w2s * .75;
+    w3s = w3s * .75;
+    w4s = w4s * .75;
+
     // Sets Max Wheel Speed
     double max = w1s;
     if (w2s > max)
@@ -252,7 +262,7 @@ public class DriveTrain extends SubsystemBase {
       w3s = w3s / max;
       w4s = w4s / max;
     }
-
+  
     // Finds Actual Angle of Wheels
     w1ca = (-1 * getPosition(frEncoder.get(), 267.4)) + 360;
     w2ca = (-1 * getPosition(flEncoder.get(), 120.7)) + 360;

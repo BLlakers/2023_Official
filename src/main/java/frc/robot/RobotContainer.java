@@ -3,6 +3,9 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
+
+import java.util.function.DoubleSupplier;
+
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -22,6 +25,7 @@ public class RobotContainer {
   Claw m_Claw = new Claw();
   XboxController driverController = new XboxController(Constants.DriverControllerChannel);
   XboxController manipController = new XboxController(Constants.ManipControllerChannel);
+  
   //JoystickButton driverButtonA = new JoystickButton(driverController, Constants.buttonA);
   JoystickButton manipButtonA = new JoystickButton(manipController, Constants.buttonA);
   //JoystickButton manipButtonB = new JoystickButton(manipController, Constants.buttonB);
@@ -32,6 +36,7 @@ public class RobotContainer {
   //JoystickButton manipButtonX = new JoystickButton(manipController, Constants.buttonX);
   JoystickButton manipButtonY = new JoystickButton(manipController, Constants.buttonY);
   JoystickButton manipButtonRight = new JoystickButton(manipController, Constants.buttonRight);
+  public JoystickButton driverButtonRight = new JoystickButton(driverController, Constants.buttonRight);
   //JoystickButton manipButtonLeft = new JoystickButton(manipController, Constants.buttonLeft);
   //JoystickButton manipButtonOptions = new JoystickButton(manipController, 7);
   //JoystickButton manipButtonStart = new JoystickButton(manipController, 8);
@@ -70,7 +75,7 @@ public class RobotContainer {
 
     manipButtonA.toggleOnTrue(m_Arm.toggleGripper());
     manipButtonRight.toggleOnTrue(m_Claw.toggleGripper());
-    
+
   }
 
   private void configureShuffleboard(){
