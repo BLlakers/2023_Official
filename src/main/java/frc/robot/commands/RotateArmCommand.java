@@ -33,7 +33,7 @@ public class RotateArmCommand extends CommandBase {
   @Override
   public void execute() {
     double controllerValue = m_leftY.getAsDouble();
-    
+    double m_sensorPosition =  m_Arm.armRotationMtr.getSelectedSensorPosition();
     SmartDashboard.putNumber("armRotationMtr", m_Arm.armRotationMtr.getSelectedSensorPosition());
 
     //Limit switch is inverted logic
@@ -59,7 +59,14 @@ public class RotateArmCommand extends CommandBase {
       } else {
         controllerValue = controllerValue;
       }
-      m_Arm.armRotationMtr.set(ControlMode.PercentOutput, .5 * controllerValue);
+      m_Arm.armRotationMtr.set(ControlMode.PercentOutput, .1 * controllerValue);
+      
+      if (m_sensorPosition <= -15000 || m_sensorPosition >= 15000) {
+        m_Arm.armRotationMtr.set(ControlMode.PercentOutput, 0 * controllerValue);
+      } else {  
+        m_Arm.armRotationMtr.set(ControlMode.PercentOutput, .1 * controllerValue);
+      }
+    
     }
   }
 
