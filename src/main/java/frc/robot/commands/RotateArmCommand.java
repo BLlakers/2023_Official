@@ -59,7 +59,7 @@ public class RotateArmCommand extends CommandBase {
       } else {
         controllerValue = controllerValue;
       }
-      m_Arm.armRotationMtr.set(ControlMode.PercentOutput, controllerValue);
+      m_Arm.armRotationMtr.set(ControlMode.PercentOutput, .5 * controllerValue);
     }
   }
 
