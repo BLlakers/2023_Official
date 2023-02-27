@@ -23,7 +23,7 @@ public class Stuff extends SubsystemBase{
         double cameray = ty.getDouble(0.0);
         SmartDashboard.putNumber("Limelight X", camerax);
         SmartDashboard.putNumber("Limelight Y", cameray);
-    
+        
         SmartDashboard.putNumber("Limelight X", camerax);
         SmartDashboard.putNumber("Limelight Y", cameray);
         

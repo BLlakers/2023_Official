@@ -15,14 +15,16 @@ import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Stuff;
-
+import frc.robot.subsystems.Tags;
 
 public class RobotContainer {
   DriveTrain m_DriveTrain = new DriveTrain();
   Arm m_Arm = new Arm();
   Claw m_Claw = new Claw();
   Stuff m_Stuff = new Stuff();
-  
+  Tags m_Tags = new Tags();
+
+
   XboxController driverController = new XboxController(Constants.DriverControllerChannel);
   XboxController manipController = new XboxController(Constants.ManipControllerChannel);
   //JoystickButton driverButtonA = new JoystickButton(driverController, Constants.buttonA);

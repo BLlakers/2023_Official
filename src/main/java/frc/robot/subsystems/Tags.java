@@ -12,14 +12,13 @@ public class Tags extends SubsystemBase{
     public void periodic() {
         //camera stuff, from the documentation
         //the .lime is to look for the network table instance called lime which is the refective tape thing, .april would be the april tag thing 
-        NetworkTable table = NetworkTableInstance.getDefault().getTable("april");
+        NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight-april");
         NetworkTableEntry tx = table.getEntry("tx");
         NetworkTableEntry ty = table.getEntry("ty");
-        double tx1 = tx.getDouble(0.0);
+        double tx2 = tx.getDouble(0.0);
         double ty2 = ty.getDouble(0.0);
-        SmartDashboard.putNumber("Limelight2 X", tx1);
-        SmartDashboard.putNumber("Limelight2 Y", ty2);
-    
+        SmartDashboard.putNumber("Limelight2 tx", tx2);
+        SmartDashboard.putNumber("Limelight2 ty", ty2);
     
     }
 }
