@@ -15,8 +15,12 @@ public class Tags extends SubsystemBase{
         NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight-april");
         NetworkTableEntry tx = table.getEntry("tx");
         NetworkTableEntry ty = table.getEntry("ty");
+        NetworkTableEntry tid = table.getEntry("tid");
         double tx2 = tx.getDouble(0.0);
         double ty2 = ty.getDouble(0.0);
+        double s7 = tid.getDouble(0.0);
+    
+        SmartDashboard.putNumber("chiem", s7);
         SmartDashboard.putNumber("Limelight2 tx", tx2);
         SmartDashboard.putNumber("Limelight2 ty", ty2);
     
