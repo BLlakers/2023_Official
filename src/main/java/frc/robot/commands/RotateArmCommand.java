@@ -59,15 +59,16 @@ public class RotateArmCommand extends CommandBase {
       } else {
         controllerValue = controllerValue;
       }   
-      m_Arm.armRotationMtr.set(ControlMode.PercentOutput, 1 * controllerValue);
+      m_Arm.armRotationMtr.set(ControlMode.PercentOutput, 0.5 * controllerValue);
       /* The following code reads the motor encoder sensor and sets the percentoutput to 0
        * This proof of concept needs further logic added to continue moving below the threshold, in the opposite direction
-       */
+      
       if (m_sensorPosition <= -252000 || m_sensorPosition >= 25000) {
         m_Arm.armRotationMtr.set(ControlMode.PercentOutput, 0 * controllerValue);
       } else {  
         m_Arm.armRotationMtr.set(ControlMode.PercentOutput, 1 * controllerValue);
       }
+       */
      
     }
   }
