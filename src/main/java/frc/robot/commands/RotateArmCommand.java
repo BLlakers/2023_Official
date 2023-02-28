@@ -33,7 +33,7 @@ public class RotateArmCommand extends CommandBase {
   @Override
   public void execute() {
     double controllerValue = m_leftY.getAsDouble();
-    double m_sensorPosition =  m_Arm.armRotationMtr.getSelectedSensorPosition();
+    double m_sensorPosition =  m_Arm.armRotationMtr.getSelectedSensorPosition(); // Variable to hold the sensor position
     SmartDashboard.putNumber("armRotationMtr", m_Arm.armRotationMtr.getSelectedSensorPosition());
 
     //Limit switch is inverted logic
@@ -60,13 +60,15 @@ public class RotateArmCommand extends CommandBase {
         controllerValue = controllerValue;
       }
       m_Arm.armRotationMtr.set(ControlMode.PercentOutput, .1 * controllerValue);
-      
-      if (m_sensorPosition <= -15000 || m_sensorPosition >= 15000) {
+      /* The following code reads the motor encoder sensor and sets the percentoutput to 0
+       * This proof of concept needs further logic added to continue moving below the threshold, in the opposite direction
+       */
+      if (m_sensorPosition <= -152000 || m_sensorPosition >= 25000) {
         m_Arm.armRotationMtr.set(ControlMode.PercentOutput, 0 * controllerValue);
       } else {  
         m_Arm.armRotationMtr.set(ControlMode.PercentOutput, .1 * controllerValue);
       }
-    
+     
     }
   }
 
