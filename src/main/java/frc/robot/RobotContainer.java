@@ -70,7 +70,6 @@ public class RobotContainer {
 
     manipButtonA.toggleOnTrue(m_Arm.toggleGripper());
     manipButtonRight.toggleOnTrue(m_Claw.toggleGripper());
-    
   }
 
   private void configureShuffleboard(){
@@ -80,6 +79,8 @@ public class RobotContainer {
         m_chooser.addOption("Auto 3", 3);
     
         SmartDashboard.putData(m_chooser);
+     
+
   }
 
   public Command getAutonomousCommand() {
