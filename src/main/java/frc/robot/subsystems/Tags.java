@@ -20,7 +20,7 @@ public class Tags extends SubsystemBase{
         double ty2 = ty.getDouble(0.0);
         double s7 = tid.getDouble(0.0);
     
-        SmartDashboard.putNumber("chiem", s7);
+        SmartDashboard.putNumber("Tag Number", s7);
         SmartDashboard.putNumber("Limelight2 tx", tx2);
         SmartDashboard.putNumber("Limelight2 ty", ty2);
     
