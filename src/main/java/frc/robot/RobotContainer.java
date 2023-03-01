@@ -3,6 +3,9 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
+
+import java.sql.Driver;
+
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -25,7 +28,9 @@ public class RobotContainer {
   //JoystickButton driverButtonA = new JoystickButton(driverController, Constants.buttonA);
   JoystickButton manipButtonA = new JoystickButton(manipController, Constants.buttonA);
   //JoystickButton manipButtonB = new JoystickButton(manipController, Constants.buttonB);
-   
+  JoystickButton driverButtonRight = new JoystickButton(driverController, Constants.buttonRight);
+  JoystickButton driverButtonLeft = new JoystickButton(driverController, Constants.buttonLeft);
+
   //2022 Code
   //JoystickButton manipButtonA = new JoystickButton(manipController, Constants.buttonA);
   //JoystickButton manipButtonB = new JoystickButton(manipController, Constants.buttonB);
@@ -70,6 +75,7 @@ public class RobotContainer {
 
     manipButtonA.toggleOnTrue(m_Arm.toggleGripper());
     manipButtonRight.toggleOnTrue(m_Claw.toggleGripper());
+   
   }
 
   private void configureShuffleboard(){
