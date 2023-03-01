@@ -17,7 +17,7 @@ public class RotateArmCommand extends CommandBase {
   DoubleSupplier m_leftY;
   Arm m_Arm;
   DigitalInput ArmLimitSwitch = new DigitalInput(9);
- 
+
   public RotateArmCommand(DoubleSupplier _leftY, Arm _Arm) {
     m_leftY = _leftY;
     m_Arm = _Arm;
@@ -33,10 +33,10 @@ public class RotateArmCommand extends CommandBase {
   @Override
   public void execute() {
     double controllerValue = m_leftY.getAsDouble();
-    double m_sensorPosition =  m_Arm.armRotationMtr.getSelectedSensorPosition(); // Variable to hold the sensor position
-    SmartDashboard.putNumber("armRotationMtr", m_Arm.armRotationMtr.getSelectedSensorPosition());
+    double m_sensorPosition = -m_Arm.armRotationMtr.getSelectedSensorPosition(); // Variable to hold the sensor position
+    SmartDashboard.putNumber("armRotationMtr", m_sensorPosition);
 
-    //Limit switch is inverted logic
+    // Limit switch is inverted logic
     if (!ArmLimitSwitch.get()) {
       m_Arm.armRotationMtr.setSelectedSensorPosition(0);
       if (controllerValue >= 0) {
@@ -46,31 +46,41 @@ public class RotateArmCommand extends CommandBase {
       }
 
     } else {
-      // m_Arm.armRotationMtr.set(ControlMode.PercentOutput, -1 * controllerValue);
-
-      // lines 30 --- 34 are setting the Deadzone value of the controller. It tells
+      // setting the Deadzone value of the controller. It tells
       // the controller not to move at .1> (a small amount on the controller) and to
       // move everywhere else.
-      System.out.println(m_leftY.getAsDouble());
-
       if (Math.abs(controllerValue) < Constants.deadzone) {
-
         controllerValue = 0;
       } else {
         controllerValue = controllerValue;
-      }   
-      m_Arm.armRotationMtr.set(ControlMode.PercentOutput, 0.5 * controllerValue);
-      /* The following code reads the motor encoder sensor and sets the percentoutput to 0
-       * This proof of concept needs further logic added to continue moving below the threshold, in the opposite direction
-      
-      if (m_sensorPosition <= -252000 || m_sensorPosition >= 25000) {
-        m_Arm.armRotationMtr.set(ControlMode.PercentOutput, 0 * controllerValue);
-      } else {  
-        m_Arm.armRotationMtr.set(ControlMode.PercentOutput, 1 * controllerValue);
       }
+
+      // m_Arm.armRotationMtr.set(ControlMode.PercentOutput, .5 * controllerValue);
+      /*
+       * The following code reads the motor encoder sensor and sets the percentoutput
+       * to 0
+       * This proof of concept needs further logic added to continue moving below the
+       * threshold, in the opposite direction
        */
-     
+
+      //If we are at the limit
+      if (m_sensorPosition >= 25000) {
+        //Then don't go further
+        if (controllerValue <= 0) {
+          m_Arm.armRotationMtr.set(ControlMode.PercentOutput, 0 * controllerValue);
+        } else {
+          m_Arm.armRotationMtr.set(ControlMode.PercentOutput, 1 * controllerValue);
+        }
+      }
+      else{
+        m_Arm.armRotationMtr.set(ControlMode.PercentOutput, 1 * controllerValue);  
+      }
     }
+    /*
+     * else {
+     * m_Arm.armRotationMtr.set(ControlMode.PercentOutput, 1 * controllerValue);
+     * }
+     */
   }
 
   @Override

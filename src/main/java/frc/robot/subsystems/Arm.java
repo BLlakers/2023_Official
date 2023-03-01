@@ -42,7 +42,7 @@ public class Arm extends SubsystemBase {
 
   @Override
   public void periodic() {
-    phCompressor.enableAnalog(50, 60);
+    phCompressor.enableAnalog(50, 120);
   }
 
   // This is is an inline command construction. Commands which are so quick and
