@@ -25,7 +25,7 @@ public class Arm extends SubsystemBase {
 
   DoubleSolenoid exampleDoublePH = new DoubleSolenoid(30, PneumaticsModuleType.REVPH, 0, 7);
   public TalonFX armRotationMtr = new TalonFX(Constants.armMotorChannel);
-
+  public static int ArmPosition = 1;
   // exampleDoublePH.set(kOff);
   // exampleDoublePH.set(kForward);
 
@@ -64,5 +64,35 @@ public class Arm extends SubsystemBase {
 
         });
   }
-
+  public CommandBase RaiseArm() {
+    // Inline construction of command goes here.
+    // Subsystem::RunOnce implicitly requires `this` subsystem.
+    
+    return runOnce(
+        () -> {
+          // one-time action goes here 
+          ArmPosition = ArmPosition + 1;
+          if (ArmPosition == 4) {
+            ArmPosition = 3;
+         }
+  }
+  
+  );
+    }
+  
+    public CommandBase LowerArm() {
+      // Inline construction of command goes here.
+      // Subsystem::RunOnce implicitly requires `this` subsystem.
+      
+      return runOnce(
+          () -> {
+            // one-time action goes here 
+            ArmPosition = ArmPosition -1;
+            if (ArmPosition == 0) {
+              ArmPosition = 1;
+            } 
+           }
+          );
+      }
+    
 }

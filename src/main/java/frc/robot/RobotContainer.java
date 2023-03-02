@@ -75,6 +75,9 @@ public class RobotContainer {
 
     manipButtonA.toggleOnTrue(m_Arm.toggleGripper());
     manipButtonRight.toggleOnTrue(m_Claw.toggleGripper());
+
+    driverButtonLeft.toggleOnTrue();
+    driverButtonRight.toggleOnTrue(getAutonomousCommand())
    
   }
 
