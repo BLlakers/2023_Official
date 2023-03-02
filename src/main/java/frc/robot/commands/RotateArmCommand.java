@@ -31,12 +31,12 @@ public class RotateArmCommand extends CommandBase {
 
   @Override
   public void execute() {
-    double m_sensorPosition = -m_Arm.armRotationMtr.getSelectedSensorPosition(); // Variable to hold the sensor position
-    double m_sensorDegrees = (m_sensorPosition * 360) / (90 * 2048);
+    //double m_sensorPosition = -m_Arm.armRotationMtr.getSelectedSensorPosition(); // Variable to hold the sensor position
+    //double m_sensorDegrees = (m_sensorPosition * 360) / (90 * 2048);
 
     
 
-    /*
+    
     double controllerValue = m_leftY.getAsDouble();
     double m_sensorPosition = -m_Arm.armRotationMtr.getSelectedSensorPosition(); // Variable to hold the sensor position
     SmartDashboard.putNumber("armRotationMtr", m_sensorPosition);
@@ -68,7 +68,7 @@ controllerValue = controllerValue *0.5;
        * to 0
        * This proof of concept needs further logic added to continue moving below the
        * threshold, in the opposite direction
-       
+       */
 
       //If we are at the limit
       if (m_sensorPosition >= 190000) {
@@ -81,7 +81,7 @@ controllerValue = controllerValue *0.5;
       }
       else{
         m_Arm.armRotationMtr.set(ControlMode.PercentOutput, 1 * controllerValue);  
-      } */
+      } 
     }
   }
 
