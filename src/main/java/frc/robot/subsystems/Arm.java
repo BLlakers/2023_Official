@@ -40,7 +40,9 @@ public class Arm extends SubsystemBase {
 
   }
 
+
   @Override
+
   public void periodic() {
     phCompressor.enableAnalog(50, 120);
   }
