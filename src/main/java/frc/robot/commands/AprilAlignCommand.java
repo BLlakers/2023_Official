@@ -1,4 +1,5 @@
 //this is semi right, this is set to align to the cameras center, not the robots center
+/*
 package frc.robot.commands;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import java.util.function.DoubleSupplier;
@@ -51,3 +52,4 @@ public class AprilAlignCommand extends CommandBase {
 
   }
 } 
+*/

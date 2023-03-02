@@ -16,7 +16,8 @@ import frc.robot.subsystems.DriveTrain;
 //import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Stuff;
 import frc.robot.subsystems.Tags;
-import frc.robot.commands.AprilAlignCommand;
+//add in later
+//import frc.robot.commands.AprilAlignCommand;
 
 public class RobotContainer {
   DriveTrain m_DriveTrain = new DriveTrain();
@@ -30,7 +31,7 @@ public class RobotContainer {
   XboxController manipController = new XboxController(Constants.ManipControllerChannel);
   JoystickButton driverButtonA = new JoystickButton(driverController, Constants.buttonA);
   JoystickButton manipButtonA = new JoystickButton(manipController, Constants.buttonA);
-  JoystickButton manipButtonB = new JoystickButton(manipController, Constants.buttonB);
+  //JoystickButton manipButtonB = new JoystickButton(manipController, Constants.buttonB);
   JoystickButton manipButtonX = new JoystickButton(manipController, Constants.buttonX);
 
   //2022 Code
@@ -79,7 +80,7 @@ public class RobotContainer {
     manipButtonRight.toggleOnTrue(m_Claw.toggleGripper());
 
     manipButtonX.whileTrue(new AlignCommand(m_DriveTrain, () -> frc.robot.subsystems.Stuff.angle));
-    manipButtonB.whileTrue(new AprilAlignCommand(m_DriveTrain, () -> frc.robot.subsystems.Tags.tx2));
+    //manipButtonB.whileTrue(new AprilAlignCommand(m_DriveTrain, () -> frc.robot.subsystems.Tags.tx2));
   }
 
   private void configureShuffleboard(){
