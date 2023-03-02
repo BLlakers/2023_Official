@@ -35,6 +35,8 @@ public class RotateArmCommand extends CommandBase {
     double m_sensorPosition = -m_Arm.armRotationMtr.getSelectedSensorPosition(); // Variable to hold the sensor position
     SmartDashboard.putNumber("armRotationMtr", m_sensorPosition);
 
+controllerValue = controllerValue *0.5;
+
     // Limit switch is inverted logic
     if (!ArmLimitSwitch.get()) {
       m_Arm.armRotationMtr.setSelectedSensorPosition(0);
@@ -63,7 +65,7 @@ public class RotateArmCommand extends CommandBase {
        */
 
       //If we are at the limit
-      if (m_sensorPosition >= 25000) {
+      if (m_sensorPosition >= 190000) {
         //Then don't go further
         if (controllerValue <= 0) {
           m_Arm.armRotationMtr.set(ControlMode.PercentOutput, 0 * controllerValue);
