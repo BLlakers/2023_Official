@@ -7,7 +7,9 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 
 public class Tags extends SubsystemBase{
- 
+    boolean distance;
+    public static Double tx2 = 0.0;
+    
     @Override
     public void periodic() {
         //camera stuff, from the documentation
@@ -19,10 +21,18 @@ public class Tags extends SubsystemBase{
         double tx2 = tx.getDouble(0.0);
         double ty2 = ty.getDouble(0.0);
         double s7 = tid.getDouble(0.0);
-    
+        
+        //tid is the tag id
         SmartDashboard.putNumber("Tag Number", s7);
         SmartDashboard.putNumber("Limelight2 tx", tx2);
         SmartDashboard.putNumber("Limelight2 ty", ty2);
+
+        //distance, mabeye?????
+        //if (s7 < 279){
+        //    distance = false;
+        //
+        //if (s7)
+
+        }
     
     }
-}
