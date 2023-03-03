@@ -31,14 +31,14 @@ public class RotateArmCommand extends CommandBase {
 
   @Override
   public void execute() {
-    //double m_sensorPosition = -m_Arm.armRotationMtr.getSelectedSensorPosition(); // Variable to hold the sensor position
-    //double m_sensorDegrees = (m_sensorPosition * 360) / (90 * 2048);
+    double m_sensorPosition = -m_Arm.armRotationMtr.getSelectedSensorPosition(); // Variable to hold the sensor position
+    double m_sensorDegrees = (m_sensorPosition * 360) / (90 * 2048);
 
     
 
     
     double controllerValue = m_leftY.getAsDouble();
-    double m_sensorPosition = -m_Arm.armRotationMtr.getSelectedSensorPosition(); // Variable to hold the sensor position
+    
     SmartDashboard.putNumber("armRotationMtr", m_sensorPosition);
 
 controllerValue = controllerValue *0.5;
