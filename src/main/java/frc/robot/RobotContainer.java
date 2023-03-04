@@ -13,8 +13,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.AlignCommand;
 import frc.robot.commands.AutoCommand;
 import frc.robot.commands.ManualRotateArmCommand;
-import frc.robot.commands.ManualRotateArmCommand;
-//import frc.robot.commands.RotateArmCommand;
+import frc.robot.commands.AutoRotateArmCommand;
 import frc.robot.commands.SwerveDriveCommand;
 import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.DriveTrain;
@@ -84,7 +83,7 @@ public class RobotContainer {
     m_DriveTrain.setDefaultCommand(new SwerveDriveCommand (() -> driverController.getLeftY(),
     () -> driverController.getLeftX(), () -> driverController.getRightX(), m_DriveTrain));
 
-    //m_Arm.setDefaultCommand(new AutomatedRotateArmCommand (m_Arm));
+    m_Arm.setDefaultCommand(new AutoRotateArmCommand (m_Arm));
     manipButtonOptions.whileTrue(new ManualRotateArmCommand(() -> manipController.getLeftY(), m_Arm));
     manipButtonLeft.onTrue(m_Arm.LowerArm()); // starts at 1 (5 deegrees) goes down
     manipButtonRight.onTrue(m_Arm.RaiseArm());  //  starts at 1, when pressed goes up to 2 (82 Deegrees), when pressed again goes up to 3 (85 deegrees)

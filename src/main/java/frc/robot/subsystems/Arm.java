@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
+import edu.wpi.first.wpilibj.DigitalInput;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 
@@ -27,6 +27,7 @@ public class Arm extends SubsystemBase {
 
   DoubleSolenoid exampleDoublePH = new DoubleSolenoid(30, PneumaticsModuleType.REVPH, 0, 7);
   public TalonFX armRotationMtr = new TalonFX(Constants.armMotorChannel);
+  public DigitalInput ArmLimitSwitch = new DigitalInput(9);
   public int ArmPosition = 1;
   public double ArmDegrees = 0;
 
@@ -36,7 +37,7 @@ public class Arm extends SubsystemBase {
 
   // boolean pressureSwitch = phCompressor.getPressureSwitchValue();
   public Arm() {
-    armRotationMtr.setInverted(true);
+    //armRotationMtr.setInverted(true);
     armRotationMtr.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
     armRotationMtr.setSelectedSensorPosition(85*120 *2048/360);
 

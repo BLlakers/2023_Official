@@ -11,7 +11,7 @@ public final class Constants {
     public static double PositionPickup = 82;
     public static double PositionDrop = 85;
     public static double[] Positions = {PositionDown, PositionPickup, PositionDrop};
-    public static double ArmTolerance = 0.4;
+    public static double ArmTolerance = 3;
    
 
     // Controller

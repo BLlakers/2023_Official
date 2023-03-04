@@ -14,7 +14,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class ManualRotateArmCommand extends CommandBase {
   DoubleSupplier m_leftY;
   Arm m_Arm;
-  DigitalInput ArmLimitSwitch = new DigitalInput(9);
 
   public ManualRotateArmCommand(DoubleSupplier _leftY, Arm _Arm) {
     m_leftY = _leftY;
@@ -31,7 +30,7 @@ public class ManualRotateArmCommand extends CommandBase {
   @Override
   public void execute() {
     double m_sensorPosition = -m_Arm.armRotationMtr.getSelectedSensorPosition(); // Variable to hold the sensor position
-    m_Arm.ArmDegrees = (m_sensorPosition * 360) / (120 * 2048); // 120:1 gearbox
+    m_Arm.ArmDegrees = (m_sensorPosition * 360) / (120 * 4096); // 120:1 gearbox
 
     double controllerValue = m_leftY.getAsDouble();
 
@@ -48,8 +47,8 @@ public class ManualRotateArmCommand extends CommandBase {
       controllerValue = controllerValue * 0.5;
 
     // Limit switch is inverted logic
-    if (!ArmLimitSwitch.get()) {
-      m_Arm.armRotationMtr.setSelectedSensorPosition(5*120 *2048/360);
+    if (!m_Arm.ArmLimitSwitch.get()) {
+      m_Arm.armRotationMtr.setSelectedSensorPosition(5*120 *4096 /360);
       if (controllerValue >= 0) {
         m_Arm.armRotationMtr.set(ControlMode.PercentOutput, 0 * controllerValue);
       } else {
