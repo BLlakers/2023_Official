@@ -24,8 +24,6 @@ public class Claw extends SubsystemBase {
         () -> {
           // one-time action goes here
           // WP - Add code here to toggle the gripper solenoid
-          System.out.println("Toggled claw solenoid");
-
           System.out.println(exampleDoublePH.get());
           exampleDoublePH.set(Value.kReverse);
           exampleDoublePH.toggle();

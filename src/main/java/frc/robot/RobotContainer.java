@@ -87,7 +87,7 @@ public class RobotContainer {
     manipButtonOptions.whileTrue(new ManualRotateArmCommand(() -> manipController.getLeftY(), m_Arm));
     manipButtonLeft.onTrue(m_Arm.LowerArm()); // starts at 1 (5 deegrees) goes down
     manipButtonRight.onTrue(m_Arm.RaiseArm());  //  starts at 1, when pressed goes up to 2 (82 Deegrees), when pressed again goes up to 3 (85 deegrees)
-    //manipButtonA.toggleOnTrue(m_Arm.toggleGripper());
+    manipButtonA.toggleOnTrue(m_Arm.toggleArm());
     manipButtonB.toggleOnTrue(m_Claw.toggleGripper());
 
     manipButtonX.whileTrue(new AlignCommand(m_DriveTrain, () -> frc.robot.subsystems.Stuff.angle));
