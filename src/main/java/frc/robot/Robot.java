@@ -27,7 +27,6 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
-    cameraTest();
   }
 
   @Override
@@ -91,42 +90,6 @@ public class Robot extends TimedRobot {
   public void simulationPeriodic() {
 
   }
-
-  public void cameraTest() {
-    NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
-    NetworkTableEntry tx = table.getEntry("tx");
-    NetworkTableEntry ty = table.getEntry("ty");
-    double camerax = tx.getDouble(0.0);
-    double cameray = ty.getDouble(0.0);
-    var aligncamera = camerax;
-
-    SmartDashboard.putNumber("Limelight X", camerax);
-    SmartDashboard.putNumber("Limelight Y", cameray);
-
-    SmartDashboard.putNumber("Limelight X", camerax);
-    SmartDashboard.putNumber("Limelight Y", cameray);
-
-    if (13.5 <= camerax && 5.7 <= camerax) {
-    //  System.out.println("alligned");
-
-    } else if (13.5 >= camerax && 5.7 >= camerax) { 
-     // System.out.println("NOT alligned");
-      //this works, but i has tons of delay and i think it is because of the procesing power of the robo rio
-    } 
-    }
-
-  
-
-      //this works, but i has tons of delay and i think it is because of the procesing power of the robo rio
-    } 
-   
-   
-      
-
-    
-  
-
-    //System.out.println(x, cameraTest());
-  
+}
   
 
