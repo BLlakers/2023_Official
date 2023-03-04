@@ -86,8 +86,8 @@ public class RobotContainer {
     () -> driverController.getLeftX(), () -> driverController.getRightX(), m_DriveTrain));
 
     m_Arm.setDefaultCommand(new AutoRotateArmCommand (m_Arm));
-
-    manipButtonOptions.whileTrue(new ManualRotateArmCommand(() -> manipController.getLeftY(), m_Arm));
+    //WP - DO NOT UNCOMMENT WITHOUT TALKING TO WARD
+    //manipButtonOptions.whileTrue(new ManualRotateArmCommand(() -> manipController.getLeftY(), m_Arm));
     manipButtonLeft.onTrue(m_Arm.LowerArm()); // starts at 1 (5 deegrees) goes down
     manipButtonRight.onTrue(m_Arm.RaiseArm());  //  starts at 1, when pressed goes up to 2 (82 Deegrees), when pressed again goes up to 3 (85 deegrees)
     manipButtonA.toggleOnTrue(m_Arm.toggleArm());
