@@ -64,6 +64,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     cameraTest();
+    SmartDashboard.putNumber("Start Yaw", m_robotContainer.m_DriveTrain.startYaw);
    
   }
 

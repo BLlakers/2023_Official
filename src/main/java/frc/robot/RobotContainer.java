@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.commands.AutoCommand;
+import frc.robot.commands.FieldAlignedCommand;
 import frc.robot.commands.RotateArmCommand;
 import frc.robot.commands.SwerveDriveCommand;
 import frc.robot.subsystems.Claw;
@@ -25,7 +26,7 @@ public class RobotContainer {
   Claw m_Claw = new Claw();
   XboxController driverController = new XboxController(Constants.DriverControllerChannel);
   XboxController manipController = new XboxController(Constants.ManipControllerChannel);
-  //JoystickButton driverButtonA = new JoystickButton(driverController, Constants.buttonA);
+  JoystickButton driverButtonB = new JoystickButton(driverController, Constants.buttonB);
   JoystickButton manipButtonA = new JoystickButton(manipController, Constants.buttonA);
   //JoystickButton manipButtonB = new JoystickButton(manipController, Constants.buttonB);
   JoystickButton driverButtonRight = new JoystickButton(driverController, Constants.buttonRight);
@@ -75,7 +76,7 @@ public class RobotContainer {
 
     manipButtonA.toggleOnTrue(m_Arm.toggleGripper());
     manipButtonRight.toggleOnTrue(m_Claw.toggleGripper());
-   
+    driverButtonB.whileTrue(new FieldAlignedCommand(m_DriveTrain));
   }
 
   private void configureShuffleboard(){
