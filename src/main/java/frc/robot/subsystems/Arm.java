@@ -7,6 +7,8 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
@@ -25,9 +27,8 @@ public class Arm extends SubsystemBase {
 
   DoubleSolenoid exampleDoublePH = new DoubleSolenoid(30, PneumaticsModuleType.REVPH, 0, 7);
   public TalonFX armRotationMtr = new TalonFX(Constants.armMotorChannel);
-  public static int ArmPosition = 1;
-  // exampleDoublePH.set(kOff);
-  // exampleDoublePH.set(kForward);
+  public int ArmPosition = 1;
+  public double ArmDegrees = 0;
 
   // scaled values in psi units
   // double psi = pressureTransducer.get();
@@ -37,6 +38,7 @@ public class Arm extends SubsystemBase {
   public Arm() {
     armRotationMtr.setInverted(true);
     armRotationMtr.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
+    armRotationMtr.setSelectedSensorPosition(85*120 *2048/360);
 
   }
 
@@ -44,6 +46,9 @@ public class Arm extends SubsystemBase {
 
   public void periodic() {
     phCompressor.enableAnalog(50, 120);
+    SmartDashboard.putNumber("Arm Position", ArmPosition);
+    SmartDashboard.putNumber("Arm Degrees", ArmDegrees);
+
   }
 
   // This is is an inline command construction. Commands which are so quick and
@@ -51,25 +56,7 @@ public class Arm extends SubsystemBase {
   // (they have no start, periodic, end behavior) can be defined this way. Inline
   // commands are defined in the subsystem
   // instead of in a separate .java file in the commands folder.
-  public CommandBase toggleGripper() {
-    // Subsystem::RunOnce implicitly requires `this` subsystem.
-
-    return runOnce(
-        () -> {
-          /* one-time action goes here */
-          System.out.println("Toggled arm solenoid");
-
-          System.out.println(exampleDoublePH.get());
-          exampleDoublePH.set(Value.kReverse);
-          exampleDoublePH.toggle();
-
-        });
-  }
-
   public CommandBase RaiseArm() {
-    // Inline construction of command goes here.
-    // Subsystem::RunOnce implicitly requires `this` subsystem.
-
     return runOnce(
         () -> {
           // one-time action goes here
@@ -78,14 +65,10 @@ public class Arm extends SubsystemBase {
             ArmPosition = 3;
           }
         }
-
     );
   }
 
   public CommandBase LowerArm() {
-    // Inline construction of command goes here.
-    // Subsystem::RunOnce implicitly requires `this` subsystem.
-
     return runOnce(
         () -> {
           // one-time action goes here
@@ -95,5 +78,4 @@ public class Arm extends SubsystemBase {
           }
         });
   }
-
 }

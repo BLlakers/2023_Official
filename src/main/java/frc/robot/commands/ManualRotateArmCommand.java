@@ -11,12 +11,12 @@ import frc.robot.subsystems.Arm;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class RotateArmCommand extends CommandBase {
+public class ManualRotateArmCommand extends CommandBase {
   DoubleSupplier m_leftY;
   Arm m_Arm;
   DigitalInput ArmLimitSwitch = new DigitalInput(9);
 
-  public RotateArmCommand(DoubleSupplier _leftY, Arm _Arm) {
+  public ManualRotateArmCommand(DoubleSupplier _leftY, Arm _Arm) {
     m_leftY = _leftY;
     m_Arm = _Arm;
     addRequirements(m_Arm);
@@ -31,24 +31,11 @@ public class RotateArmCommand extends CommandBase {
   @Override
   public void execute() {
     double m_sensorPosition = -m_Arm.armRotationMtr.getSelectedSensorPosition(); // Variable to hold the sensor position
-    double m_sensorDegrees = (m_sensorPosition * 360) / (90 * 2048);
+    m_Arm.ArmDegrees = (m_sensorPosition * 360) / (120 * 2048); // 120:1 gearbox
 
     double controllerValue = m_leftY.getAsDouble();
 
-    SmartDashboard.putNumber("armRotationMtr", m_sensorPosition);
 
-    controllerValue = controllerValue * 0.5;
-
-    // Limit switch is inverted logic
-    if (!ArmLimitSwitch.get()) {
-      m_Arm.armRotationMtr.setSelectedSensorPosition(0);
-      if (controllerValue >= 0) {
-        m_Arm.armRotationMtr.set(ControlMode.PercentOutput, 0 * controllerValue);
-      } else {
-        m_Arm.armRotationMtr.set(ControlMode.PercentOutput, controllerValue);
-      }
-
-    } else {
       // setting the Deadzone value of the controller. It tells
       // the controller not to move at .1> (a small amount on the controller) and to
       // move everywhere else.
@@ -57,6 +44,19 @@ public class RotateArmCommand extends CommandBase {
       } else {
         controllerValue = controllerValue;
       }
+
+      controllerValue = controllerValue * 0.5;
+
+    // Limit switch is inverted logic
+    if (!ArmLimitSwitch.get()) {
+      m_Arm.armRotationMtr.setSelectedSensorPosition(5*120 *2048/360);
+      if (controllerValue >= 0) {
+        m_Arm.armRotationMtr.set(ControlMode.PercentOutput, 0 * controllerValue);
+      } else {
+        m_Arm.armRotationMtr.set(ControlMode.PercentOutput, controllerValue);
+      }
+
+    } else {
 
       // m_Arm.armRotationMtr.set(ControlMode.PercentOutput, .5 * controllerValue);
       /*
@@ -67,7 +67,7 @@ public class RotateArmCommand extends CommandBase {
        */
 
       // If we are at the limit
-      if (m_sensorPosition >= 190000) {
+      if (m_Arm.ArmDegrees >= 90) {
         // Then don't go further
         if (controllerValue <= 0) {
           m_Arm.armRotationMtr.set(ControlMode.PercentOutput, 0 * controllerValue);
@@ -82,6 +82,7 @@ public class RotateArmCommand extends CommandBase {
 
   @Override
   public void end(boolean interrupted) {
+    m_Arm.armRotationMtr.set(ControlMode.PercentOutput, 0);
   }
 
   public boolean isFinished() {

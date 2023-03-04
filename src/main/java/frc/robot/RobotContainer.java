@@ -12,11 +12,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.AlignCommand;
 import frc.robot.commands.AutoCommand;
+import frc.robot.commands.ManualRotateArmCommand;
+import frc.robot.commands.ManualRotateArmCommand;
 //import frc.robot.commands.RotateArmCommand;
 import frc.robot.commands.SwerveDriveCommand;
 import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.DriveTrain;
-//import frc.robot.subsystems.Arm;
+import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Stuff;
 import frc.robot.subsystems.Tags;
 //add in later
@@ -24,7 +26,7 @@ import frc.robot.subsystems.Tags;
 
 public class RobotContainer {
   DriveTrain m_DriveTrain = new DriveTrain();
-  //Arm m_Arm = new Arm();
+  Arm m_Arm = new Arm();
   Claw m_Claw = new Claw();
   Stuff m_Stuff = new Stuff();
   Tags m_Tags = new Tags();
@@ -44,12 +46,12 @@ public class RobotContainer {
 
   //2022 Code
   //JoystickButton manipButtonA = new JoystickButton(manipController, Constants.buttonA);
-  //JoystickButton manipButtonB = new JoystickButton(manipController, Constants.buttonB);
+  JoystickButton manipButtonB = new JoystickButton(manipController, Constants.buttonB);
   //JoystickButton manipButtonX = new JoystickButton(manipController, Constants.buttonX);
   JoystickButton manipButtonY = new JoystickButton(manipController, Constants.buttonY);
   JoystickButton manipButtonRight = new JoystickButton(manipController, Constants.buttonRight);
-  //JoystickButton manipButtonLeft = new JoystickButton(manipController, Constants.buttonLeft);
-  //JoystickButton manipButtonOptions = new JoystickButton(manipController, 7);
+  JoystickButton manipButtonLeft = new JoystickButton(manipController, Constants.buttonLeft);
+  JoystickButton manipButtonOptions = new JoystickButton(manipController, 7);
   //JoystickButton manipButtonStart = new JoystickButton(manipController, 8);
   
   // A chooser for autonomous commands
@@ -82,11 +84,12 @@ public class RobotContainer {
     m_DriveTrain.setDefaultCommand(new SwerveDriveCommand (() -> driverController.getLeftY(),
     () -> driverController.getLeftX(), () -> driverController.getRightX(), m_DriveTrain));
 
-    //m_Arm.setDefaultCommand(new RotateArmCommand (() -> manipController.getLeftY(), m_Arm));
-
+    //m_Arm.setDefaultCommand(new AutomatedRotateArmCommand (m_Arm));
+    manipButtonOptions.whileTrue(new ManualRotateArmCommand(() -> manipController.getLeftY(), m_Arm));
+    manipButtonLeft.onTrue(m_Arm.LowerArm()); // starts at 1 (5 deegrees) goes down
+    manipButtonRight.onTrue(m_Arm.RaiseArm());  //  starts at 1, when pressed goes up to 2 (82 Deegrees), when pressed again goes up to 3 (85 deegrees)
     //manipButtonA.toggleOnTrue(m_Arm.toggleGripper());
-    manipButtonRight.toggleOnTrue(m_Claw.toggleGripper());
-
+    manipButtonB.toggleOnTrue(m_Claw.toggleGripper());
 
     manipButtonX.whileTrue(new AlignCommand(m_DriveTrain, () -> frc.robot.subsystems.Stuff.angle));
     //manipButtonB.whileTrue(new AprilAlignCommand(m_DriveTrain, () -> frc.robot.subsystems.Tags.tx2));

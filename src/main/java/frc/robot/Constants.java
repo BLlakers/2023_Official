@@ -5,8 +5,14 @@ public final class Constants {
     public static int PHChannel = 30; // REV Pneumatic Hub
     public static int PDHChannel = 20; // REV Power Distribution Hub
 
-    // Manipulator
+    // Arm
     public static int armMotorChannel = 9;
+    public static double PositionDown = 5;
+    public static double PositionPickup = 82;
+    public static double PositionDrop = 85;
+    public static double[] Positions = {PositionDown, PositionPickup, PositionDrop};
+    public static double ArmTolerance = 0.4;
+   
 
     // Controller
     public static int DriverControllerChannel = 0;
@@ -17,7 +23,7 @@ public final class Constants {
     public static int buttonY = 4;
     public static int buttonLeft = 5;
     public static int buttonRight = 6;
-    public static double deadzone = 0.2;
+    public static double deadzone = 0;
 
     // Drive Train
     public static int blSteerMotorChannel = 1;
