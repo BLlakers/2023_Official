@@ -33,7 +33,7 @@ public class AutoRotateArmCommand extends CommandBase {
   @Override
   public void execute() {
     double m_sensorPosition = m_Arm.armRotationMtr.getSelectedSensorPosition(); // Variable to hold the sensor position
-    m_Arm.ArmDegrees = (m_sensorPosition * 360) / (120 * 2048); // 120:1 gearbox
+    m_Arm.ArmDegrees = (m_sensorPosition * 360 * 0.72) / (120 * 2048); // 120:1 gearbox
     double drivevalue = 0;
 
     // Determine the target position
@@ -48,9 +48,9 @@ SmartDashboard.putNumber("Target", targetDegrees);
 SmartDashboard.putNumber("Arm Degrees", m_Arm.ArmDegrees);
     // Use bang bang control to reach the target
     if (m_Arm.ArmDegrees <= (targetDegrees - Constants.ArmTolerance)){ 
-      drivevalue = drivevalue + 0.4;  }
+      drivevalue = drivevalue + 0.25;  }
     else if( m_Arm.ArmDegrees >= (targetDegrees + Constants.ArmTolerance)) {
-      drivevalue = drivevalue - 0.4;
+      drivevalue = drivevalue - 0.25;
      } else{
 
      }
@@ -70,7 +70,7 @@ SmartDashboard.putNumber("Arm Degrees", m_Arm.ArmDegrees);
     //Tell it to move, using limit switch and upper limit logic
     // Limit switch is inverted logic
     if (!m_Arm.ArmLimitSwitch.get()) {
-      m_Arm.armRotationMtr.setSelectedSensorPosition(5 * 120 * 2048 / 360);
+      m_Arm.armRotationMtr.setSelectedSensorPosition(5 * 120 * 2048 / (360* 0.72));
       m_Arm.ArmPosition = 1;
       if (drivevalue <= 0) {
         m_Arm.armRotationMtr.set(ControlMode.PercentOutput, 0 * drivevalue);
