@@ -15,7 +15,6 @@ import frc.robot.commands.AutoCommand;
 import frc.robot.commands.ManualRotateArmCommand;
 import frc.robot.commands.AutoRotateArmCommand;
 import frc.robot.commands.FieldAlignedCommand;
-import frc.robot.commands.RotateArmCommand;
 import frc.robot.commands.SwerveDriveCommand;
 import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.DriveTrain;
