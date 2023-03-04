@@ -37,6 +37,7 @@ public class DriveTrain extends SubsystemBase {
   double leftX;
   double rightX;
   AHRS gyro = new AHRS(SPI.Port.kMXP);
+  public double startYaw = 0;
 
   public DriveTrain() {
     flDrive.setInverted(false);
@@ -55,6 +56,11 @@ public class DriveTrain extends SubsystemBase {
     brDrive.getEncoder().setPosition(0);
   }
   
+  public double getGyroYaw() {
+    System.out.println(gyro.getYaw());
+  return gyro.getYaw();
+  }
+
     public double getPosition(double rawAngle, double offset) {
     double offsetRot = offset / 360;
     double angle = rawAngle - offsetRot;
