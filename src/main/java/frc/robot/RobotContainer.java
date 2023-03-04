@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.AlignCommand;
+
 import frc.robot.commands.AutoCommand;
 import frc.robot.commands.ManualRotateArmCommand;
 import frc.robot.commands.AutoRotateArmCommand;
@@ -19,7 +19,6 @@ import frc.robot.commands.SwerveDriveCommand;
 import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Arm;
-import frc.robot.subsystems.Stuff;
 import frc.robot.subsystems.Tags;
 //add in later
 //import frc.robot.commands.AprilAlignCommand;

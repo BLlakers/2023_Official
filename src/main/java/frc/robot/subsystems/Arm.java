@@ -25,6 +25,20 @@ public class Arm extends SubsystemBase {
   // AnalogPotentiometer pressureTransducer = new AnalogPotentiometer(/* the
   // AnalogIn port*/ 2, scale, offset);
 
+<<<<<<<<< Temporary merge branch 1
+//exampleDoublePH.set(kOff);
+//exampleDoublePH.set(kForward);
+ 
+// scaled values in psi units
+//double psi = pressureTransducer.get();  
+Compressor phCompressor = new Compressor(Constants.PHChannel, PneumaticsModuleType.REVPH);
+  //boolean pressureSwitch = phCompressor.getPressureSwitchValue();
+  
+@Override
+  public void periodic() {
+  phCompressor.enableAnalog(50,60);
+ }
+=========
   DoubleSolenoid exampleDoublePH = new DoubleSolenoid(30, PneumaticsModuleType.REVPH, 0, 7);
   public TalonFX armRotationMtr = new TalonFX(Constants.armMotorChannel);
   public DigitalInput ArmLimitSwitch = new DigitalInput(9);
