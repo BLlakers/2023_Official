@@ -14,14 +14,14 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class DriveTrain extends SubsystemBase {
-  public CANSparkMax flDrive = new CANSparkMax(Constants.flDriveMotorChannel, MotorType.kBrushless); //3
-  public CANSparkMax flSteer = new CANSparkMax(Constants.flSteerMotorChannel, MotorType.kBrushless); //4
-  public CANSparkMax frDrive = new CANSparkMax(Constants.frDriveMotorChannel, MotorType.kBrushless); //6
-  public CANSparkMax frSteer = new CANSparkMax(Constants.frSteerMotorChannel, MotorType.kBrushless); //5
-  public CANSparkMax blDrive = new CANSparkMax(Constants.blDriveMotorChannel, MotorType.kBrushless); //2
-  public CANSparkMax blSteer = new CANSparkMax(Constants.blSteerMotorChannel, MotorType.kBrushless); //1
-  public CANSparkMax brDrive = new CANSparkMax(Constants.brDriveMotorChannel, MotorType.kBrushless); //7
-  public CANSparkMax brSteer = new CANSparkMax(Constants.brSteerMotorChannel, MotorType.kBrushless); //8
+  public CANSparkMax flDrive = new CANSparkMax(Constants.flDriveMotorChannel, MotorType.kBrushless); // 3
+  public CANSparkMax flSteer = new CANSparkMax(Constants.flSteerMotorChannel, MotorType.kBrushless); // 4
+  public CANSparkMax frDrive = new CANSparkMax(Constants.frDriveMotorChannel, MotorType.kBrushless); // 6
+  public CANSparkMax frSteer = new CANSparkMax(Constants.frSteerMotorChannel, MotorType.kBrushless); // 5
+  public CANSparkMax blDrive = new CANSparkMax(Constants.blDriveMotorChannel, MotorType.kBrushless); // 2
+  public CANSparkMax blSteer = new CANSparkMax(Constants.blSteerMotorChannel, MotorType.kBrushless); // 1
+  public CANSparkMax brDrive = new CANSparkMax(Constants.brDriveMotorChannel, MotorType.kBrushless); // 7
+  public CANSparkMax brSteer = new CANSparkMax(Constants.brSteerMotorChannel, MotorType.kBrushless); // 8
   public DutyCycleEncoder blEncoder = new DutyCycleEncoder(Constants.blEncoderChannel);
   public DutyCycleEncoder flEncoder = new DutyCycleEncoder(Constants.flEncoderChannel);
   public DutyCycleEncoder frEncoder = new DutyCycleEncoder(Constants.frEncoderChannel);
@@ -54,15 +54,15 @@ public class DriveTrain extends SubsystemBase {
     flSteer.setIdleMode(CANSparkMax.IdleMode.kBrake);
     brDrive.getEncoder().setPosition(0);
   }
-  
-    public double getPosition(double rawAngle, double offset) {
+
+  public double getPosition(double rawAngle, double offset) {
     double offsetRot = offset / 360;
     double angle = rawAngle - offsetRot;
     double angleDeg = (angle % 1) * 360;
     if (angleDeg < 0) {
       angleDeg = angleDeg + 360;
     }
-      
+
     return angleDeg;
   }
 
@@ -89,7 +89,7 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public void drive(DoubleSupplier _leftY, DoubleSupplier _leftX, DoubleSupplier _rightX) {
-    
+
     leftY = _leftY.getAsDouble();
     leftX = _leftX.getAsDouble();
     rightX = _rightX.getAsDouble();
@@ -127,7 +127,7 @@ public class DriveTrain extends SubsystemBase {
     double D = vy + omega * Constants.length * .6;
 
     // Finds Speeds for Each of the Wheels
-    //WP - When this was in the swerve drive command all lines were * 0.5
+    // WP - When this was in the swerve drive command all lines were * 0.5
     double w1s = Math.sqrt(Math.pow(B, 2) + Math.pow(C, 2)) * .6;
     double w2s = Math.sqrt(Math.pow(B, 2) + Math.pow(D, 2)) * .6;
     double w3s = Math.sqrt(Math.pow(A, 2) + Math.pow(D, 2)) * .6;
@@ -139,21 +139,21 @@ public class DriveTrain extends SubsystemBase {
     double w3a = (Math.atan2(A, D) * (180 / Math.PI)) + 180;
     double w4a = (Math.atan2(A, C) * (180 / Math.PI)) + 180;
 
-    //double yaw = gyro.getYaw() + 180;
+    // double yaw = gyro.getYaw() + 180;
 
-    //if (yaw == 360) {
-    //  yaw = 0;
-    //}
+    // if (yaw == 360) {
+    // yaw = 0;
+    // }
     //
-    //if (yaw <= 180) {
-    //  yaw = yaw + 180;
-    //} else if (w1a > 180) {
-    //  yaw = yaw - 180;
-    //}
+    // if (yaw <= 180) {
+    // yaw = yaw + 180;
+    // } else if (w1a > 180) {
+    // yaw = yaw - 180;
+    // }
     //
-    //if (yaw == 360) {
-    //  yaw = 0;
-    //}
+    // if (yaw == 360) {
+    // yaw = 0;
+    // }
 
     // Manipulates Degree Values so 0 is on top and degree values get bigger when
     // going clockwise
@@ -195,7 +195,6 @@ public class DriveTrain extends SubsystemBase {
       w4a = w4a - 180;
     }
 
-    
     // if (Math.abs(omega) < .1) {
     // if (yaw < 180) {
     // if (w1a == 360) {
@@ -211,13 +210,12 @@ public class DriveTrain extends SubsystemBase {
     // w4a = 0;
     // }
     // }
-     
+
     // w1a = Math.abs(w1a - yaw);
     // w2a = Math.abs(w2a - yaw);
     // w3a = Math.abs(w3a - yaw);
     // w4a = Math.abs(w4a - yaw);
     // }
-     
 
     if (w1a == 360) {
       w1a = 0;
@@ -470,12 +468,11 @@ public class DriveTrain extends SubsystemBase {
     }
   }
 
-
   @Override
   public void periodic() {
-  //System.out.println(gyro.getAngle());
-  //System.out.println(gyro.getYaw()); 
-  SmartDashboard.putNumber("gyro.getYaw", gyro.getYaw());
-  //System.out.println(brDrive.getEncoder().getPosition());
+    // System.out.println(gyro.getAngle());
+    // System.out.println(gyro.getYaw());
+    SmartDashboard.putNumber("gyro.getYaw", gyro.getYaw());
+    // System.out.println(brDrive.getEncoder().getPosition());
   }
 }

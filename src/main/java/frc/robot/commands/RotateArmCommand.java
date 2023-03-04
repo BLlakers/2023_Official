@@ -2,18 +2,15 @@ package frc.robot.commands;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
-import com.revrobotics.CANSparkMax;
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import java.util.function.DoubleSupplier;
-
 import javax.lang.model.util.ElementScanner14;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Arm;
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 public class RotateArmCommand extends CommandBase {
   DoubleSupplier m_leftY;
   Arm m_Arm;
@@ -36,14 +33,11 @@ public class RotateArmCommand extends CommandBase {
     double m_sensorPosition = -m_Arm.armRotationMtr.getSelectedSensorPosition(); // Variable to hold the sensor position
     double m_sensorDegrees = (m_sensorPosition * 360) / (90 * 2048);
 
-    
-
-    
     double controllerValue = m_leftY.getAsDouble();
-    
+
     SmartDashboard.putNumber("armRotationMtr", m_sensorPosition);
 
-controllerValue = controllerValue *0.5;
+    controllerValue = controllerValue * 0.5;
 
     // Limit switch is inverted logic
     if (!ArmLimitSwitch.get()) {
@@ -72,18 +66,17 @@ controllerValue = controllerValue *0.5;
        * threshold, in the opposite direction
        */
 
-      //If we are at the limit
+      // If we are at the limit
       if (m_sensorPosition >= 190000) {
-        //Then don't go further
+        // Then don't go further
         if (controllerValue <= 0) {
           m_Arm.armRotationMtr.set(ControlMode.PercentOutput, 0 * controllerValue);
         } else {
           m_Arm.armRotationMtr.set(ControlMode.PercentOutput, 1 * controllerValue);
         }
+      } else {
+        m_Arm.armRotationMtr.set(ControlMode.PercentOutput, 1 * controllerValue);
       }
-      else{
-        m_Arm.armRotationMtr.set(ControlMode.PercentOutput, 1 * controllerValue);  
-      } 
     }
   }
 

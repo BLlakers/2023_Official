@@ -1,14 +1,14 @@
 package frc.robot;
 
 public final class Constants {
-    //Robot
+    // Robot
     public static int PHChannel = 30; // REV Pneumatic Hub
     public static int PDHChannel = 20; // REV Power Distribution Hub
 
-    //Manipulator
+    // Manipulator
     public static int armMotorChannel = 9;
 
-    //Controller
+    // Controller
     public static int DriverControllerChannel = 0;
     public static int ManipControllerChannel = 1;
     public static int buttonA = 1;
@@ -19,7 +19,7 @@ public final class Constants {
     public static int buttonRight = 6;
     public static double deadzone = 0.2;
 
-    //Drive Train
+    // Drive Train
     public static int blSteerMotorChannel = 1;
     public static int blDriveMotorChannel = 2;
     public static int flDriveMotorChannel = 3;
@@ -34,6 +34,6 @@ public final class Constants {
     public static int brEncoderChannel = 3;
     public static double spinTolerance = 4.2;
     public static double length = 0.58;
-    public static double width = 0.58;    
+    public static double width = 0.58;
 
 }

@@ -50,25 +50,25 @@ public class SwerveDriveCommand extends CommandBase {
     // // Finds the X Value of the Left Stick on the Controller and Takes Care of
     // // Joystick Drift
     // if (Math.abs(leftX) < Constants.deadzone) {
-    //   x = 0;
+    // x = 0;
     // } else {
-    //   x = leftX;
+    // x = leftX;
     // }
 
     // // Finds the Y Value of the Left Stick on the Controller and Takes Care of
     // // Joystick Drift
     // if (Math.abs(leftY) < Constants.deadzone) {
-    //   y = 0;
+    // y = 0;
     // } else {
-    //   y = -leftY;
+    // y = -leftY;
     // }
 
     // // Finds the X Value of the Right Stick on the Controller and Takes Care of
     // // Joystick Drift
     // if (Math.abs(rightX) < Constants.deadzone) {
-    //   rot = 0;
+    // rot = 0;
     // } else {
-    //   rot = rightX;
+    // rot = rightX;
     // }
 
     // double vx = x;// desired x speed
@@ -95,94 +95,94 @@ public class SwerveDriveCommand extends CommandBase {
     // /*double yaw = m_DriveTrain.gyro.getYaw() + 180;
 
     // if (yaw == 360) {
-    //   yaw = 0;
+    // yaw = 0;
     // }
 
     // if (yaw <= 180) {
-    //   yaw = yaw + 180;
+    // yaw = yaw + 180;
     // } else if (w1a > 180) {
-    //   yaw = yaw - 180;
+    // yaw = yaw - 180;
     // }
 
     // if (yaw == 360) {
-    //   yaw = 0;
+    // yaw = 0;
     // }*/
 
     // // Manipulates Degree Values so 0 is on top and degree values get bigger when
     // // going clockwise
 
     // if (w1a == 360) {
-    //   w1a = 0;
+    // w1a = 0;
     // }
     // if (w2a == 360) {
-    //   w2a = 0;
+    // w2a = 0;
     // }
     // if (w3a == 360) {
-    //   w3a = 0;
+    // w3a = 0;
     // }
     // if (w4a == 360) {
-    //   w4a = 0;
+    // w4a = 0;
     // }
 
     // if (w1a <= 180) {
-    //   w1a = w1a + 180;
+    // w1a = w1a + 180;
     // } else if (w1a > 180) {
-    //   w1a = w1a - 180;
+    // w1a = w1a - 180;
     // }
 
     // if (w2a <= 180) {
-    //   w2a = w2a + 180;
+    // w2a = w2a + 180;
     // } else if (w2a > 180) {
-    //   w2a = w2a - 180;
+    // w2a = w2a - 180;
     // }
 
     // if (w3a <= 180) {
-    //   w3a = w3a + 180;
+    // w3a = w3a + 180;
     // } else if (w3a > 180) {
-    //   w3a = w3a - 180;
+    // w3a = w3a - 180;
     // }
 
     // if (w4a <= 180) {
-    //   w4a = w4a + 180;
+    // w4a = w4a + 180;
     // } else if (w4a > 180) {
-    //   w4a = w4a - 180;
+    // w4a = w4a - 180;
     // }
 
     // /*
-    //  * if (Math.abs(omega) < .1) {
-    //  * if (yaw < 180) {
-    //  * if (w1a == 360) {
-    //  * w1a = 0;
-    //  * }
-    //  * if (w2a == 360) {
-    //  * w2a = 0;
-    //  * }
-    //  * if (w3a == 360) {
-    //  * w3a = 0;
-    //  * }
-    //  * if (w4a == 360) {
-    //  * w4a = 0;
-    //  * }
-    //  * }
-    //  * 
-    //  * w1a = Math.abs(w1a - yaw);
-    //  * w2a = Math.abs(w2a - yaw);
-    //  * w3a = Math.abs(w3a - yaw);
-    //  * w4a = Math.abs(w4a - yaw);
-    //  * }
-    //  */
+    // * if (Math.abs(omega) < .1) {
+    // * if (yaw < 180) {
+    // * if (w1a == 360) {
+    // * w1a = 0;
+    // * }
+    // * if (w2a == 360) {
+    // * w2a = 0;
+    // * }
+    // * if (w3a == 360) {
+    // * w3a = 0;
+    // * }
+    // * if (w4a == 360) {
+    // * w4a = 0;
+    // * }
+    // * }
+    // *
+    // * w1a = Math.abs(w1a - yaw);
+    // * w2a = Math.abs(w2a - yaw);
+    // * w3a = Math.abs(w3a - yaw);
+    // * w4a = Math.abs(w4a - yaw);
+    // * }
+    // */
 
     // if (w1a == 360) {
-    //   w1a = 0;
+    // w1a = 0;
     // }
     // if (w2a == 360) {
-    //   w2a = 0;
+    // w2a = 0;
     // }
     // if (w3a == 360) {
-    //   w3a = 0;
+    // w3a = 0;
     // }
     // if (w4a == 360) {
-    //   w4a = 0;
+    // w4a = 0;
     // }
 
     // // Finds Complimentary Angle to the Desired Angle
@@ -194,35 +194,39 @@ public class SwerveDriveCommand extends CommandBase {
     // // Sets Max Wheel Speed
     // double max = w1s;
     // if (w2s > max)
-    //   max = w2s;
+    // max = w2s;
     // if (w3s > max)
-    //   max = w3s;
+    // max = w3s;
     // if (w4s > max)
-    //   max = w4s;
+    // max = w4s;
     // if (max > 1) {
-    //   w1s = w1s / max;
-    //   w2s = w2s / max;
-    //   w3s = w3s / max;
-    //   w4s = w4s / max;
+    // w1s = w1s / max;
+    // w2s = w2s / max;
+    // w3s = w3s / max;
+    // w4s = w4s / max;
     // }
 
     // // Finds Actual Angle of Wheels
-    // w1ca = (-1 * m_DriveTrain.getPosition(m_DriveTrain.frEncoder.get(), 267.4)) + 360;
-    // w2ca = (-1 * m_DriveTrain.getPosition(m_DriveTrain.flEncoder.get(), 120.7)) + 360;
-    // w3ca = (-1 * m_DriveTrain.getPosition(m_DriveTrain.blEncoder.get(), 64.7)) + 360;
-    // w4ca = (-1 * m_DriveTrain.getPosition(m_DriveTrain.brEncoder.get(), 335.2)) + 360;
+    // w1ca = (-1 * m_DriveTrain.getPosition(m_DriveTrain.frEncoder.get(), 267.4)) +
+    // 360;
+    // w2ca = (-1 * m_DriveTrain.getPosition(m_DriveTrain.flEncoder.get(), 120.7)) +
+    // 360;
+    // w3ca = (-1 * m_DriveTrain.getPosition(m_DriveTrain.blEncoder.get(), 64.7)) +
+    // 360;
+    // w4ca = (-1 * m_DriveTrain.getPosition(m_DriveTrain.brEncoder.get(), 335.2)) +
+    // 360;
 
     // if (w1ca == 360) {
-    //   w1a = 0;
+    // w1a = 0;
     // }
     // if (w2ca == 360) {
-    //   w2a = 0;
+    // w2a = 0;
     // }
     // if (w3ca == 360) {
-    //   w3a = 0;
+    // w3a = 0;
     // }
     // if (w4ca == 360) {
-    //   w4a = 0;
+    // w4a = 0;
     // }
 
     // double w1d_1 = w1a - w1ca;
@@ -246,55 +250,55 @@ public class SwerveDriveCommand extends CommandBase {
     // double w4d_4 = w4ca - w4ra;
 
     // if (w1d_1 < 0) {
-    //   w1d_1 = w1d_1 + 360;
+    // w1d_1 = w1d_1 + 360;
     // }
     // if (w1d_2 < 0) {
-    //   w1d_2 = w1d_2 + 360;
+    // w1d_2 = w1d_2 + 360;
     // }
     // if (w1d_3 < 0) {
-    //   w1d_3 = w1d_3 + 360;
+    // w1d_3 = w1d_3 + 360;
     // }
     // if (w1d_4 < 0) {
-    //   w1d_4 = w1d_4 + 360;
+    // w1d_4 = w1d_4 + 360;
     // }
 
     // if (w2d_1 < 0) {
-    //   w2d_1 = w2d_1 + 360;
+    // w2d_1 = w2d_1 + 360;
     // }
     // if (w2d_2 < 0) {
-    //   w2d_2 = w2d_2 + 360;
+    // w2d_2 = w2d_2 + 360;
     // }
     // if (w2d_3 < 0) {
-    //   w2d_3 = w2d_3 + 360;
+    // w2d_3 = w2d_3 + 360;
     // }
     // if (w2d_4 < 0) {
-    //   w2d_4 = w2d_4 + 360;
+    // w2d_4 = w2d_4 + 360;
     // }
 
     // if (w3d_1 < 0) {
-    //   w3d_1 = w3d_1 + 360;
+    // w3d_1 = w3d_1 + 360;
     // }
     // if (w3d_2 < 0) {
-    //   w3d_2 = w3d_2 + 360;
+    // w3d_2 = w3d_2 + 360;
     // }
     // if (w3d_3 < 0) {
-    //   w3d_3 = w3d_3 + 360;
+    // w3d_3 = w3d_3 + 360;
     // }
     // if (w3d_4 < 0) {
-    //   w3d_4 = w3d_4 + 360;
+    // w3d_4 = w3d_4 + 360;
     // }
 
     // if (w4d_1 < 0) {
-    //   w4d_1 = w4d_1 + 360;
+    // w4d_1 = w4d_1 + 360;
     // }
     // if (w4d_2 < 0) {
-    //   w4d_2 = w4d_2 + 360;
+    // w4d_2 = w4d_2 + 360;
     // }
     // if (w4d_3 < 0) {
-    //   w4d_3 = w4d_3 + 360;
+    // w4d_3 = w4d_3 + 360;
     // }
     // if (w4d_4 < 0) {
-    //   w4d_4 = w4d_4 + 360;
+    // w4d_4 = w4d_4 + 360;
     // }
 
     // double value_1 = m_DriveTrain.getOptimalRoute(w1d_1, w1d_2, w1d_3, w1d_4);
@@ -303,123 +307,123 @@ public class SwerveDriveCommand extends CommandBase {
     // double value_4 = m_DriveTrain.getOptimalRoute(w4d_1, w4d_2, w4d_3, w4d_4);
 
     // if (value_1 == 1) {
-    //   m_DriveTrain.frDrive.set(w1s);
-    //   if (w1d_1 > Constants.spinTolerance) {
-    //     m_DriveTrain.frSteer.set(0.07);
-    //   } else {
-    //     m_DriveTrain.frSteer.set(0);
-    //   }
+    // m_DriveTrain.frDrive.set(w1s);
+    // if (w1d_1 > Constants.spinTolerance) {
+    // m_DriveTrain.frSteer.set(0.07);
+    // } else {
+    // m_DriveTrain.frSteer.set(0);
+    // }
     // } else if (value_1 == 2) {
-    //   m_DriveTrain.frDrive.set(w1s);
-    //   if (w1d_2 > Constants.spinTolerance) {
-    //     m_DriveTrain.frSteer.set(-0.07);
-    //   } else {
-    //     m_DriveTrain.frSteer.set(0);
-    //   }
+    // m_DriveTrain.frDrive.set(w1s);
+    // if (w1d_2 > Constants.spinTolerance) {
+    // m_DriveTrain.frSteer.set(-0.07);
+    // } else {
+    // m_DriveTrain.frSteer.set(0);
+    // }
     // } else if (value_1 == 3) {
-    //   m_DriveTrain.frDrive.set(-w1s);
-    //   if (w1d_3 > Constants.spinTolerance) {
-    //     m_DriveTrain.frSteer.set(0.07);
-    //   } else {
-    //     m_DriveTrain.frSteer.set(0);
-    //   }
+    // m_DriveTrain.frDrive.set(-w1s);
+    // if (w1d_3 > Constants.spinTolerance) {
+    // m_DriveTrain.frSteer.set(0.07);
+    // } else {
+    // m_DriveTrain.frSteer.set(0);
+    // }
     // } else if (value_1 == 4) {
-    //   m_DriveTrain.frDrive.set(-w1s);
-    //   if (w1d_4 > Constants.spinTolerance) {
-    //     m_DriveTrain.frSteer.set(-0.07);
-    //   } else {
-    //     m_DriveTrain.frSteer.set(0);
-    //   }
+    // m_DriveTrain.frDrive.set(-w1s);
+    // if (w1d_4 > Constants.spinTolerance) {
+    // m_DriveTrain.frSteer.set(-0.07);
+    // } else {
+    // m_DriveTrain.frSteer.set(0);
+    // }
     // }
 
     // if (value_2 == 1) {
-    //   m_DriveTrain.flDrive.set(w2s);
-    //   if (w2d_1 > Constants.spinTolerance) {
-    //     m_DriveTrain.flSteer.set(0.07);
-    //   } else {
-    //     m_DriveTrain.flSteer.set(0);
-    //   }
+    // m_DriveTrain.flDrive.set(w2s);
+    // if (w2d_1 > Constants.spinTolerance) {
+    // m_DriveTrain.flSteer.set(0.07);
+    // } else {
+    // m_DriveTrain.flSteer.set(0);
+    // }
     // } else if (value_2 == 2) {
-    //   m_DriveTrain.flDrive.set(w2s);
-    //   if (w2d_2 > Constants.spinTolerance) {
-    //     m_DriveTrain.flSteer.set(-0.07);
-    //   } else {
-    //     m_DriveTrain.flSteer.set(0);
-    //   }
+    // m_DriveTrain.flDrive.set(w2s);
+    // if (w2d_2 > Constants.spinTolerance) {
+    // m_DriveTrain.flSteer.set(-0.07);
+    // } else {
+    // m_DriveTrain.flSteer.set(0);
+    // }
     // } else if (value_2 == 3) {
-    //   m_DriveTrain.flDrive.set(-w2s);
-    //   if (w2d_3 > Constants.spinTolerance) {
-    //     m_DriveTrain.flSteer.set(0.07);
-    //   } else {
-    //     m_DriveTrain.flSteer.set(0);
-    //   }
+    // m_DriveTrain.flDrive.set(-w2s);
+    // if (w2d_3 > Constants.spinTolerance) {
+    // m_DriveTrain.flSteer.set(0.07);
+    // } else {
+    // m_DriveTrain.flSteer.set(0);
+    // }
     // } else if (value_2 == 4) {
-    //   m_DriveTrain.flDrive.set(-w2s);
-    //   if (w2d_4 > Constants.spinTolerance) {
-    //     m_DriveTrain.flSteer.set(-0.07);
-    //   } else {
-    //     m_DriveTrain.flSteer.set(0);
-    //   }
+    // m_DriveTrain.flDrive.set(-w2s);
+    // if (w2d_4 > Constants.spinTolerance) {
+    // m_DriveTrain.flSteer.set(-0.07);
+    // } else {
+    // m_DriveTrain.flSteer.set(0);
+    // }
     // }
 
     // if (value_3 == 1) {
-    //   m_DriveTrain.blDrive.set(w3s);
-    //   if (w3d_1 > Constants.spinTolerance) {
-    //     m_DriveTrain.blSteer.set(0.07);
-    //   } else {
-    //     m_DriveTrain.blSteer.set(0);
-    //   }
+    // m_DriveTrain.blDrive.set(w3s);
+    // if (w3d_1 > Constants.spinTolerance) {
+    // m_DriveTrain.blSteer.set(0.07);
+    // } else {
+    // m_DriveTrain.blSteer.set(0);
+    // }
     // } else if (value_3 == 2) {
-    //   m_DriveTrain.blDrive.set(w3s);
-    //   if (w3d_2 > Constants.spinTolerance) {
-    //     m_DriveTrain.blSteer.set(-0.07);
-    //   } else {
-    //     m_DriveTrain.blSteer.set(0);
-    //   }
+    // m_DriveTrain.blDrive.set(w3s);
+    // if (w3d_2 > Constants.spinTolerance) {
+    // m_DriveTrain.blSteer.set(-0.07);
+    // } else {
+    // m_DriveTrain.blSteer.set(0);
+    // }
     // } else if (value_3 == 3) {
-    //   m_DriveTrain.blDrive.set(-w3s);
-    //   if (w3d_3 > Constants.spinTolerance) {
-    //     m_DriveTrain.blSteer.set(0.07);
-    //   } else {
-    //     m_DriveTrain.blSteer.set(0);
-    //   }
+    // m_DriveTrain.blDrive.set(-w3s);
+    // if (w3d_3 > Constants.spinTolerance) {
+    // m_DriveTrain.blSteer.set(0.07);
+    // } else {
+    // m_DriveTrain.blSteer.set(0);
+    // }
     // } else if (value_3 == 4) {
-    //   m_DriveTrain.blDrive.set(-w3s);
-    //   if (w3d_4 > Constants.spinTolerance) {
-    //     m_DriveTrain.blSteer.set(-0.07);
-    //   } else {
-    //     m_DriveTrain.blSteer.set(0);
-    //   }
+    // m_DriveTrain.blDrive.set(-w3s);
+    // if (w3d_4 > Constants.spinTolerance) {
+    // m_DriveTrain.blSteer.set(-0.07);
+    // } else {
+    // m_DriveTrain.blSteer.set(0);
+    // }
     // }
 
     // if (value_4 == 1) {
-    //   m_DriveTrain.brDrive.set(w4s);
-    //   if (w4d_1 > Constants.spinTolerance) {
-    //     m_DriveTrain.brSteer.set(0.07);
-    //   } else {
-    //     m_DriveTrain.brSteer.set(0);
-    //   }
+    // m_DriveTrain.brDrive.set(w4s);
+    // if (w4d_1 > Constants.spinTolerance) {
+    // m_DriveTrain.brSteer.set(0.07);
+    // } else {
+    // m_DriveTrain.brSteer.set(0);
+    // }
     // } else if (value_4 == 2) {
-    //   m_DriveTrain.brDrive.set(w4s);
-    //   if (w4d_2 > Constants.spinTolerance) {
-    //     m_DriveTrain.brSteer.set(-0.07);
-    //   } else {
-    //     m_DriveTrain.brSteer.set(0);
-    //   }
+    // m_DriveTrain.brDrive.set(w4s);
+    // if (w4d_2 > Constants.spinTolerance) {
+    // m_DriveTrain.brSteer.set(-0.07);
+    // } else {
+    // m_DriveTrain.brSteer.set(0);
+    // }
     // } else if (value_4 == 3) {
-    //   m_DriveTrain.brDrive.set(-w4s);
-    //   if (w4d_3 > Constants.spinTolerance) {
-    //     m_DriveTrain.brSteer.set(0.07);
-    //   } else {
-    //     m_DriveTrain.brSteer.set(0);
-    //   }
+    // m_DriveTrain.brDrive.set(-w4s);
+    // if (w4d_3 > Constants.spinTolerance) {
+    // m_DriveTrain.brSteer.set(0.07);
+    // } else {
+    // m_DriveTrain.brSteer.set(0);
+    // }
     // } else if (value_4 == 4) {
-    //   m_DriveTrain.brDrive.set(-w4s);
-    //   if (w4d_4 > Constants.spinTolerance) {
-    //     m_DriveTrain.brSteer.set(-0.07);
-    //   } else {
-    //     m_DriveTrain.brSteer.set(0);
-    //   }
+    // m_DriveTrain.brDrive.set(-w4s);
+    // if (w4d_4 > Constants.spinTolerance) {
+    // m_DriveTrain.brSteer.set(-0.07);
+    // } else {
+    // m_DriveTrain.brSteer.set(0);
+    // }
     // }
   }
 

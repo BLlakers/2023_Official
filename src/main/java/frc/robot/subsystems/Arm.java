@@ -40,7 +40,6 @@ public class Arm extends SubsystemBase {
 
   }
 
-
   @Override
 
   public void periodic() {
@@ -66,35 +65,35 @@ public class Arm extends SubsystemBase {
 
         });
   }
+
   public CommandBase RaiseArm() {
     // Inline construction of command goes here.
     // Subsystem::RunOnce implicitly requires `this` subsystem.
-    
+
     return runOnce(
         () -> {
-          // one-time action goes here 
+          // one-time action goes here
           ArmPosition = ArmPosition + 1;
           if (ArmPosition == 4) {
             ArmPosition = 3;
-         }
+          }
+        }
+
+    );
   }
-  
-  );
-    }
-  
-    public CommandBase LowerArm() {
-      // Inline construction of command goes here.
-      // Subsystem::RunOnce implicitly requires `this` subsystem.
-      
-      return runOnce(
-          () -> {
-            // one-time action goes here 
-            ArmPosition = ArmPosition -1;
-            if (ArmPosition == 0) {
-              ArmPosition = 1;
-            } 
-           }
-          );
-      }
-    
+
+  public CommandBase LowerArm() {
+    // Inline construction of command goes here.
+    // Subsystem::RunOnce implicitly requires `this` subsystem.
+
+    return runOnce(
+        () -> {
+          // one-time action goes here
+          ArmPosition = ArmPosition - 1;
+          if (ArmPosition == 0) {
+            ArmPosition = 1;
+          }
+        });
+  }
+
 }
