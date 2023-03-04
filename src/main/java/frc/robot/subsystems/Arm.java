@@ -79,4 +79,19 @@ public class Arm extends SubsystemBase {
           }
         });
   }
+
+  public CommandBase toggleArm() {
+    // Inline construction of command goes here.
+    // Subsystem::RunOnce implicitly requires `this` subsystem.
+
+    return runOnce(
+        () -> {
+          // one-time action goes here
+          // WP - Add code here to toggle the gripper solenoid
+          System.out.println(exampleDoublePH.get());
+          exampleDoublePH.set(Value.kReverse);
+          exampleDoublePH.toggle();
+        });
+  }
+
 }
