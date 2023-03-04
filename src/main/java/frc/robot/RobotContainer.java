@@ -14,6 +14,8 @@ import frc.robot.commands.AlignCommand;
 import frc.robot.commands.AutoCommand;
 import frc.robot.commands.ManualRotateArmCommand;
 import frc.robot.commands.AutoRotateArmCommand;
+import frc.robot.commands.FieldAlignedCommand;
+import frc.robot.commands.RotateArmCommand;
 import frc.robot.commands.SwerveDriveCommand;
 import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.DriveTrain;
@@ -33,7 +35,7 @@ public class RobotContainer {
 
   XboxController driverController = new XboxController(Constants.DriverControllerChannel);
   XboxController manipController = new XboxController(Constants.ManipControllerChannel);
-  JoystickButton driverButtonA = new JoystickButton(driverController, Constants.buttonA);
+  JoystickButton driverButtonB = new JoystickButton(driverController, Constants.buttonB);
   JoystickButton manipButtonA = new JoystickButton(manipController, Constants.buttonA);
   //JoystickButton manipButtonB = new JoystickButton(manipController, Constants.buttonB);
 
