@@ -19,7 +19,7 @@ public void periodic() {
   
  }
 
-  }
+  
 
   public CommandBase toggleGripper() {
     // Inline construction of command goes here.

@@ -6,10 +6,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
-//import edu.wpi.first.networktables.NetworkTable;
-//import edu.wpi.first.networktables.NetworkTableEntry;
-//import edu.wpi.first.networktables.NetworkTableInstance;
-//import frc.robot.subsystems.Stuff;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
+
 //some imports no longer needed but leaving them here untill final version
 
 public class Robot extends TimedRobot {

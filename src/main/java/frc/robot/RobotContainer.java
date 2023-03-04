@@ -16,10 +16,12 @@ import frc.robot.commands.ManualRotateArmCommand;
 import frc.robot.commands.AutoRotateArmCommand;
 import frc.robot.commands.FieldAlignedCommand;
 import frc.robot.commands.SwerveDriveCommand;
+import frc.robot.commands.AlignCommand;
 import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Tags;
+import frc.robot.subsystems.Stuff;
 //add in later
 //import frc.robot.commands.AprilAlignCommand;
 
@@ -84,14 +86,16 @@ public class RobotContainer {
     () -> driverController.getLeftX(), () -> driverController.getRightX(), m_DriveTrain));
 
     m_Arm.setDefaultCommand(new AutoRotateArmCommand (m_Arm));
+
     manipButtonOptions.whileTrue(new ManualRotateArmCommand(() -> manipController.getLeftY(), m_Arm));
     manipButtonLeft.onTrue(m_Arm.LowerArm()); // starts at 1 (5 deegrees) goes down
     manipButtonRight.onTrue(m_Arm.RaiseArm());  //  starts at 1, when pressed goes up to 2 (82 Deegrees), when pressed again goes up to 3 (85 deegrees)
     manipButtonA.toggleOnTrue(m_Arm.toggleArm());
     manipButtonB.toggleOnTrue(m_Claw.toggleGripper());
-
     manipButtonX.whileTrue(new AlignCommand(m_DriveTrain, () -> frc.robot.subsystems.Stuff.angle));
     //manipButtonB.whileTrue(new AprilAlignCommand(m_DriveTrain, () -> frc.robot.subsystems.Tags.tx2));
+
+    driverButtonB.whileTrue(new FieldAlignedCommand(m_DriveTrain));
 
   }
 
