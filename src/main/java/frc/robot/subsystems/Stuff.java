@@ -25,12 +25,9 @@ public class Stuff extends SubsystemBase {
         SmartDashboard.putNumber("Limelight X", camerax);
         SmartDashboard.putNumber("Limelight Y", cameray);
 
-        SmartDashboard.putNumber("Limelight X", camerax);
-        SmartDashboard.putNumber("Limelight Y", cameray);
-
         // finding if it is within he perfect angles. perfect angles are from 13.5 to
         // 5.7, with 9.6 being perfectly centered
-        if (13.5 >= camerax && 5.7 <= camerax) {
+        if (12 >= camerax && 6 <= camerax) {
             isAligned = true;
             angle = 9.6;
         } else {

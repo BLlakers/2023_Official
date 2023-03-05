@@ -41,11 +41,11 @@ public class AlignCommand extends CommandBase {
 
     // finaly driving
 
-    if (m_angle.getAsDouble() >= 13){
+    if (m_angle.getAsDouble() >= 12){
       //too far to right so it moves to the left
       move = -0.2;
     }
-    else if (m_angle.getAsDouble() <= 5){
+    else if (m_angle.getAsDouble() <= 6){
       //too far to the left so it moves to the right
       move = 0.2;
     }

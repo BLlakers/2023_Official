@@ -43,6 +43,7 @@ public class RobotContainer {
   JoystickButton driverButtonLeft = new JoystickButton(driverController, Constants.buttonLeft);
 
   JoystickButton manipButtonX = new JoystickButton(manipController, Constants.buttonX);
+  JoystickButton driverButtonX = new JoystickButton(driverController, Constants.buttonX);
 
 
   //2022 Code
@@ -93,6 +94,7 @@ public class RobotContainer {
     manipButtonA.toggleOnTrue(m_Arm.toggleArm());
     manipButtonB.toggleOnTrue(m_Claw.toggleGripper());
     manipButtonX.whileTrue(new AlignCommand(m_DriveTrain, () -> frc.robot.subsystems.Stuff.angle));
+    driverButtonX.whileTrue(new AlignCommand(m_DriveTrain, () -> frc.robot.subsystems.Stuff.angle));
     //manipButtonB.whileTrue(new AprilAlignCommand(m_DriveTrain, () -> frc.robot.subsystems.Tags.tx2));
 
     driverButtonB.whileTrue(new FieldAlignedCommand(m_DriveTrain));
