@@ -37,10 +37,10 @@ public class FieldAlignedCommand extends CommandBase {
     @Override
     public void execute() {
 
-            if (m_DriveTrain.getGyroYaw() - m_DriveTrain.startYaw > 0){
+            if (m_DriveTrain.getGyroYaw() - m_DriveTrain.startYaw > 10){
                 m_DriveTrain.drive(() -> 0, () -> 0, () -> 1);
             }
-            if (m_DriveTrain.getGyroYaw() - m_DriveTrain.startYaw < 0) {
+            if (m_DriveTrain.getGyroYaw() - m_DriveTrain.startYaw < -10) {
                 m_DriveTrain.drive(() -> 0, () -> 0, () -> -1);
             }        
     }   

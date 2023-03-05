@@ -15,7 +15,7 @@ AnalogInput ultrasonicSensor = new AnalogInput(3);
 
 @Override
 public void periodic() {
-  SmartDashboard.putNumber("Ultrasonic Votlage", ultrasonicSensor.getValue());
+  SmartDashboard.putNumber("Ultrasonic getVoltage", ultrasonicSensor.getVoltage());
   
  }
 
