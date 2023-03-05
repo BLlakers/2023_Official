@@ -12,11 +12,13 @@ public class Claw extends SubsystemBase{
 
 DoubleSolenoid exampleDoublePH = new DoubleSolenoid(30, PneumaticsModuleType.REVPH, 1, 8); //NO ROBOT CODE THIS IS SOLENOID PORT
 AnalogInput ultrasonicSensor = new AnalogInput(3);
+public boolean SensingPiece;
+
 
 @Override
 public void periodic() {
   SmartDashboard.putNumber("Ultrasonic getVoltage", ultrasonicSensor.getVoltage());
-  
+  SmartDashboard.putBoolean("Sensing somethign in the claw?", SensingPiece);
  }
 
   
