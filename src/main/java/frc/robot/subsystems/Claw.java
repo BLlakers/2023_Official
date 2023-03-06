@@ -17,9 +17,15 @@ public boolean SensingPiece;
 
 @Override
 public void periodic() {
+if (ultrasonicSensor.getVoltage() <= .2){
+SensingPiece = true;
+} else {
+SensingPiece = false;
+}
   SmartDashboard.putNumber("Ultrasonic getVoltage", ultrasonicSensor.getVoltage());
   SmartDashboard.putBoolean("Sensing somethign in the claw?", SensingPiece);
- }
+
+}
 
   
 

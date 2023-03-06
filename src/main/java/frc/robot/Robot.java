@@ -13,7 +13,6 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 //some imports no longer needed but leaving them here untill final version
 
 public class Robot extends TimedRobot {
-
   private Command m_autonomousCommand;
   private RobotContainer m_robotContainer;
 
