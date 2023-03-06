@@ -17,6 +17,7 @@ import frc.robot.commands.AutoRotateArmCommand;
 import frc.robot.commands.FieldAlignedCommand;
 import frc.robot.commands.SwerveDriveCommand;
 import frc.robot.commands.AlignCommand;
+import frc.robot.commands.AutoClawCommand;
 import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Arm;
@@ -47,13 +48,13 @@ public class RobotContainer {
 
 
   //2022 Code
-  //JoystickButton manipButtonA = new JoystickButton(manipController, Constants.buttonA);
+  //JoystickButton manipButtonY = new JoystickButton(manipController, Constants.buttonY);
   JoystickButton manipButtonB = new JoystickButton(manipController, Constants.buttonB);
   //JoystickButton manipButtonX = new JoystickButton(manipController, Constants.buttonX);
   JoystickButton manipButtonY = new JoystickButton(manipController, Constants.buttonY);
   JoystickButton manipButtonRight = new JoystickButton(manipController, Constants.buttonRight);
   JoystickButton manipButtonLeft = new JoystickButton(manipController, Constants.buttonLeft);
-  JoystickButton manipButtonOptions = new JoystickButton(manipController, 7);
+  JoystickButton manipButtonOptions = new JoystickButton(manipController, Constants.buttonOptions);
   //JoystickButton manipButtonStart = new JoystickButton(manipController, 8);
   
   // A chooser for autonomous commands
@@ -98,7 +99,7 @@ public class RobotContainer {
     //manipButtonB.whileTrue(new AprilAlignCommand(m_DriveTrain, () -> frc.robot.subsystems.Tags.tx2));
 
     driverButtonB.whileTrue(new FieldAlignedCommand(m_DriveTrain));
-
+    manipButtonOptions.whileTrue(new AutoClawCommand(m_Claw));
   }
 
   private void configureShuffleboard(){
