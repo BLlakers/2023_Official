@@ -13,7 +13,6 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 //some imports no longer needed but leaving them here untill final version
 
 public class Robot extends TimedRobot {
-
   private Command m_autonomousCommand;
   private RobotContainer m_robotContainer;
 
@@ -41,12 +40,12 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
-
+/* 
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
     m_robotContainer.m_DriveTrain.startYaw = m_robotContainer.m_DriveTrain.getGyroYaw();
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
-    }
+    }*/
   }
 
   @Override
