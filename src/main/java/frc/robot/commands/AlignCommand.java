@@ -24,6 +24,8 @@ public class AlignCommand extends CommandBase {
   @Override
   public void execute() { // Runs multiple times
     Double move = 0.0;
+    
+    //this is old stuff, but i am keeping it just as a referance and just incase it is needed again
     // turn2 must somehow become a doubble supplier and the drivetrain is off too
     // finding the turning amount needed
     Double turn1 = 0.035; // how much the motor must turn to turn one degree, this number IS WRONG: it
@@ -31,6 +33,7 @@ public class AlignCommand extends CommandBase {
     Double turn2 = turn1 * m_angle.getAsDouble();
     // Double turn = (turn2.getAsDoubleSupplier());
     SmartDashboard.putNumber("command angle", m_angle.getAsDouble());
+    //end of old stuff
 
     // movement for the left(left joystick thing) y on the "joystick"
     DoubleSupplier lefty;
@@ -39,20 +42,20 @@ public class AlignCommand extends CommandBase {
     DoubleSupplier leftx;
     leftx = () -> 0.0;
 
-    // finaly driving
-
+    //figuring out which way to drive
     if (m_angle.getAsDouble() >= 12){
-      //too far to right so it moves to the left
+      //too far to right so it slowly moves to the left
       move = -0.2;
     }
+
     else if (m_angle.getAsDouble() <= 6){
-      //too far to the left so it moves to the right
+      //too far to the left so it slowly moves to the right
       move = 0.2;
     }
 
-    //actully driving
+    //fianlly driving
     Double move1 = move;
-    //added to fix error in the lat statemnt
+    //added to fix error in the last statemnt because it said move was "not final"
 
     if (m_angle.getAsDouble() == 9.6){
       m_DriveTrain.drive(() -> 0, () -> 0, () -> 0);
