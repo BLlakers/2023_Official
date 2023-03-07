@@ -17,7 +17,7 @@ public boolean SensingPiece;
 
 @Override
 public void periodic() {
-if (ultrasonicSensor.getVoltage() <= .2){
+if (ultrasonicSensor.getVoltage() >= .7){
 SensingPiece = true;
 } else {
 SensingPiece = false;
