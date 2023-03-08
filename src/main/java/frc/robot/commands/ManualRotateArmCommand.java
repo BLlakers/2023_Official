@@ -1,16 +1,9 @@
 package frc.robot.commands;
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import java.util.function.DoubleSupplier;
-import javax.lang.model.util.ElementScanner14;
-
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Arm;
-import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 public class ManualRotateArmCommand extends CommandBase {
   DoubleSupplier m_leftY;
   Arm m_Arm;

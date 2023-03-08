@@ -41,13 +41,13 @@ public class Arm extends SubsystemBase {
     //armRotationMtr.setInverted(true);
     armRotationMtr.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
     armRotationMtr.setSelectedSensorPosition(85*120 *2048/360);
-
+    ArmPosition = 1;
   }
 
   @Override
 
   public void periodic() {
-    phCompressor.enableAnalog(50, 120);
+    phCompressor.enableAnalog(100, 120);
     SmartDashboard.putNumber("Arm Position", ArmPosition);
     SmartDashboard.putNumber("Arm Degrees", ArmDegrees);
 

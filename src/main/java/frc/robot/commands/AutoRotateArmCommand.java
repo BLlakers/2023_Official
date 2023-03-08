@@ -1,21 +1,10 @@
 package frc.robot.commands;
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
-
-import java.lang.annotation.Target;
-import java.util.function.DoubleSupplier;
-import javax.lang.model.util.ElementScanner14;
-import javax.swing.text.Position;
-
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Arm;
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 public class AutoRotateArmCommand extends CommandBase {
-  DoubleSupplier m_leftY;
   Arm m_Arm;
   Double targetDegrees;
 
@@ -27,7 +16,7 @@ public class AutoRotateArmCommand extends CommandBase {
 
   @Override
   public void initialize() {
-
+    
   }
 
   @Override
@@ -37,41 +26,34 @@ public class AutoRotateArmCommand extends CommandBase {
     double drivevalue = 0;
 
     // Determine the target position
-    if (m_Arm.ArmPosition == 1) { //The target position for 0 = Lower, 1 = pickup, 2 = Drop
-     targetDegrees = Constants.Positions[0];
+    if (m_Arm.ArmPosition == 1) { // The target position for 0 = Lower, 1 = pickup, 2 = Drop
+      targetDegrees = Constants.Positions[0];
     } else if (m_Arm.ArmPosition == 2) {
       targetDegrees = Constants.Positions[1];
     } else if (m_Arm.ArmPosition == 3) {
       targetDegrees = Constants.Positions[2];
     }
-SmartDashboard.putNumber("Target", targetDegrees);
-SmartDashboard.putNumber("Arm Degrees", m_Arm.ArmDegrees);
+    SmartDashboard.putNumber("Target", targetDegrees);
+    SmartDashboard.putNumber("Arm Degrees", m_Arm.ArmDegrees);
     // Use bang bang control to reach the target
-    if (m_Arm.ArmDegrees <= (targetDegrees - Constants.ArmTolerance)){ 
-      drivevalue = drivevalue + 0.25;  }
-    else if( m_Arm.ArmDegrees >= (targetDegrees + Constants.ArmTolerance)) {
+    if (m_Arm.ArmDegrees <= (targetDegrees - Constants.ArmTolerance)) {
+      drivevalue = drivevalue + 0.25;
+    } else if (m_Arm.ArmDegrees >= (targetDegrees + Constants.ArmTolerance)) {
       drivevalue = drivevalue - 0.25;
-     } else{
+    } else {
 
-     }
+    }
+
     // Apply a feedforward constant to hold the arm in position
-     drivevalue = drivevalue + 0.14*Math.sin(m_Arm.ArmDegrees * Math.PI / 180);
-     SmartDashboard.putNumber("Drive Value", drivevalue);
+    drivevalue = drivevalue + 0.14 * Math.sin(m_Arm.ArmDegrees * Math.PI / 180);
+    SmartDashboard.putNumber("Drive Value", drivevalue);
 
-  
-  //   if (m_Arm.ArmDegrees == Constants.Positions[0]) {
-  //   m_Arm.armRotationMtr.set(ControlMode.PercentOutput, feedforward);
-  //  } else if (m_Arm.ArmDegrees == Constants.Positions[1] ) {
-  //   m_Arm.armRotationMtr.set(ControlMode.PercentOutput, feedforward);
-  //  } else if (m_Arm.ArmDegrees == Constants.Positions[2] ) {
-  //   m_Arm.armRotationMtr.set(ControlMode.PercentOutput, feedforward);
-  //  }
-    
-    //Tell it to move, using limit switch and upper limit logic
-    // Limit switch is inverted logic
     if (!m_Arm.ArmLimitSwitch.get()) {
-      m_Arm.armRotationMtr.setSelectedSensorPosition(5 * 120 * 2048 / (360* 0.72));
-      m_Arm.ArmPosition = 1;
+      // Logic if the limit switch is pressed
+      // Set the encoder to the lower position, update the position we are at
+      // accordingly
+      m_Arm.armRotationMtr.setSelectedSensorPosition(Constants.Positions[0] * 120 * 2048 / (360 * 0.72));
+
       if (drivevalue <= 0) {
         m_Arm.armRotationMtr.set(ControlMode.PercentOutput, 0 * drivevalue);
       } else {
@@ -79,15 +61,17 @@ SmartDashboard.putNumber("Arm Degrees", m_Arm.ArmDegrees);
       }
 
     } else {
+      // Logic if the limit switch is NOT pressed
       if (m_Arm.ArmDegrees >= 90) {
         // Then don't go further
         if (drivevalue >= 0) {
-          m_Arm.armRotationMtr.set(ControlMode.PercentOutput, 0 * drivevalue);
+          // then if the motor drivevalue is greater than 0. DONT LET MOTOR OVERDRIVE 90 deegrees. 
+          m_Arm.armRotationMtr.set(ControlMode.PercentOutput, 0 * drivevalue); // dont drive
         } else {
-          m_Arm.armRotationMtr.set(ControlMode.PercentOutput, 1 * drivevalue);
+          m_Arm.armRotationMtr.set(ControlMode.PercentOutput, 1 * drivevalue); // drive like normal
         }
       } else {
-        m_Arm.armRotationMtr.set(ControlMode.PercentOutput, 1 * drivevalue);
+        m_Arm.armRotationMtr.set(ControlMode.PercentOutput, 1 * drivevalue); // drive like normal
       }
     }
   }

@@ -1,20 +1,7 @@
 package frc.robot.commands;
-
-import java.util.function.DoubleSupplier;
-import com.kauailabs.navx.frc.AHRS;
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-import edu.wpi.first.wpilibj.SPI;
-import edu.wpi.first.wpilibj.interfaces.Gyro;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.DriveTrain;
-
-
-
 public class FieldAlignedCommand extends CommandBase {
     DriveTrain m_DriveTrain;
     RobotContainer m_RobotContainer;

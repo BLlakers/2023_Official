@@ -8,8 +8,8 @@ public final class Constants {
     // Arm
     public static int armMotorChannel = 9;
     public static double PositionDown = 5;
-    public static double PositionPickup = 72; //72
-    public static double PositionDrop = 82; //87
+    public static double PositionPickup = 69; //69
+    public static double PositionDrop = 87; //87
     public static double[] Positions = {PositionDown, PositionPickup, PositionDrop};
     public static double ArmTolerance = 3;
    
