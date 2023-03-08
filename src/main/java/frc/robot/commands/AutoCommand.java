@@ -7,7 +7,7 @@ import java.util.function.DoubleSupplier;
 import com.revrobotics.CANSparkMax;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
+
 import frc.robot.subsystems.DriveTrain;
 
 public class AutoCommand extends CommandBase {

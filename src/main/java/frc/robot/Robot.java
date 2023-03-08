@@ -6,9 +6,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
-import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.networktables.NetworkTableEntry;
-import edu.wpi.first.networktables.NetworkTableInstance;
 
 //some imports no longer needed but leaving them here untill final version
 
@@ -16,10 +13,13 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
   private RobotContainer m_robotContainer;
 
+  String codeVersion = "0.0";
+
   @Override
   public void robotInit() {
     m_robotContainer = new RobotContainer();
     CameraServer.startAutomaticCapture();
+    SmartDashboard.putString("Code Version", codeVersion);
 
   }
 
