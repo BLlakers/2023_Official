@@ -6,14 +6,14 @@ import frc.robot.subsystems.Claw;
 
 public class AutoClawCommand extends CommandBase {
     Claw m_Claw;
-    int Time = 0;
-    int Time2 = 0;
-
+    
     public AutoClawCommand(Claw _Claw) {
      m_Claw = _Claw;
      addRequirements(m_Claw);
     }
     public void initialize() {
+    int Time = 0
+    int Time2 = 0
     }
 
     @Override
