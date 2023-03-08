@@ -99,7 +99,7 @@ public class RobotContainer {
     //manipButtonB.whileTrue(new AprilAlignCommand(m_DriveTrain, () -> frc.robot.subsystems.Tags.tx2));
 
     driverButtonB.whileTrue(new FieldAlignedCommand(m_DriveTrain));
-    manipButtonOptions.whileTrue(new AutoClawCommand(m_Claw));
+    manipButtonY.whileTrue(new AutoClawCommand(m_Claw));
   }
 
   private void configureShuffleboard(){
