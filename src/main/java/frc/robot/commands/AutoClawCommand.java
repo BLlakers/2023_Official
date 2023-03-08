@@ -6,21 +6,24 @@ import frc.robot.subsystems.Claw;
 
 public class AutoClawCommand extends CommandBase {
     Claw m_Claw;
-    
+    int Time = 0;
+    int Time2 = 0;
     public AutoClawCommand(Claw _Claw) {
      m_Claw = _Claw;
      addRequirements(m_Claw);
     }
     public void initialize() {
-    int Time = 0
-    int Time2 = 0
+    int Time = 0;
+    int Time2 = 0;
     }
 
     @Override
     public void execute() {
         if (m_Claw.SensingPiece == true){
             //counts how many thimes this has run because we only want it to close the calw once
+            Time = Time2;
             Time2 = Time + 1;
+            
             if (Time2 == 1){
                 //close the claw if it has run once  
         m_Claw.exampleDoublePH.set(Value.kReverse);
