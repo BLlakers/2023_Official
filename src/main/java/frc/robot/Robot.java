@@ -40,12 +40,12 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
-/* 
+    m_robotContainer.m_Arm.ArmPosition = 1;
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
     m_robotContainer.m_DriveTrain.startYaw = m_robotContainer.m_DriveTrain.getGyroYaw();
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
-    }*/
+    }
   }
 
   @Override
@@ -55,8 +55,10 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
+   m_robotContainer.m_Arm.ArmPosition = 1;
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
+      
     }
     //m_robotContainer.m_DriveTrain.startYaw = m_robotContainer.m_DriveTrain.getGyroYaw();
 
