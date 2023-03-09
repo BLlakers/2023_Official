@@ -10,14 +10,14 @@ import edu.wpi.first.wpilibj.AnalogInput;
 
 public class Claw extends SubsystemBase{
 
-DoubleSolenoid exampleDoublePH = new DoubleSolenoid(30, PneumaticsModuleType.REVPH, 1, 8); //NO ROBOT CODE THIS IS SOLENOID PORT
+public DoubleSolenoid exampleDoublePH = new DoubleSolenoid(30, PneumaticsModuleType.REVPH, 1, 8); //NO ROBOT CODE THIS IS SOLENOID PORT
 AnalogInput ultrasonicSensor = new AnalogInput(3);
 public boolean SensingPiece;
 
 
 @Override
 public void periodic() {
-if (ultrasonicSensor.getVoltage() >= .7){
+if (ultrasonicSensor.getVoltage() <= 3.2){
 SensingPiece = true;
 } else {
 SensingPiece = false;
