@@ -26,8 +26,8 @@ public class AutoClawCommand extends CommandBase {
             
             if (Time2 == 1){
                 //close the claw if it has run once  
-        m_Claw.exampleDoublePH.set(Value.kReverse);
-        m_Claw.exampleDoublePH.toggle();
+        m_Claw.exampleDoublePH.set(Value.kForward);
+
             } else {
                 //just a placeholder because now you do nothing
             }
