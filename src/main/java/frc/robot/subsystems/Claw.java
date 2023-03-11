@@ -14,7 +14,9 @@ public DoubleSolenoid exampleDoublePH = new DoubleSolenoid(30, PneumaticsModuleT
 AnalogInput ultrasonicSensor = new AnalogInput(3);
 public boolean SensingPiece;
 
-
+public Claw(){
+exampleDoublePH.set(Value.kForward);
+}
 @Override
 public void periodic() {
 if (ultrasonicSensor.getVoltage() <= 3.2){
