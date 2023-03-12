@@ -44,7 +44,7 @@ public class SwerveModule extends SubsystemBase {
 
         private final RelativeEncoder m_driveEncoder;
         private final DigitalInput m_TurnEncoderInput;
-        private final DutyCycle m_TurnPWMEncoder;
+        public final DutyCycle m_TurnPWMEncoder;
         private double turnEncoderOffset;
         private double encoderBias = 0; //encoder stuff for rotation
         private int turnPWMChannel;
