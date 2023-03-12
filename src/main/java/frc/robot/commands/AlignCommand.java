@@ -1,6 +1,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import java.util.function.DoubleSupplier;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveTrain;
@@ -42,6 +43,8 @@ public class AlignCommand extends CommandBase {
     DoubleSupplier leftx;
     leftx = () -> 0.0;
 
+    System.out.println(m_angle.getAsDouble());
+
     //figuring out which way to drive
     if (m_angle.getAsDouble() >= 12){
       //too far to right so it slowly moves to the left
@@ -58,10 +61,12 @@ public class AlignCommand extends CommandBase {
     //added to fix error in the last statemnt because it said move was "not final"
 
     if (m_angle.getAsDouble() == 9.6){
-      m_DriveTrain.drive(() -> 0, () -> 0, 0, false);
+      m_DriveTrain.drive(() -> 0, () -> 0, () -> 0, false);
+      System.out.println("you are aligned");
     }
-    else{
-      m_DriveTrain.drive(lefty, leftx, move1, false);
+    else {
+      m_DriveTrain.drive(lefty, leftx, () -> move1, false);
+      System.out.println("you arent there yet");
     }
     
     // make this so it ONLY runs once
