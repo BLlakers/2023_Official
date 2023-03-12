@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
+import frc.robot.subsystems.DriveTrainPID;
 import frc.robot.commands.AutoCommand;
 import frc.robot.commands.ManualRotateArmCommand;
 import frc.robot.commands.AutoRotateArmCommand;
@@ -26,7 +26,7 @@ import frc.robot.subsystems.Stuff;
 //import frc.robot.commands.AprilAlignCommand;
 
 public class RobotContainer {
-  DriveTrain m_DriveTrain = new DriveTrain();
+  DriveTrainPID m_DriveTrainPID = new DriveTrainPID();
   Arm m_Arm = new Arm();
   Claw m_Claw = new Claw();
   Stuff m_Stuff = new Stuff();
@@ -83,8 +83,8 @@ public class RobotContainer {
     // cancelling on release.
     ///m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
 
-    m_DriveTrain.setDefaultCommand(new SwerveDriveCommand (() -> driverController.getLeftY(),
-    () -> driverController.getLeftX(), () -> driverController.getRightX(), m_DriveTrain));
+    m_DriveTrainPID.setDefaultCommand(new SwerveDriveCommand (() -> driverController.getLeftY(),
+    () -> driverController.getLeftX(), () -> driverController.getRightX(), m_DriveTrainPID));
 
     m_Arm.setDefaultCommand(new AutoRotateArmCommand (m_Arm));
     //WP - DO NOT UNCOMMENT WITHOUT TALKING TO WARD
@@ -93,10 +93,10 @@ public class RobotContainer {
     manipButtonRight.onTrue(m_Arm.RaiseArm());  //  starts at 1, when pressed goes up to 2 (82 Deegrees), when pressed again goes up to 3 (85 deegrees)
     manipButtonA.toggleOnTrue(m_Arm.toggleArm());
     manipButtonB.toggleOnTrue(m_Claw.toggleGripper());
-    driverButtonRS.onTrue(m_DriveTrain.WheelzLock());
+    //driverButtonRS.onTrue(m_DriveTrainPID.WheelzLock());
     //limelight allign works on both controllers
-    manipButtonX.whileTrue(new AlignCommand(m_DriveTrain, () -> frc.robot.subsystems.Stuff.angle));
-    driverButtonX.whileTrue(new AlignCommand(m_DriveTrain, () -> frc.robot.subsystems.Stuff.angle));
+    //manipButtonX.whileTrue(new AlignCommand(m_DriveTrain, () -> frc.robot.subsystems.Stuff.angle));
+    //driverButtonX.whileTrue(new AlignCommand(m_DriveTrain, () -> frc.robot.subsystems.Stuff.angle));
     //manipButtonB.whileTrue(new AprilAlignCommand(m_DriveTrain, () -> frc.robot.subsystems.Tags.tx2));
 
     //driverButtonB.whileTrue(new FieldAlignedCommand(m_DriveTrain));
@@ -117,9 +117,10 @@ public class RobotContainer {
 
   public Command getAutonomousCommand() {
     Command autoSeq = Commands.sequence(
-    Commands.waitSeconds(1.0),
-    new AutoCommand(m_DriveTrain, m_chooser.getSelected()));
-
+    Commands.waitSeconds(1.0));
+    // Command autoSeq = Commands.sequence(
+    // Commands.waitSeconds(1.0),
+    // new AutoCommand(m_DriveTrain, m_chooser.getSelected()));
     return autoSeq;
     //return new AutoCommand(m_DriveTrain);
   }
