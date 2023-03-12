@@ -9,6 +9,8 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotContainer;
 import frc.robot.Constants;
@@ -477,7 +479,7 @@ public class DriveTrain extends SubsystemBase {
     }
   }
 
-  public void WheelzLock() {
+  public CommandBase WheelzLock() {
     double flthing;
     double frthing;
     double brthing;
@@ -528,6 +530,7 @@ public class DriveTrain extends SubsystemBase {
       // reset so do i do nothing
 
     }
+    return WheelzLock();
   }
 
   @Override

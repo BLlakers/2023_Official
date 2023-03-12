@@ -44,7 +44,7 @@ public class RobotContainer {
 
   JoystickButton manipButtonX = new JoystickButton(manipController, Constants.buttonX);
   JoystickButton driverButtonX = new JoystickButton(driverController, Constants.buttonX);
-
+  JoystickButton driverButtonRS = new JoystickButton(driverController, Constants.buttonRS);
 
   //2022 Code
   //JoystickButton manipButtonY = new JoystickButton(manipController, Constants.buttonY);
@@ -93,7 +93,7 @@ public class RobotContainer {
     manipButtonRight.onTrue(m_Arm.RaiseArm());  //  starts at 1, when pressed goes up to 2 (82 Deegrees), when pressed again goes up to 3 (85 deegrees)
     manipButtonA.toggleOnTrue(m_Arm.toggleArm());
     manipButtonB.toggleOnTrue(m_Claw.toggleGripper());
-    
+    driverButtonRS.toggleOnTrue(m_DriveTrain.WheelzLock());
     //limelight allign works on both controllers
     //manipButtonX.whileTrue(new AlignCommand(m_DriveTrain, () -> frc.robot.subsystems.Stuff.angle));
     //driverButtonX.whileTrue(new AlignCommand(m_DriveTrain, () -> frc.robot.subsystems.Stuff.angle));
@@ -101,6 +101,7 @@ public class RobotContainer {
 
     //driverButtonB.whileTrue(new FieldAlignedCommand(m_DriveTrain));
     manipButtonY.whileTrue(new AutoClawCommand(m_Claw));
+
   }
 
   private void configureShuffleboard(){
