@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
+import frc.robot.RobotContainer;
 import frc.robot.Constants;
 
 public class DriveTrain extends SubsystemBase {
@@ -36,6 +36,7 @@ public class DriveTrain extends SubsystemBase {
   double leftY;
   double leftX;
   double rightX;
+  Boolean WheelLock;
   AHRS gyro = new AHRS(SPI.Port.kMXP);
   public double startYaw = 0;
 
@@ -55,13 +56,13 @@ public class DriveTrain extends SubsystemBase {
     flSteer.setIdleMode(CANSparkMax.IdleMode.kBrake);
     brDrive.getEncoder().setPosition(0);
   }
-  
+
   public double getGyroYaw() {
     System.out.println(gyro.getYaw());
-  return gyro.getYaw();
+    return gyro.getYaw();
   }
 
-    public double getPosition(double rawAngle, double offset) {
+  public double getPosition(double rawAngle, double offset) {
     double offsetRot = offset / 360;
     double angle = rawAngle - offsetRot;
     double angleDeg = (angle % 1) * 360;
@@ -94,11 +95,12 @@ public class DriveTrain extends SubsystemBase {
     }
   }
 
-  public void drive(DoubleSupplier _leftY, DoubleSupplier _leftX, DoubleSupplier _rightX) {
+  public void drive(DoubleSupplier _leftY, DoubleSupplier _leftX, DoubleSupplier _rightX, Boolean _WheelLock) {
 
     leftY = _leftY.getAsDouble();
     leftX = _leftX.getAsDouble();
     rightX = _rightX.getAsDouble();
+    WheelLock = _WheelLock.booleanValue();
     // Finds the X Value of the Left Stick on the Controller and Takes Care of
     // Joystick Drift
     if (Math.abs(leftX) < Constants.deadzone) {
@@ -134,7 +136,7 @@ public class DriveTrain extends SubsystemBase {
 
     // Finds Speeds for Each of the Wheels
     // WP - When this was in the swerve drive command all lines were * 0.5
-    double w1s = Math.sqrt(Math.pow(B, 2) + Math.pow(C, 2)) * .7; //.6
+    double w1s = Math.sqrt(Math.pow(B, 2) + Math.pow(C, 2)) * .7; // .6
     double w2s = Math.sqrt(Math.pow(B, 2) + Math.pow(D, 2)) * .7;
     double w3s = Math.sqrt(Math.pow(A, 2) + Math.pow(D, 2)) * .7;
     double w4s = Math.sqrt(Math.pow(A, 2) + Math.pow(C, 2)) * .7;
@@ -471,6 +473,60 @@ public class DriveTrain extends SubsystemBase {
       } else {
         brSteer.set(0);
       }
+
+    }
+  }
+
+  public void WheelzLock() {
+    double flthing;
+    double frthing;
+    double brthing;
+    double blthing;
+
+    if (WheelLock == true) {
+      // front left
+      flthing = (-1 * getPosition(flEncoder.get(), 267.4)) + 360;
+      if (flthing == 45) {
+        // placeholder, and brakes
+        flDrive.setIdleMode(CANSparkMax.IdleMode.kBrake); // change offset
+      } else {
+        flSteer.set(0.07);
+      }
+
+      // front right
+      frthing = (-1 * getPosition(frEncoder.get(), 267.4)) + 360; // chage offset
+      if (frthing == 45) {
+        // placeholder, and brakes
+        frDrive.setIdleMode(CANSparkMax.IdleMode.kBrake);
+      } else {
+        frSteer.set(0.07);
+      }
+    }
+    // back right
+    brthing = (-1 * getPosition(brEncoder.get(), 267.4)) + 360; // change offset
+    if (brthing == 45) {
+      // placeholder, and brakes
+      brDrive.setIdleMode(CANSparkMax.IdleMode.kBrake);
+    } else {
+      brSteer.set(0.07);
+    }
+    // back left
+    blthing = (-1 * getPosition(blEncoder.get(), 267.4)) + 360; // change offset
+    if (blthing == 45) {
+      // placeholder, and brakes
+      blDrive.setIdleMode(CANSparkMax.IdleMode.kBrake);
+    } else {
+      blSteer.set(0.07);
+
+      // fl +45 should be: 312.4
+      // bl -45 should be: 19.7
+      // fr -45 should be: 222.4
+      // br +45 should be: 380.2
+    }
+
+    if (WheelLock == false) {
+      // reset so do i do nothing
+
     }
   }
 

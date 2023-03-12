@@ -58,10 +58,10 @@ public class AlignCommand extends CommandBase {
     //added to fix error in the last statemnt because it said move was "not final"
 
     if (m_angle.getAsDouble() == 9.6){
-      m_DriveTrain.drive(() -> 0, () -> 0, () -> 0);
+      m_DriveTrain.drive(() -> 0, () -> 0, () -> 0, false);
     }
     else{
-      m_DriveTrain.drive(lefty, leftx, () -> move1);
+      m_DriveTrain.drive(lefty, leftx, () -> move1, false);
     }
     
     // make this so it ONLY runs once

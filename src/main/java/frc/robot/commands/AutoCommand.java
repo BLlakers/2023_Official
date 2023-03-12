@@ -40,7 +40,7 @@ public class AutoCommand extends CommandBase {
     m_DriveTrain.flDrive.setIdleMode(CANSparkMax.IdleMode.kBrake);
     counter = 0; // Sets counter = 0
 
-    m_DriveTrain.drive(() -> 0, () -> 0, () -> 0);
+    m_DriveTrain.drive(() -> 0, () -> 0, () -> 0, false);
 
   }
 
@@ -66,22 +66,22 @@ public class AutoCommand extends CommandBase {
     if ((w1ca > 7 && w1ca < 173) || (w1ca > 187 && w1ca < 353)) { // If The front right wheel is > 7 degress and < 173
                                                                   // OR > 187 and < 353 it will tell the robot to not
                                                                   // move foward and it will re center the wheels
-      m_DriveTrain.drive(() -> 0, () -> 0, () -> 0); // says not to drive
+      m_DriveTrain.drive(() -> 0, () -> 0, () -> 0, false); // says not to drive
     } else if ((w2ca > 7 && w2ca < 173) || (w2ca > 187 && w2ca < 353)) { // If The front left wheel is > 7 degress and
                                                                          // < 173 OR > 187 and < 353 it will tell the
                                                                          // robot to not move foward and it will re
                                                                          // center the wheels
-      m_DriveTrain.drive(() -> 0, () -> 0, () -> 0); // says not to drive
+      m_DriveTrain.drive(() -> 0, () -> 0, () -> 0, false); // says not to drive
     } else if ((w3ca > 7 && w3ca < 173) || (w3ca > 187 && w3ca < 353)) { // If The back left wheel is > 7 degress and
                                                                          // < 173 OR > 187 and < 353 it will tell the
                                                                          // robot to not move foward and it will re
                                                                          // center the wheels
-      m_DriveTrain.drive(() -> 0, () -> 0, () -> 0); // says not to drive
+      m_DriveTrain.drive(() -> 0, () -> 0, () -> 0, false); // says not to drive
     } else if ((w4ca > 7 && w4ca < 173) || (w4ca > 187 && w4ca < 353)) { // If The back right wheel is > 7 degress and
                                                                          // < 173 OR > 187 and < 353 it will tell the
                                                                          // robot to not move foward and it will re
                                                                          // center the wheels
-      m_DriveTrain.drive(() -> 0, () -> 0, () -> 0); // says not to drive
+      m_DriveTrain.drive(() -> 0, () -> 0, () -> 0, false); // says not to drive
     } else {
 
       if (m_AutoMode == 1) {
@@ -89,9 +89,9 @@ public class AutoCommand extends CommandBase {
                                                                                     // rotations on the motor. 1 motor
                                                                                     // rotation = 8.14 wheel rotation
                                                                                     //115.0597
-          m_DriveTrain.drive(leftY, leftX, rightX);
+          m_DriveTrain.drive(leftY, leftX, rightX, false);
         } else {
-          m_DriveTrain.drive(() -> 0, () -> 0, () -> 0);
+          m_DriveTrain.drive(() -> 0, () -> 0, () -> 0, false);
           counter = counter + 1;
         }
       }
@@ -101,9 +101,9 @@ public class AutoCommand extends CommandBase {
                                                                                 // rotations on the motor. 1 motor
                                                                                 // rotation = 8.14 wheel rotation (11
                                                                                 // inches = wheel)
-          m_DriveTrain.drive(leftY, leftX, rightX);
+          m_DriveTrain.drive(leftY, leftX, rightX, false);
         } else {
-          m_DriveTrain.drive(() -> 0, () -> 0, () -> 0);
+          m_DriveTrain.drive(() -> 0, () -> 0, () -> 0, false);
           counter = counter + 1;
         }
       }
@@ -112,9 +112,9 @@ public class AutoCommand extends CommandBase {
         if (Math.abs(m_DriveTrain.brDrive.getEncoder().getPosition()) < 125.0597) { // Drives until the encoder is at
                                                                                     // rotations on the motor. 1 motor
                                                                                     // rotation = 8.14 wheel rotation
-          m_DriveTrain.drive(leftY, leftX, rightX);
+          m_DriveTrain.drive(leftY, leftX, rightX, false);
         } else {
-          m_DriveTrain.drive(() -> 0, () -> 0, () -> 0);
+          m_DriveTrain.drive(() -> 0, () -> 0, () -> 0, false);
           counter = counter + 1;
         }
       }
@@ -123,7 +123,7 @@ public class AutoCommand extends CommandBase {
 
   @Override
   public void end(boolean interrupted) {
-    m_DriveTrain.drive(() -> 0, () -> 0, () -> 0);
+    m_DriveTrain.drive(() -> 0, () -> 0, () -> 0, false);
   }
 
   @Override

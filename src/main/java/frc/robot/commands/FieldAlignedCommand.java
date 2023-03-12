@@ -25,10 +25,10 @@ public class FieldAlignedCommand extends CommandBase {
     public void execute() {
 
             if (m_DriveTrain.getGyroYaw() - m_DriveTrain.startYaw > 10){
-                m_DriveTrain.drive(() -> 0, () -> 0, () -> 1);
+                m_DriveTrain.drive(() -> 0, () -> 0, () -> 1, false);
             }
             if (m_DriveTrain.getGyroYaw() - m_DriveTrain.startYaw < -10) {
-                m_DriveTrain.drive(() -> 0, () -> 0, () -> -1);
+                m_DriveTrain.drive(() -> 0, () -> 0, () -> -1, false);
             }        
     }   
     
