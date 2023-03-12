@@ -42,7 +42,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void disabledPeriodic() {
-    
+    System.out.println(m_robotContainer.m_DriveTrainPID.m_backLeft.m_TurnPWMEncoder.getOutput());
   }
 
   @Override
