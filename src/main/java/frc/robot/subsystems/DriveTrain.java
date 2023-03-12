@@ -9,19 +9,21 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
+import frc.robot.RobotContainer;
 import frc.robot.Constants;
 
 public class DriveTrain extends SubsystemBase {
-  public CANSparkMax flDrive = new CANSparkMax(Constants.flDriveMotorChannel, MotorType.kBrushless); //3
-  public CANSparkMax flSteer = new CANSparkMax(Constants.flSteerMotorChannel, MotorType.kBrushless); //4
-  public CANSparkMax frDrive = new CANSparkMax(Constants.frDriveMotorChannel, MotorType.kBrushless); //6
-  public CANSparkMax frSteer = new CANSparkMax(Constants.frSteerMotorChannel, MotorType.kBrushless); //5
-  public CANSparkMax blDrive = new CANSparkMax(Constants.blDriveMotorChannel, MotorType.kBrushless); //2
-  public CANSparkMax blSteer = new CANSparkMax(Constants.blSteerMotorChannel, MotorType.kBrushless); //1
-  public CANSparkMax brDrive = new CANSparkMax(Constants.brDriveMotorChannel, MotorType.kBrushless); //7
-  public CANSparkMax brSteer = new CANSparkMax(Constants.brSteerMotorChannel, MotorType.kBrushless); //8
+  public CANSparkMax flDrive = new CANSparkMax(Constants.flDriveMotorChannel, MotorType.kBrushless); // 3
+  public CANSparkMax flSteer = new CANSparkMax(Constants.flSteerMotorChannel, MotorType.kBrushless); // 4
+  public CANSparkMax frDrive = new CANSparkMax(Constants.frDriveMotorChannel, MotorType.kBrushless); // 6
+  public CANSparkMax frSteer = new CANSparkMax(Constants.frSteerMotorChannel, MotorType.kBrushless); // 5
+  public CANSparkMax blDrive = new CANSparkMax(Constants.blDriveMotorChannel, MotorType.kBrushless); // 2
+  public CANSparkMax blSteer = new CANSparkMax(Constants.blSteerMotorChannel, MotorType.kBrushless); // 1
+  public CANSparkMax brDrive = new CANSparkMax(Constants.brDriveMotorChannel, MotorType.kBrushless); // 7
+  public CANSparkMax brSteer = new CANSparkMax(Constants.brSteerMotorChannel, MotorType.kBrushless); // 8
   public DutyCycleEncoder blEncoder = new DutyCycleEncoder(Constants.blEncoderChannel);
   public DutyCycleEncoder flEncoder = new DutyCycleEncoder(Constants.flEncoderChannel);
   public DutyCycleEncoder frEncoder = new DutyCycleEncoder(Constants.frEncoderChannel);
@@ -36,7 +38,9 @@ public class DriveTrain extends SubsystemBase {
   double leftY;
   double leftX;
   double rightX;
+  public Boolean WheelLock = false;
   AHRS gyro = new AHRS(SPI.Port.kMXP);
+  public double startYaw = 0;
 
   public DriveTrain() {
     flDrive.setInverted(false);
@@ -54,15 +58,20 @@ public class DriveTrain extends SubsystemBase {
     flSteer.setIdleMode(CANSparkMax.IdleMode.kBrake);
     brDrive.getEncoder().setPosition(0);
   }
-  
-    public double getPosition(double rawAngle, double offset) {
+
+  public double getGyroYaw() {
+    System.out.println(gyro.getYaw());
+    return gyro.getYaw();
+  }
+
+  public double getPosition(double rawAngle, double offset) {
     double offsetRot = offset / 360;
     double angle = rawAngle - offsetRot;
     double angleDeg = (angle % 1) * 360;
     if (angleDeg < 0) {
       angleDeg = angleDeg + 360;
     }
-      
+
     return angleDeg;
   }
 
@@ -88,26 +97,37 @@ public class DriveTrain extends SubsystemBase {
     }
   }
 
-  public void drive(DoubleSupplier _leftY, DoubleSupplier _leftX, DoubleSupplier _rightX) {
-    
+  public void drive(DoubleSupplier _leftY, DoubleSupplier _leftX, DoubleSupplier _rightX, Boolean _WheelLock) {
+
     leftY = _leftY.getAsDouble();
     leftX = _leftX.getAsDouble();
     rightX = _rightX.getAsDouble();
-    // Finds the X Value of the Left Stick on the Controller and Takes Care of
-    // Joystick Drift
-    if (Math.abs(leftX) < Constants.deadzone) {
-      x = 0;
-    } else {
-      x = leftX;
-    }
+    WheelLock = _WheelLock;
 
-    // Finds the Y Value of the Left Stick on the Controller and Takes Care of
-    // Joystick Drift
-    if (Math.abs(leftY) < Constants.deadzone) {
+    // Implemements a circular deadzone for the main drive joystick
+    if (Math.sqrt(Math.pow(leftX,2) + Math.pow(leftY,2)) < Constants.deadzone){
+      x = 0;
       y = 0;
-    } else {
+    } else{
+      x = leftX;
       y = -leftY;
     }
+
+    // // Finds the X Value of the Left Stick on the Controller and Takes Care of
+    // // Joystick Drift
+    // if (Math.abs(leftX) < Constants.deadzone) {
+    //   x = 0;
+    // } else {
+    //   x = leftX;
+    // }
+
+    // // Finds the Y Value of the Left Stick on the Controller and Takes Care of
+    // // Joystick Drift
+    // if (Math.abs(leftY) < Constants.deadzone) {
+    //   y = 0;
+    // } else {
+    //   y = -leftY;
+    // }
 
     // Finds the X Value of the Right Stick on the Controller and Takes Care of
     // Joystick Drift
@@ -127,11 +147,11 @@ public class DriveTrain extends SubsystemBase {
     double D = vy + omega * Constants.length * .6;
 
     // Finds Speeds for Each of the Wheels
-    //WP - When this was in the swerve drive command all lines were * 0.5
-    double w1s = Math.sqrt(Math.pow(B, 2) + Math.pow(C, 2)) * .6;
-    double w2s = Math.sqrt(Math.pow(B, 2) + Math.pow(D, 2)) * .6;
-    double w3s = Math.sqrt(Math.pow(A, 2) + Math.pow(D, 2)) * .6;
-    double w4s = Math.sqrt(Math.pow(A, 2) + Math.pow(C, 2)) * .6;
+    // WP - When this was in the swerve drive command all lines were * 0.5
+    double w1s = Math.sqrt(Math.pow(B, 2) + Math.pow(C, 2)) * .7; // At beginning of comp was 0.6
+    double w2s = Math.sqrt(Math.pow(B, 2) + Math.pow(D, 2)) * .7;
+    double w3s = Math.sqrt(Math.pow(A, 2) + Math.pow(D, 2)) * .7;
+    double w4s = Math.sqrt(Math.pow(A, 2) + Math.pow(C, 2)) * .7;
 
     // Finds the Desired Angle
     double w1a = (Math.atan2(B, C) * (180 / Math.PI)) + 180;
@@ -139,21 +159,33 @@ public class DriveTrain extends SubsystemBase {
     double w3a = (Math.atan2(A, D) * (180 / Math.PI)) + 180;
     double w4a = (Math.atan2(A, C) * (180 / Math.PI)) + 180;
 
-    //double yaw = gyro.getYaw() + 180;
+    if (WheelLock == true) {
+      w1a = 45;
+      w2a = -45;
+      w3a = 45;
+      w4a = -45;
 
-    //if (yaw == 360) {
-    //  yaw = 0;
-    //}
+      w1s = 0;
+      w2s = 0;
+      w3s = 0;
+      w4s = 0;
+    }
+
+    // double yaw = gyro.getYaw() + 180;
+
+    // if (yaw == 360) {
+    // yaw = 0;
+    // }
     //
-    //if (yaw <= 180) {
-    //  yaw = yaw + 180;
-    //} else if (w1a > 180) {
-    //  yaw = yaw - 180;
-    //}
+    // if (yaw <= 180) {
+    // yaw = yaw + 180;
+    // } else if (w1a > 180) {
+    // yaw = yaw - 180;
+    // }
     //
-    //if (yaw == 360) {
-    //  yaw = 0;
-    //}
+    // if (yaw == 360) {
+    // yaw = 0;
+    // }
 
     // Manipulates Degree Values so 0 is on top and degree values get bigger when
     // going clockwise
@@ -195,7 +227,6 @@ public class DriveTrain extends SubsystemBase {
       w4a = w4a - 180;
     }
 
-    
     // if (Math.abs(omega) < .1) {
     // if (yaw < 180) {
     // if (w1a == 360) {
@@ -211,13 +242,12 @@ public class DriveTrain extends SubsystemBase {
     // w4a = 0;
     // }
     // }
-     
+
     // w1a = Math.abs(w1a - yaw);
     // w2a = Math.abs(w2a - yaw);
     // w3a = Math.abs(w3a - yaw);
     // w4a = Math.abs(w4a - yaw);
     // }
-     
 
     if (w1a == 360) {
       w1a = 0;
@@ -467,15 +497,81 @@ public class DriveTrain extends SubsystemBase {
       } else {
         brSteer.set(0);
       }
+
     }
   }
 
+  public CommandBase WheelzLock() {
+    
+    return runOnce(
+        () -> {
+          // one-time action goes here
+          // WP - Add code here to toggle the gripper solenoid
+        if (WheelLock == true){
+          WheelLock = false;
+        }
+       else if (WheelLock == false) {
+          WheelLock = true;
+        }
+        });
+  }
+    // double flthing;
+    // double frthing;
+    // double brthing;
+    // double blthing;
+
+    
+    //   // front left
+    //   flthing = (-1 * getPosition(flEncoder.get(), 267.4)) + 360;
+    //   if (flthing == 45) {
+    //     // placeholder, and brakes
+    //     flDrive.setIdleMode(CANSparkMax.IdleMode.kBrake); // change offset
+    //   } else {
+    //     flSteer.set(0.07);
+    //   }
+
+    //   // front right
+    //   frthing = (-1 * getPosition(frEncoder.get(), 267.4)) + 360; // chage offset
+    //   if (frthing == -45) {
+    //     // placeholder, and brakes
+    //     frDrive.setIdleMode(CANSparkMax.IdleMode.kBrake);
+    //   } else {
+    //     frSteer.set(0.07);
+    //   }
+    // }
+    // // back right
+    // brthing = (-1 * getPosition(brEncoder.get(), 267.4)) + 360; // change offset
+    // if (brthing == 45) {
+    //   // placeholder, and brakes
+    //   brDrive.setIdleMode(CANSparkMax.IdleMode.kBrake);
+    // } else {
+    //   brSteer.set(0.07);
+    // }
+    // // back left
+    // blthing = (-1 * getPosition(blEncoder.get(), 267.4)) + 360; // change offset
+    // if (blthing == -45) {
+    //   // placeholder, and brakes
+    //   blDrive.setIdleMode(CANSparkMax.IdleMode.kBrake);
+    // } else {
+    //   blSteer.set(0.07);
+
+    //   // fl +45 should be: 312.4
+    //   // bl -45 should be: 19.7
+    //   // fr -45 should be: 222.4
+    //   // br +45 should be: 380.2
+    // }
+
+    // if (WheelLock == false) {
+    //   // reset so do i do nothing
+
+    // }
+  
 
   @Override
   public void periodic() {
-  //System.out.println(gyro.getAngle());
-  //System.out.println(gyro.getYaw()); 
-  SmartDashboard.putNumber("gyro.getYaw", gyro.getYaw());
-  //System.out.println(brDrive.getEncoder().getPosition());
+    // System.out.println(gyro.getAngle());
+    // System.out.println(gyro.getYaw());
+    SmartDashboard.putNumber("gyro.getYaw", gyro.getYaw());
+    // System.out.println(brDrive.getEncoder().getPosition());
   }
 }
