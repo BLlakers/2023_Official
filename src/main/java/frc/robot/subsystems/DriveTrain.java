@@ -38,7 +38,7 @@ public class DriveTrain extends SubsystemBase {
   double leftY;
   double leftX;
   double rightX;
-  Boolean WheelLock;
+  public Boolean WheelLock = false;
   AHRS gyro = new AHRS(SPI.Port.kMXP);
   public double startYaw = 0;
 
@@ -102,7 +102,7 @@ public class DriveTrain extends SubsystemBase {
     leftY = _leftY.getAsDouble();
     leftX = _leftX.getAsDouble();
     rightX = _rightX.getAsDouble();
-    WheelLock = _WheelLock.booleanValue();
+    WheelLock = _WheelLock;
     // Finds the X Value of the Left Stick on the Controller and Takes Care of
     // Joystick Drift
     if (Math.abs(leftX) < Constants.deadzone) {
@@ -148,6 +148,18 @@ public class DriveTrain extends SubsystemBase {
     double w2a = (Math.atan2(B, D) * (180 / Math.PI)) + 180;
     double w3a = (Math.atan2(A, D) * (180 / Math.PI)) + 180;
     double w4a = (Math.atan2(A, C) * (180 / Math.PI)) + 180;
+
+    if (WheelLock == true) {
+      w1a = 45;
+      w2a = -45;
+      w3a = 45;
+      w4a = -45;
+
+      w1s = 0;
+      w2s = 0;
+      w3s = 0;
+      w4s = 0;
+    }
 
     // double yaw = gyro.getYaw() + 180;
 
@@ -480,58 +492,70 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public CommandBase WheelzLock() {
-    double flthing;
-    double frthing;
-    double brthing;
-    double blthing;
-
-    if (WheelLock == true) {
-      // front left
-      flthing = (-1 * getPosition(flEncoder.get(), 267.4)) + 360;
-      if (flthing == 45) {
-        // placeholder, and brakes
-        flDrive.setIdleMode(CANSparkMax.IdleMode.kBrake); // change offset
-      } else {
-        flSteer.set(0.07);
-      }
-
-      // front right
-      frthing = (-1 * getPosition(frEncoder.get(), 267.4)) + 360; // chage offset
-      if (frthing == 45) {
-        // placeholder, and brakes
-        frDrive.setIdleMode(CANSparkMax.IdleMode.kBrake);
-      } else {
-        frSteer.set(0.07);
-      }
-    }
-    // back right
-    brthing = (-1 * getPosition(brEncoder.get(), 267.4)) + 360; // change offset
-    if (brthing == 45) {
-      // placeholder, and brakes
-      brDrive.setIdleMode(CANSparkMax.IdleMode.kBrake);
-    } else {
-      brSteer.set(0.07);
-    }
-    // back left
-    blthing = (-1 * getPosition(blEncoder.get(), 267.4)) + 360; // change offset
-    if (blthing == 45) {
-      // placeholder, and brakes
-      blDrive.setIdleMode(CANSparkMax.IdleMode.kBrake);
-    } else {
-      blSteer.set(0.07);
-
-      // fl +45 should be: 312.4
-      // bl -45 should be: 19.7
-      // fr -45 should be: 222.4
-      // br +45 should be: 380.2
-    }
-
-    if (WheelLock == false) {
-      // reset so do i do nothing
-
-    }
-    return WheelzLock();
+    
+    return runOnce(
+        () -> {
+          // one-time action goes here
+          // WP - Add code here to toggle the gripper solenoid
+        if (WheelLock == true){
+          WheelLock = false;
+        }
+       else if (WheelLock == false) {
+          WheelLock = true;
+        }
+        });
   }
+    // double flthing;
+    // double frthing;
+    // double brthing;
+    // double blthing;
+
+    
+    //   // front left
+    //   flthing = (-1 * getPosition(flEncoder.get(), 267.4)) + 360;
+    //   if (flthing == 45) {
+    //     // placeholder, and brakes
+    //     flDrive.setIdleMode(CANSparkMax.IdleMode.kBrake); // change offset
+    //   } else {
+    //     flSteer.set(0.07);
+    //   }
+
+    //   // front right
+    //   frthing = (-1 * getPosition(frEncoder.get(), 267.4)) + 360; // chage offset
+    //   if (frthing == -45) {
+    //     // placeholder, and brakes
+    //     frDrive.setIdleMode(CANSparkMax.IdleMode.kBrake);
+    //   } else {
+    //     frSteer.set(0.07);
+    //   }
+    // }
+    // // back right
+    // brthing = (-1 * getPosition(brEncoder.get(), 267.4)) + 360; // change offset
+    // if (brthing == 45) {
+    //   // placeholder, and brakes
+    //   brDrive.setIdleMode(CANSparkMax.IdleMode.kBrake);
+    // } else {
+    //   brSteer.set(0.07);
+    // }
+    // // back left
+    // blthing = (-1 * getPosition(blEncoder.get(), 267.4)) + 360; // change offset
+    // if (blthing == -45) {
+    //   // placeholder, and brakes
+    //   blDrive.setIdleMode(CANSparkMax.IdleMode.kBrake);
+    // } else {
+    //   blSteer.set(0.07);
+
+    //   // fl +45 should be: 312.4
+    //   // bl -45 should be: 19.7
+    //   // fr -45 should be: 222.4
+    //   // br +45 should be: 380.2
+    // }
+
+    // if (WheelLock == false) {
+    //   // reset so do i do nothing
+
+    // }
+  
 
   @Override
   public void periodic() {

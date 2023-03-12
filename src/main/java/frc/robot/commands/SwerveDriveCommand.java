@@ -45,7 +45,7 @@ public class SwerveDriveCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_DriveTrain.drive(m_leftY, m_leftX, m_rightX, false);
+    m_DriveTrain.drive(m_leftY, m_leftX, m_rightX, m_DriveTrain.WheelLock);
     // leftY = m_leftY.getAsDouble();
     // leftX = m_leftX.getAsDouble();
     // rightX = m_rightX.getAsDouble();

@@ -93,7 +93,7 @@ public class RobotContainer {
     manipButtonRight.onTrue(m_Arm.RaiseArm());  //  starts at 1, when pressed goes up to 2 (82 Deegrees), when pressed again goes up to 3 (85 deegrees)
     manipButtonA.toggleOnTrue(m_Arm.toggleArm());
     manipButtonB.toggleOnTrue(m_Claw.toggleGripper());
-    driverButtonRS.toggleOnTrue(m_DriveTrain.WheelzLock());
+    driverButtonRS.onTrue(m_DriveTrain.WheelzLock());
     //limelight allign works on both controllers
     //manipButtonX.whileTrue(new AlignCommand(m_DriveTrain, () -> frc.robot.subsystems.Stuff.angle));
     //driverButtonX.whileTrue(new AlignCommand(m_DriveTrain, () -> frc.robot.subsystems.Stuff.angle));

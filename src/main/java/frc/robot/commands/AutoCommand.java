@@ -103,7 +103,7 @@ public class AutoCommand extends CommandBase {
                                                                                 // inches = wheel)
           m_DriveTrain.drive(leftY, leftX, rightX, false);
         } else {
-          m_DriveTrain.drive(() -> 0, () -> 0, () -> 0, false);
+          m_DriveTrain.drive(() -> 0, () -> 0, () -> 0, true);
           counter = counter + 1;
         }
       }
@@ -123,7 +123,7 @@ public class AutoCommand extends CommandBase {
 
   @Override
   public void end(boolean interrupted) {
-    m_DriveTrain.drive(() -> 0, () -> 0, () -> 0, false);
+    m_DriveTrain.drive(() -> 0, () -> 0, () -> 0, true);
   }
 
   @Override
