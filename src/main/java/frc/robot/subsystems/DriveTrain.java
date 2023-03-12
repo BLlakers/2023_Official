@@ -134,10 +134,10 @@ public class DriveTrain extends SubsystemBase {
 
     // Finds Speeds for Each of the Wheels
     // WP - When this was in the swerve drive command all lines were * 0.5
-    double w1s = Math.sqrt(Math.pow(B, 2) + Math.pow(C, 2)) * .6;
-    double w2s = Math.sqrt(Math.pow(B, 2) + Math.pow(D, 2)) * .6;
-    double w3s = Math.sqrt(Math.pow(A, 2) + Math.pow(D, 2)) * .6;
-    double w4s = Math.sqrt(Math.pow(A, 2) + Math.pow(C, 2)) * .6;
+    double w1s = Math.sqrt(Math.pow(B, 2) + Math.pow(C, 2)) * .7; //.6
+    double w2s = Math.sqrt(Math.pow(B, 2) + Math.pow(D, 2)) * .7;
+    double w3s = Math.sqrt(Math.pow(A, 2) + Math.pow(D, 2)) * .7;
+    double w4s = Math.sqrt(Math.pow(A, 2) + Math.pow(C, 2)) * .7;
 
     // Finds the Desired Angle
     double w1a = (Math.atan2(B, C) * (180 / Math.PI)) + 180;

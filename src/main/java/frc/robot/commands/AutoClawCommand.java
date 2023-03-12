@@ -20,17 +20,19 @@ public class AutoClawCommand extends CommandBase {
     @Override
     public void execute() {
         if (m_Claw.SensingPiece == true){
-            //counts how many thimes this has run because we only want it to close the calw once
-            Time = Time2;
-            Time2 = Time + 1;
-            
-            if (Time2 == 1){
-                //close the claw if it has run once  
-        m_Claw.exampleDoublePH.set(Value.kForward);
+            m_Claw.exampleDoublePH.set(Value.kForward);
 
-            } else {
-                //just a placeholder because now you do nothing
-            }
+            //counts how many thimes this has run because we only want it to close the calw once
+            //Time2 = Time + 1;
+            //Time = Time2;
+            
+            //if (Time2 == 1){
+            //    //close the claw if it has run once  
+            //    m_Claw.exampleDoublePH.set(Value.kForward);
+            //
+            //} else {
+            //    //just a placeholder because now you do nothing
+            //}
 
         } else {
             Time = 0;

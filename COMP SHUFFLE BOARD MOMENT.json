@@ -24,10 +24,10 @@
               "_showGlyph": false,
               "Crosshair/Show crosshair": true,
               "Crosshair/Crosshair color": "#FFFFFFFF",
-              "Controls/Show controls": false,
+              "Controls/Show controls": true,
               "Controls/Rotation": "NONE",
               "compression": -1.0,
-              "fps": -1,
+              "fps": 5,
               "imageWidth": 0,
               "imageHeight": 0
             }
@@ -117,9 +117,9 @@
               "Controls/Show controls": true,
               "Controls/Rotation": "NONE",
               "compression": -1.0,
-              "fps": -1,
-              "imageWidth": -1,
-              "imageHeight": -1
+              "fps": 10,
+              "imageWidth": 0,
+              "imageHeight": 0
             }
           },
           "7,0": {
@@ -165,7 +165,7 @@
               "Controls/Show controls": false,
               "Controls/Rotation": "NONE",
               "compression": -1.0,
-              "fps": -1,
+              "fps": 10,
               "imageWidth": 0,
               "imageHeight": 0
             }
@@ -186,7 +186,63 @@
               "Controls/Show controls": false,
               "Controls/Rotation": "NONE",
               "compression": -1.0,
-              "fps": -1,
+              "fps": 5,
+              "imageWidth": 0,
+              "imageHeight": 0
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Tab 3",
+      "autoPopulate": false,
+      "autoPopulatePrefix": "",
+      "widgetPane": {
+        "gridSize": 128.0,
+        "showGrid": true,
+        "hgap": 16.0,
+        "vgap": 16.0,
+        "titleType": 0,
+        "tiles": {
+          "3,0": {
+            "size": [
+              3,
+              2
+            ],
+            "content": {
+              "_type": "Camera Stream",
+              "_source0": "camera_server://USB Camera 0",
+              "_title": "USB Camera 0",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Crosshair/Show crosshair": true,
+              "Crosshair/Crosshair color": "#FFFFFFFF",
+              "Controls/Show controls": true,
+              "Controls/Rotation": "NONE",
+              "compression": -1.0,
+              "fps": 5,
+              "imageWidth": 0,
+              "imageHeight": 0
+            }
+          },
+          "4,2": {
+            "size": [
+              3,
+              2
+            ],
+            "content": {
+              "_type": "Camera Stream",
+              "_source0": "camera_server://limelight",
+              "_title": "limelight",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Crosshair/Show crosshair": true,
+              "Crosshair/Crosshair color": "#FFFFFFFF",
+              "Controls/Show controls": true,
+              "Controls/Rotation": "NONE",
+              "compression": -1.0,
+              "fps": 10,
               "imageWidth": 0,
               "imageHeight": 0
             }
@@ -196,9 +252,9 @@
     }
   ],
   "windowGeometry": {
-    "x": 4.0,
-    "y": 0.0,
-    "width": 1534.4000244140625,
-    "height": 822.4000244140625
+    "x": -6.400000095367432,
+    "y": 1.600000023841858,
+    "width": 1547.199951171875,
+    "height": 828.7999877929688
   }
 }

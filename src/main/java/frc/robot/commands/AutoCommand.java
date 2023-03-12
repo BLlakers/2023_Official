@@ -85,9 +85,10 @@ public class AutoCommand extends CommandBase {
     } else {
 
       if (m_AutoMode == 1) {
-        if (Math.abs(m_DriveTrain.brDrive.getEncoder().getPosition()) < 125.0597) { // Drives until the encoder is at
+        if (Math.abs(m_DriveTrain.brDrive.getEncoder().getPosition()) < 115.0597    ) { // Drives until the encoder is at
                                                                                     // rotations on the motor. 1 motor
                                                                                     // rotation = 8.14 wheel rotation
+                                                                                    //115.0597
           m_DriveTrain.drive(leftY, leftX, rightX);
         } else {
           m_DriveTrain.drive(() -> 0, () -> 0, () -> 0);
@@ -96,7 +97,7 @@ public class AutoCommand extends CommandBase {
       }
 
       else if (m_AutoMode == 2) {
-        if (Math.abs(m_DriveTrain.brDrive.getEncoder().getPosition()) < 57.2) { // Drives until the encoder is at
+        if (Math.abs(m_DriveTrain.brDrive.getEncoder().getPosition()) < 50) { // Drives until the encoder is at
                                                                                 // rotations on the motor. 1 motor
                                                                                 // rotation = 8.14 wheel rotation (11
                                                                                 // inches = wheel)

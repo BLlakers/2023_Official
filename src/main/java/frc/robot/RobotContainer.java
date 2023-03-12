@@ -95,11 +95,11 @@ public class RobotContainer {
     manipButtonB.toggleOnTrue(m_Claw.toggleGripper());
     
     //limelight allign works on both controllers
-    manipButtonX.whileTrue(new AlignCommand(m_DriveTrain, () -> frc.robot.subsystems.Stuff.angle));
-    driverButtonX.whileTrue(new AlignCommand(m_DriveTrain, () -> frc.robot.subsystems.Stuff.angle));
+    //manipButtonX.whileTrue(new AlignCommand(m_DriveTrain, () -> frc.robot.subsystems.Stuff.angle));
+    //driverButtonX.whileTrue(new AlignCommand(m_DriveTrain, () -> frc.robot.subsystems.Stuff.angle));
     //manipButtonB.whileTrue(new AprilAlignCommand(m_DriveTrain, () -> frc.robot.subsystems.Tags.tx2));
 
-    driverButtonB.whileTrue(new FieldAlignedCommand(m_DriveTrain));
+    //driverButtonB.whileTrue(new FieldAlignedCommand(m_DriveTrain));
     manipButtonY.whileTrue(new AutoClawCommand(m_Claw));
   }
 
