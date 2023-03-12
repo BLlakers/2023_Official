@@ -97,11 +97,11 @@ public class DriveTrain extends SubsystemBase {
     }
   }
 
-  public void drive(DoubleSupplier _leftY, DoubleSupplier _leftX, DoubleSupplier _rightX, Boolean _WheelLock) {
+  public void drive(DoubleSupplier _leftY, DoubleSupplier _leftX, Double move1, Boolean _WheelLock) {
 
     leftY = _leftY.getAsDouble();
     leftX = _leftX.getAsDouble();
-    rightX = _rightX.getAsDouble();
+    rightX = move1.getAsDouble();
     WheelLock = _WheelLock;
     // Finds the X Value of the Left Stick on the Controller and Takes Care of
     // Joystick Drift
@@ -564,4 +564,10 @@ public class DriveTrain extends SubsystemBase {
     SmartDashboard.putNumber("gyro.getYaw", gyro.getYaw());
     // System.out.println(brDrive.getEncoder().getPosition());
   }
+
+public void drive(DoubleSupplier _leftY, DoubleSupplier _leftX, Object move1, boolean _WheelLock) {
+}
+
+public void drive(DoubleSupplier _leftY, DoubleSupplier _leftX, Object move1, boolean _WheelLock) {
+}
 }

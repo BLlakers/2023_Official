@@ -23,7 +23,7 @@ public class AlignCommand extends CommandBase {
 
   @Override
   public void execute() { // Runs multiple times
-    Double move = 0.0;
+    double move = 0.0;
     
     //this is old stuff, but i am keeping it just as a referance and just incase it is needed again
     // turn2 must somehow become a doubble supplier and the drivetrain is off too
@@ -53,15 +53,15 @@ public class AlignCommand extends CommandBase {
       move = 0.2;
     }
 
-    //fianlly driving
+    //fianlly drivinG
     Double move1 = move;
     //added to fix error in the last statemnt because it said move was "not final"
 
     if (m_angle.getAsDouble() == 9.6){
-      m_DriveTrain.drive(() -> 0, () -> 0, () -> 0, false);
+      m_DriveTrain.drive(() -> 0, () -> 0, 0, false);
     }
     else{
-      m_DriveTrain.drive(lefty, leftx, () -> move1, false);
+      m_DriveTrain.drive(lefty, leftx, move1, false);
     }
     
     // make this so it ONLY runs once
