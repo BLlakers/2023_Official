@@ -29,10 +29,10 @@ public class DriveTrainPID extends SubsystemBase {
     private final Translation2d m_backRightLocation = new Translation2d( 0.285, -0.285);
 
     //constructor for each swerve module
-    public final SwerveModule m_frontRight  = new SwerveModule(Constants.frDriveMotorChannel, Constants.frSteerMotorChannel, Constants.frEncoderChannel, 0.7341);
-    public final SwerveModule m_frontLeft = new SwerveModule(Constants.flDriveMotorChannel, Constants.flSteerMotorChannel, Constants.flEncoderChannel, 0.3359);
-    public final SwerveModule m_backLeft  = new SwerveModule(Constants.blDriveMotorChannel, Constants.blSteerMotorChannel, Constants.blEncoderChannel, 0.1819);
-    public final SwerveModule m_backRight   = new SwerveModule(Constants.brDriveMotorChannel, Constants.brSteerMotorChannel, Constants.brEncoderChannel, 0.9262); //0.05178
+    public final SwerveModule m_frontRight  = new SwerveModule(Constants.frDriveMotorChannel, Constants.frSteerMotorChannel, Constants.frEncoderChannel, 0.7341-0.25);
+    public final SwerveModule m_frontLeft = new SwerveModule(Constants.flDriveMotorChannel, Constants.flSteerMotorChannel, Constants.flEncoderChannel, 0.3359-0.25);
+    public final SwerveModule m_backLeft  = new SwerveModule(Constants.blDriveMotorChannel, Constants.blSteerMotorChannel, Constants.blEncoderChannel, 1.1819-0.25);
+    public final SwerveModule m_backRight   = new SwerveModule(Constants.brDriveMotorChannel, Constants.brSteerMotorChannel, Constants.brEncoderChannel, 0.9262-0.25); //0.05178
 
     private final SwerveDriveKinematics m_kinematics = new SwerveDriveKinematics(m_frontRightLocation, m_backRightLocation, m_backLeftLocation, m_frontLeftLocation);
   
