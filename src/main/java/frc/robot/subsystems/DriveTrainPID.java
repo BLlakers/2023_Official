@@ -23,10 +23,10 @@ public class DriveTrainPID extends SubsystemBase {
 
     private final AHRS navx = new AHRS();
 
-    private final Translation2d m_frontRightLocation = new Translation2d( 0.285, -0.285);
-    private final Translation2d m_frontLeftLocation = new Translation2d(0.285,  0.285);
-    private final Translation2d m_backLeftLocation = new Translation2d(-0.285,  0.285);
-    private final Translation2d m_backRightLocation = new Translation2d( -0.285, -0.285);
+    private final Translation2d m_frontRightLocation = new Translation2d( 0.285, 0.285);
+    private final Translation2d m_frontLeftLocation = new Translation2d(-0.285,  0.285);
+    private final Translation2d m_backLeftLocation = new Translation2d(-0.285,  -0.285);
+    private final Translation2d m_backRightLocation = new Translation2d( 0.285, -0.285);
 
     //constructor for each swerve module
     public final SwerveModule m_frontRight  = new SwerveModule(Constants.frDriveMotorChannel, Constants.frSteerMotorChannel, Constants.frEncoderChannel, 0.2341);
@@ -50,7 +50,7 @@ public class DriveTrainPID extends SubsystemBase {
     
     //Constructor
     public DriveTrainPID() {
-        boolean justBecause = true;
+
         m_initialStates = new SwerveDriveKinematics(m_frontRightLocation, m_frontLeftLocation, m_backLeftLocation, m_backRightLocation);
         var initialStates = m_initialStates.toSwerveModuleStates( new ChassisSpeeds(0, 0, 0));
         
@@ -105,12 +105,12 @@ public class DriveTrainPID extends SubsystemBase {
      * Updates the position of the robot relative to where it started
      */
     public void updateOdometry() { //it may have to be in the right order
-        positions[0] = new SwerveModulePosition(m_frontLeft.getDifferentState().speedMetersPerSecond, m_frontLeft.getState().angle);
-        positions[1] = new SwerveModulePosition(m_backLeft.getDifferentState().speedMetersPerSecond, m_backLeft.getState().angle);
+        positions[1] = new SwerveModulePosition(m_frontLeft.getDifferentState().speedMetersPerSecond, m_frontLeft.getState().angle);
+        positions[2] = new SwerveModulePosition(m_backLeft.getDifferentState().speedMetersPerSecond, m_backLeft.getState().angle);
         
        
-        positions[2] = new SwerveModulePosition(m_backRight.getDifferentState().speedMetersPerSecond, m_backRight.getState().angle);
-        positions[3] = new SwerveModulePosition(m_frontRight.getDifferentState().speedMetersPerSecond, m_frontRight.getState().angle);
+        positions[3] = new SwerveModulePosition(m_backRight.getDifferentState().speedMetersPerSecond, m_backRight.getState().angle);
+        positions[0] = new SwerveModulePosition(m_frontRight.getDifferentState().speedMetersPerSecond, m_frontRight.getState().angle);
        
 
         
@@ -126,10 +126,6 @@ public class DriveTrainPID extends SubsystemBase {
      
     }
 
-    public void resetNavxMark (double initialAngle) {
-        navx.reset(); //90 because of the feild orientation vs our driver fov
-        navx.setAngleAdjustment(-initialAngle); //TODO negative because navx has a goofy coordinate system
-    }
     /**
      * Gives the current position and rotation of the robot (meters) based on the wheel odometry from where the robot started
      * @return Pose2d of current robot position

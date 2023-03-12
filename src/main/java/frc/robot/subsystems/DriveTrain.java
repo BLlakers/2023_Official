@@ -113,29 +113,7 @@ public class DriveTrain extends SubsystemBase {
     //   y = -leftY;
     // }
 
-    // Finds the X Value of the Left Stick on the Controller and Takes Care of
-    // Joystick Drift
-    if (Math.abs(leftX) < Constants.deadzone) {
-      x = 0;
-    } else {
-      x = leftX;
-    }
-
-    // Finds the Y Value of the Left Stick on the Controller and Takes Care of
-    // Joystick Drift
-    if (Math.abs(leftY) < Constants.deadzone) {
-      y = 0;
-    } else {
-      y = -leftY;
-    }
-
-    // Finds the X Value of the Right Stick on the Controller and Takes Care of
-    // Joystick Drift
-    if (Math.abs(rightX) < Constants.deadzone) {
-      rot = 0;
-    } else {
-      rot = rightX;
-    }
+    
 
     double vx = x;// desired x speed
     double vy = y;// desired y speed

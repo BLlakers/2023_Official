@@ -4,6 +4,8 @@ package frc.robot.commands;
 import java.util.function.DoubleSupplier;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import com.revrobotics.CANSparkMax;
+
+import frc.robot.Constants;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.DriveTrainPID;
 
@@ -43,7 +45,37 @@ public class SwerveDriveCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_DriveTrain.drive(m_leftY.getAsDouble(), m_leftX.getAsDouble(), m_rightX.getAsDouble(), false, false);
+    Double x;
+    Double y;
+    Double rot;
+    Double leftX = m_leftX.getAsDouble();
+    Double leftY = m_leftY.getAsDouble();
+    Double rightX = m_rightX.getAsDouble();
+    // Finds the X Value of the Left Stick on the Controller and Takes Care of
+    // Joystick Drift
+    if (Math.abs(leftX) < Constants.deadzone) {
+      x = 0.0;
+    } else {
+      x = leftX;
+    }
+
+    // Finds the Y Value of the Left Stick on the Controller and Takes Care of
+    // Joystick Drift
+    if (Math.abs(leftY) < Constants.deadzone) {
+      y = 0.0;
+    } else {
+      y = leftY;
+    }
+
+    // Finds the X Value of the Right Stick on the Controller and Takes Care of
+    // Joystick Drift
+    if (Math.abs(rightX) < Constants.deadzone) {
+      rot = 0.0;
+    } else {
+      rot = rightX;
+    }
+    
+    m_DriveTrain.drive(x,y,rot, false, false);
    
   }
 
