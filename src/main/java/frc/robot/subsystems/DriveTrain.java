@@ -103,21 +103,31 @@ public class DriveTrain extends SubsystemBase {
     leftX = _leftX.getAsDouble();
     rightX = _rightX.getAsDouble();
     WheelLock = _WheelLock;
-    // Finds the X Value of the Left Stick on the Controller and Takes Care of
-    // Joystick Drift
-    if (Math.abs(leftX) < Constants.deadzone) {
-      x = 0;
-    } else {
-      x = leftX;
-    }
 
-    // Finds the Y Value of the Left Stick on the Controller and Takes Care of
-    // Joystick Drift
-    if (Math.abs(leftY) < Constants.deadzone) {
+    // Implemements a circular deadzone for the main drive joystick
+    if (Math.sqrt(Math.pow(leftX,2) + Math.pow(leftY,2)) < Constants.deadzone){
+      x = 0;
       y = 0;
-    } else {
+    } else{
+      x = leftX;
       y = -leftY;
     }
+
+    // // Finds the X Value of the Left Stick on the Controller and Takes Care of
+    // // Joystick Drift
+    // if (Math.abs(leftX) < Constants.deadzone) {
+    //   x = 0;
+    // } else {
+    //   x = leftX;
+    // }
+
+    // // Finds the Y Value of the Left Stick on the Controller and Takes Care of
+    // // Joystick Drift
+    // if (Math.abs(leftY) < Constants.deadzone) {
+    //   y = 0;
+    // } else {
+    //   y = -leftY;
+    // }
 
     // Finds the X Value of the Right Stick on the Controller and Takes Care of
     // Joystick Drift
@@ -138,7 +148,7 @@ public class DriveTrain extends SubsystemBase {
 
     // Finds Speeds for Each of the Wheels
     // WP - When this was in the swerve drive command all lines were * 0.5
-    double w1s = Math.sqrt(Math.pow(B, 2) + Math.pow(C, 2)) * .7; // .6
+    double w1s = Math.sqrt(Math.pow(B, 2) + Math.pow(C, 2)) * .7; // At beginning of comp was 0.6
     double w2s = Math.sqrt(Math.pow(B, 2) + Math.pow(D, 2)) * .7;
     double w3s = Math.sqrt(Math.pow(A, 2) + Math.pow(D, 2)) * .7;
     double w4s = Math.sqrt(Math.pow(A, 2) + Math.pow(C, 2)) * .7;

@@ -2,9 +2,6 @@
 package frc.robot.commands;
 
 import java.util.function.DoubleSupplier;
-
-import org.opencv.features2d.FlannBasedMatcher;
-
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import com.revrobotics.CANSparkMax;
 import frc.robot.subsystems.DriveTrain;
