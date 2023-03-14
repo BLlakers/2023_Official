@@ -58,7 +58,7 @@ public class RobotContainer {
   JoystickButton manipButtonOptions = new JoystickButton(manipController, Constants.buttonOptions);
   //JoystickButton manipButtonStart = new JoystickButton(manipController, 8);
   SendableChooser<Integer> m_chooser = new SendableChooser<>();
-  public static boolean RBpressed = manipButtonRight.getAsBoolean();
+  public static boolean RBheld = manipButtonRight.getAsBoolean();
 
   // A chooser for autonomous commands
   
@@ -108,7 +108,7 @@ public class RobotContainer {
 
     //driverButtonB.whileTrue(new FieldAlignedCommand(m_DriveTrain));
     manipButtonY.whileTrue(new AutoClawCommand(m_Claw));
-    driverButtonRight.whileTrue(m_DriveTrain.RBpressed());
+    driverButtonRight.whileTrue(m_DriveTrain.RBheld());
   }
 
   private void configureShuffleboard(){

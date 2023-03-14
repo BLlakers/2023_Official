@@ -169,7 +169,7 @@ public class DriveTrain extends SubsystemBase {
       w3s = 0;
       w4s = 0;
     }
-    if (RobotContainer.RBpressed == true) {
+    if (RobotContainer.RBheld == true) {
       w1s = Math.sqrt(Math.pow(B, 2) + Math.pow(C, 2)) * .8; 
       w2s = Math.sqrt(Math.pow(B, 2) + Math.pow(D, 2)) * .8;
       w3s = Math.sqrt(Math.pow(A, 2) + Math.pow(D, 2)) * .8;
@@ -509,17 +509,17 @@ public class DriveTrain extends SubsystemBase {
 
     }
   }
-  public CommandBase RBpressed() {
+  public CommandBase RBheld() {
     // Inline construction of command goes here.
     // Subsystem::RunOnce implicitly requires `this` subsystem.
 
     return runOnce(
         () -> {
-          if (RobotContainer.RBpressed == true){
-            RobotContainer.RBpressed = false;
+          if (RobotContainer.RBheld == true){
+            RobotContainer.RBheld = false;
           }
-         else if (RobotContainer.RBpressed == false) {
-          RobotContainer.RBpressed = true;
+         else if (RobotContainer.RBheld == false) {
+          RobotContainer.RBheld = true;
           }
           // one-time action goes here
           // WP - Add code here to toggle the gripper solenoid
