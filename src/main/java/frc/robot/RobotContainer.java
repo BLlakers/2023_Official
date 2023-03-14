@@ -37,25 +37,16 @@ public class RobotContainer {
   XboxController manipController = new XboxController(Constants.ManipControllerChannel);
   JoystickButton driverButtonB = new JoystickButton(driverController, Constants.buttonB);
   JoystickButton manipButtonA = new JoystickButton(manipController, Constants.buttonA);
-  //JoystickButton manipButtonB = new JoystickButton(manipController, Constants.buttonB);
-
   JoystickButton driverButtonRight = new JoystickButton(driverController, Constants.buttonRight);
   JoystickButton driverButtonLeft = new JoystickButton(driverController, Constants.buttonLeft);
-
   JoystickButton manipButtonX = new JoystickButton(manipController, Constants.buttonX);
   JoystickButton driverButtonX = new JoystickButton(driverController, Constants.buttonX);
   JoystickButton driverButtonRS = new JoystickButton(driverController, Constants.buttonRS);
-
-  //2022 Code
-  //JoystickButton manipButtonY = new JoystickButton(manipController, Constants.buttonY);
   JoystickButton manipButtonB = new JoystickButton(manipController, Constants.buttonB);
-  //JoystickButton manipButtonX = new JoystickButton(manipController, Constants.buttonX);
   JoystickButton manipButtonY = new JoystickButton(manipController, Constants.buttonY);
   JoystickButton manipButtonRight = new JoystickButton(manipController, Constants.buttonRight);
   JoystickButton manipButtonLeft = new JoystickButton(manipController, Constants.buttonLeft);
   JoystickButton manipButtonOptions = new JoystickButton(manipController, Constants.buttonOptions);
-  //JoystickButton manipButtonStart = new JoystickButton(manipController, 8);
-  
   // A chooser for autonomous commands
   SendableChooser<Integer> m_chooser = new SendableChooser<>();
 
