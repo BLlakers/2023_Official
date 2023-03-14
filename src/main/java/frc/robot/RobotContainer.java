@@ -31,10 +31,12 @@ public class RobotContainer {
   Claw m_Claw = new Claw();
   Stuff m_Stuff = new Stuff();
   Tags m_Tags = new Tags();
-
+  
+  //TODO boolean RBpressed;
+  
 
   XboxController driverController = new XboxController(Constants.DriverControllerChannel);
-  XboxController manipController = new XboxController(Constants.ManipControllerChannel);
+  static XboxController manipController = new XboxController(Constants.ManipControllerChannel);
   JoystickButton driverButtonB = new JoystickButton(driverController, Constants.buttonB);
   JoystickButton manipButtonA = new JoystickButton(manipController, Constants.buttonA);
   //JoystickButton manipButtonB = new JoystickButton(manipController, Constants.buttonB);
@@ -51,20 +53,23 @@ public class RobotContainer {
   JoystickButton manipButtonB = new JoystickButton(manipController, Constants.buttonB);
   //JoystickButton manipButtonX = new JoystickButton(manipController, Constants.buttonX);
   JoystickButton manipButtonY = new JoystickButton(manipController, Constants.buttonY);
-  JoystickButton manipButtonRight = new JoystickButton(manipController, Constants.buttonRight);
+  static JoystickButton manipButtonRight = new JoystickButton(manipController, Constants.buttonRight);
   JoystickButton manipButtonLeft = new JoystickButton(manipController, Constants.buttonLeft);
   JoystickButton manipButtonOptions = new JoystickButton(manipController, Constants.buttonOptions);
   //JoystickButton manipButtonStart = new JoystickButton(manipController, 8);
-  
-  // A chooser for autonomous commands
   SendableChooser<Integer> m_chooser = new SendableChooser<>();
+  public static boolean RBpressed = manipButtonRight.getAsBoolean();
+
+  // A chooser for autonomous commands
+  
 
 
   public RobotContainer() {  
     configureShuffleboard();
     configureBindings();
+    
   }
-
+ //TODO REFRENCE BACK TO THIS NEXT YEAR FOR TRIGGER:
     /**
    * Use this method to define your trigger->comand mappings. Triggers can be created via the
    * {@link Trigger#Trigger(java.util.function.BooleanSupplier)} constructor with an arbitrary
@@ -74,13 +79,15 @@ public class RobotContainer {
    * PS4} controllers or {@link edu.wpi.first.wpilibj2.command.button.CommandJoystick Flight
    * joysticks}.
    */
+  //TODO END
+
   private void configureBindings() {
+    
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
     ///new Trigger(m_exampleSubsystem::exampleCondition)
     ///    .onTrue(new ExampleCommand(m_exampleSubsystem));
 
-    // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
-    // cancelling on release.
+    // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed, cancelling on release.
     ///m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
 
     m_DriveTrain.setDefaultCommand(new SwerveDriveCommand (() -> driverController.getLeftY(),
@@ -101,7 +108,7 @@ public class RobotContainer {
 
     //driverButtonB.whileTrue(new FieldAlignedCommand(m_DriveTrain));
     manipButtonY.whileTrue(new AutoClawCommand(m_Claw));
-
+    driverButtonRight.whileTrue(m_DriveTrain.RBpressed());
   }
 
   private void configureShuffleboard(){

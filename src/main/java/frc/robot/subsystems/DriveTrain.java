@@ -14,7 +14,6 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotContainer;
 import frc.robot.Constants;
-
 public class DriveTrain extends SubsystemBase {
   public CANSparkMax flDrive = new CANSparkMax(Constants.flDriveMotorChannel, MotorType.kBrushless); // 3
   public CANSparkMax flSteer = new CANSparkMax(Constants.flSteerMotorChannel, MotorType.kBrushless); // 4
@@ -148,10 +147,10 @@ public class DriveTrain extends SubsystemBase {
 
     // Finds Speeds for Each of the Wheels
     // WP - When this was in the swerve drive command all lines were * 0.5
-    double w1s = Math.sqrt(Math.pow(B, 2) + Math.pow(C, 2)) * .7; // At beginning of comp was 0.6
-    double w2s = Math.sqrt(Math.pow(B, 2) + Math.pow(D, 2)) * .7;
-    double w3s = Math.sqrt(Math.pow(A, 2) + Math.pow(D, 2)) * .7;
-    double w4s = Math.sqrt(Math.pow(A, 2) + Math.pow(C, 2)) * .7;
+    double w1s = Math.sqrt(Math.pow(B, 2) + Math.pow(C, 2)) * .6; // At beginning of comp was 0.6
+    double w2s = Math.sqrt(Math.pow(B, 2) + Math.pow(D, 2)) * .6;
+    double w3s = Math.sqrt(Math.pow(A, 2) + Math.pow(D, 2)) * .6;
+    double w4s = Math.sqrt(Math.pow(A, 2) + Math.pow(C, 2)) * .6;
 
     // Finds the Desired Angle
     double w1a = (Math.atan2(B, C) * (180 / Math.PI)) + 180;
@@ -170,7 +169,17 @@ public class DriveTrain extends SubsystemBase {
       w3s = 0;
       w4s = 0;
     }
-
+    if (RobotContainer.RBpressed == true) {
+      w1s = Math.sqrt(Math.pow(B, 2) + Math.pow(C, 2)) * .8; 
+      w2s = Math.sqrt(Math.pow(B, 2) + Math.pow(D, 2)) * .8;
+      w3s = Math.sqrt(Math.pow(A, 2) + Math.pow(D, 2)) * .8;
+      w4s = Math.sqrt(Math.pow(A, 2) + Math.pow(C, 2)) * .8;
+      } else {
+        w1s = Math.sqrt(Math.pow(B, 2) + Math.pow(C, 2)) * .6; 
+        w2s = Math.sqrt(Math.pow(B, 2) + Math.pow(D, 2)) * .6;
+        w3s = Math.sqrt(Math.pow(A, 2) + Math.pow(D, 2)) * .6;
+        w4s = Math.sqrt(Math.pow(A, 2) + Math.pow(C, 2)) * .6;
+      }
     // double yaw = gyro.getYaw() + 180;
 
     // if (yaw == 360) {
@@ -500,7 +509,22 @@ public class DriveTrain extends SubsystemBase {
 
     }
   }
+  public CommandBase RBpressed() {
+    // Inline construction of command goes here.
+    // Subsystem::RunOnce implicitly requires `this` subsystem.
 
+    return runOnce(
+        () -> {
+          if (RobotContainer.RBpressed == true){
+            RobotContainer.RBpressed = false;
+          }
+         else if (RobotContainer.RBpressed == false) {
+          RobotContainer.RBpressed = true;
+          }
+          // one-time action goes here
+          // WP - Add code here to toggle the gripper solenoid
+        });
+  }
   public CommandBase WheelzLock() {
     
     return runOnce(
