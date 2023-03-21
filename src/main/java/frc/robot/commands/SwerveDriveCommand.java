@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import com.revrobotics.CANSparkMax;
 
 import frc.robot.Constants;
-import frc.robot.subsystems.DriveTrain;
+
 import frc.robot.subsystems.DriveTrainPID;
 
 public class SwerveDriveCommand extends CommandBase {
@@ -56,7 +56,7 @@ public class SwerveDriveCommand extends CommandBase {
     if (Math.abs(leftX) < Constants.deadzone) {
       x = 0.0;
     } else {
-      x = leftX;
+      x = -leftX;
     }
 
     // Finds the Y Value of the Left Stick on the Controller and Takes Care of
@@ -64,7 +64,7 @@ public class SwerveDriveCommand extends CommandBase {
     if (Math.abs(leftY) < Constants.deadzone) {
       y = 0.0;
     } else {
-      y = leftY;
+      y = -leftY;
     }
 
     // Finds the X Value of the Right Stick on the Controller and Takes Care of
@@ -75,7 +75,8 @@ public class SwerveDriveCommand extends CommandBase {
       rot = rightX;
     }
     
-    m_DriveTrain.drive(x,y,rot, false, false);
+    //Swerve drive uses a different Y and X than expected!
+    m_DriveTrain.drive(y,x,rot, false, m_DriveTrain.WheelLock);
    
   }
 

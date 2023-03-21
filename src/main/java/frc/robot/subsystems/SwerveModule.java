@@ -37,8 +37,8 @@ public class SwerveModule extends SubsystemBase {
         private static final double kModuleMaxAngularVelocity = DriveTrainPID.kMaxAngularSpeed;
         private static final double kModuleMaxAngularAcceleration = 2 * Math.PI; // radians per second squared
 
-        private final CANSparkMax m_driveMotor;
-        private final CANSparkMax m_turningMotor;
+        public final CANSparkMax m_driveMotor;
+        public final CANSparkMax m_turningMotor;
 
         private final SparkMaxPIDController m_drivePID;
 
