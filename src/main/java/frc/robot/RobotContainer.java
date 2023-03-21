@@ -35,13 +35,13 @@ public class RobotContainer {
   //TODO boolean RBpressed;
   
 
-  XboxController driverController = new XboxController(Constants.DriverControllerChannel);
+  static XboxController driverController = new XboxController(Constants.DriverControllerChannel);
   static XboxController manipController = new XboxController(Constants.ManipControllerChannel);
   JoystickButton driverButtonB = new JoystickButton(driverController, Constants.buttonB);
   JoystickButton manipButtonA = new JoystickButton(manipController, Constants.buttonA);
   //JoystickButton manipButtonB = new JoystickButton(manipController, Constants.buttonB);
 
-  JoystickButton driverButtonRight = new JoystickButton(driverController, Constants.buttonRight);
+  public static JoystickButton driverButtonRight = new JoystickButton(driverController, Constants.buttonRight);
   JoystickButton driverButtonLeft = new JoystickButton(driverController, Constants.buttonLeft);
 
   JoystickButton manipButtonX = new JoystickButton(manipController, Constants.buttonX);
@@ -53,12 +53,12 @@ public class RobotContainer {
   JoystickButton manipButtonB = new JoystickButton(manipController, Constants.buttonB);
   //JoystickButton manipButtonX = new JoystickButton(manipController, Constants.buttonX);
   JoystickButton manipButtonY = new JoystickButton(manipController, Constants.buttonY);
-  static JoystickButton manipButtonRight = new JoystickButton(manipController, Constants.buttonRight);
+   JoystickButton manipButtonRight = new JoystickButton(manipController, Constants.buttonRight);
   JoystickButton manipButtonLeft = new JoystickButton(manipController, Constants.buttonLeft);
   JoystickButton manipButtonOptions = new JoystickButton(manipController, Constants.buttonOptions);
   //JoystickButton manipButtonStart = new JoystickButton(manipController, 8);
   SendableChooser<Integer> m_chooser = new SendableChooser<>();
-  public static boolean RBheld = manipButtonRight.getAsBoolean();
+  //public static boolean RBheld = manipButtonRight.getAsBoolean();
 
   // A chooser for autonomous commands
   
@@ -80,6 +80,7 @@ public class RobotContainer {
    * joysticks}.
    */
   //TODO END
+
 
   private void configureBindings() {
     

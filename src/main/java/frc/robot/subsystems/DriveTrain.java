@@ -97,6 +97,9 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public void drive(DoubleSupplier _leftY, DoubleSupplier _leftX, DoubleSupplier _rightX, Boolean _WheelLock) {
+    
+    Boolean RBheld = RobotContainer.driverButtonRight.getAsBoolean();
+    System.out.println(RBheld);
 
     leftY = _leftY.getAsDouble();
     leftX = _leftX.getAsDouble();
@@ -145,13 +148,23 @@ public class DriveTrain extends SubsystemBase {
     double C = vy - omega * Constants.length * .6;
     double D = vy + omega * Constants.length * .6;
 
+    double w1s;
+    double w2s;
+    double w3s;
+    double w4s;
     // Finds Speeds for Each of the Wheels
     // WP - When this was in the swerve drive command all lines were * 0.5
-    double w1s = Math.sqrt(Math.pow(B, 2) + Math.pow(C, 2)) * .6; // At beginning of comp was 0.6
-    double w2s = Math.sqrt(Math.pow(B, 2) + Math.pow(D, 2)) * .6;
-    double w3s = Math.sqrt(Math.pow(A, 2) + Math.pow(D, 2)) * .6;
-    double w4s = Math.sqrt(Math.pow(A, 2) + Math.pow(C, 2)) * .6;
-
+    if (RBheld == true) {
+      w1s = Math.sqrt(Math.pow(B, 2) + Math.pow(C, 2)) * .1; 
+      w2s = Math.sqrt(Math.pow(B, 2) + Math.pow(D, 2)) * .1;
+      w3s = Math.sqrt(Math.pow(A, 2) + Math.pow(D, 2)) * .1;
+      w4s = Math.sqrt(Math.pow(A, 2) + Math.pow(C, 2)) * .1;
+      } else {
+        w1s = Math.sqrt(Math.pow(B, 2) + Math.pow(C, 2)) * .6; 
+        w2s = Math.sqrt(Math.pow(B, 2) + Math.pow(D, 2)) * .6;
+        w3s = Math.sqrt(Math.pow(A, 2) + Math.pow(D, 2)) * .6;
+        w4s = Math.sqrt(Math.pow(A, 2) + Math.pow(C, 2)) * .6;
+      }
     // Finds the Desired Angle
     double w1a = (Math.atan2(B, C) * (180 / Math.PI)) + 180;
     double w2a = (Math.atan2(B, D) * (180 / Math.PI)) + 180;
@@ -169,17 +182,7 @@ public class DriveTrain extends SubsystemBase {
       w3s = 0;
       w4s = 0;
     }
-    if (RobotContainer.RBheld == true) {
-      w1s = Math.sqrt(Math.pow(B, 2) + Math.pow(C, 2)) * .8; 
-      w2s = Math.sqrt(Math.pow(B, 2) + Math.pow(D, 2)) * .8;
-      w3s = Math.sqrt(Math.pow(A, 2) + Math.pow(D, 2)) * .8;
-      w4s = Math.sqrt(Math.pow(A, 2) + Math.pow(C, 2)) * .8;
-      } else {
-        w1s = Math.sqrt(Math.pow(B, 2) + Math.pow(C, 2)) * .6; 
-        w2s = Math.sqrt(Math.pow(B, 2) + Math.pow(D, 2)) * .6;
-        w3s = Math.sqrt(Math.pow(A, 2) + Math.pow(D, 2)) * .6;
-        w4s = Math.sqrt(Math.pow(A, 2) + Math.pow(C, 2)) * .6;
-      }
+   
     // double yaw = gyro.getYaw() + 180;
 
     // if (yaw == 360) {
@@ -515,12 +518,6 @@ public class DriveTrain extends SubsystemBase {
 
     return runOnce(
         () -> {
-          if (RobotContainer.RBheld == true){
-            RobotContainer.RBheld = true;
-          }
-         else if (RobotContainer.RBheld == false) {
-          RobotContainer.RBheld = false;
-          }
           // one-time action goes here
           // WP - Add code here to toggle the gripper solenoid
         });
