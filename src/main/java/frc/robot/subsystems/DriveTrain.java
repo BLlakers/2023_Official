@@ -516,10 +516,10 @@ public class DriveTrain extends SubsystemBase {
     return runOnce(
         () -> {
           if (RobotContainer.RBheld == true){
-            RobotContainer.RBheld = false;
+            RobotContainer.RBheld = true;
           }
          else if (RobotContainer.RBheld == false) {
-          RobotContainer.RBheld = true;
+          RobotContainer.RBheld = false;
           }
           // one-time action goes here
           // WP - Add code here to toggle the gripper solenoid
