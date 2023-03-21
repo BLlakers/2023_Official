@@ -30,7 +30,13 @@ public class Stuff extends SubsystemBase {
         if (12 >= camerax && 6 <= camerax) {
             isAligned = true;
             angle = 9.6;
-        } else {
+        } 
+        else if(camerax == 0 && cameray == 0){
+            isAligned = false;
+            angle = 9.6;
+
+        }
+        else {
             isAligned = false;
             // finds where the robot should move to in terms of degreese, which i will
             // eventuly translate into motr rpm (example: 1 degree = 0.2 motor rpm) and i
