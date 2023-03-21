@@ -76,7 +76,7 @@ public class RobotContainer {
     () -> driverController.getLeftX(), () -> driverController.getRightX(), m_DriveTrainPID));
     //limelight allign works on both controllers
     //manipButtonX.whileTrue(new AlignCommand(m_DriveTrain, () -> frc.robot.subsystems.Stuff.angle));
-    //driverButtonX.whileTrue(new AlignCommand(m_DriveTrain, () -> frc.robot.subsystems.Stuff.angle));
+    driverButtonX.whileTrue(new AlignCommand(m_DriveTrainPID, () -> frc.robot.subsystems.Stuff.angle));
     //manipButtonB.whileTrue(new AprilAlignCommand(m_DriveTrain, () -> frc.robot.subsystems.Tags.tx2));
     //driverButtonB.whileTrue(new FieldAlignedCommand(m_DriveTrain));
     driverButtonRS.onTrue(m_DriveTrainPID.WheelzLock());
