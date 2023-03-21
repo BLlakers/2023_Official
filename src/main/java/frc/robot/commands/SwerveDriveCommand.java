@@ -72,7 +72,7 @@ public class SwerveDriveCommand extends CommandBase {
     if (Math.abs(rightX) < Constants.deadzone) {
       rot = 0.0;
     } else {
-      rot = rightX;
+      rot = -rightX;
     }
     
     //Swerve drive uses a different Y and X than expected!
