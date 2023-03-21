@@ -1,15 +1,16 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import java.util.function.DoubleSupplier;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.DriveTrainPID;
 
 public class AlignCommand extends CommandBase {
-  DriveTrain m_DriveTrain; // Creates an object DriveTrain
+  DriveTrainPID m_DriveTrain; // Creates an object DriveTrain
   DoubleSupplier m_angle;
 
-  public AlignCommand(DriveTrain _DriveTrain, DoubleSupplier _angle) { // Creates a contrusctor for auto command (How
+  public AlignCommand(DriveTrainPID _DriveTrain, DoubleSupplier _angle) { // Creates a contrusctor for auto command (How
                                                                        // things get set up)
     m_DriveTrain = _DriveTrain;
     m_angle = _angle;
@@ -23,7 +24,7 @@ public class AlignCommand extends CommandBase {
 
   @Override
   public void execute() { // Runs multiple times
-    Double move = 0.0;
+    double move = 0.0;
     
     //this is old stuff, but i am keeping it just as a referance and just incase it is needed again
     // turn2 must somehow become a doubble supplier and the drivetrain is off too
@@ -35,13 +36,7 @@ public class AlignCommand extends CommandBase {
     SmartDashboard.putNumber("command angle", m_angle.getAsDouble());
     //end of old stuff
 
-    // movement for the left(left joystick thing) y on the "joystick"
-    DoubleSupplier lefty;
-    lefty = () -> 0.0;
-    // movement fo the left(left joystick thing) x on the "joystick"
-    DoubleSupplier leftx;
-    leftx = () -> 0.0;
-
+    
     //figuring out which way to drive
     if (m_angle.getAsDouble() >= 12){
       //too far to right so it slowly moves to the left
@@ -53,19 +48,17 @@ public class AlignCommand extends CommandBase {
       move = 0.2;
     }
 
-    //fianlly driving
+    //fianlly drivinG
     Double move1 = move;
     //added to fix error in the last statemnt because it said move was "not final"
 
     if (m_angle.getAsDouble() == 9.6){
-      m_DriveTrain.drive(() -> 0, () -> 0, () -> 0, false);
+      m_DriveTrain.drive(0,0,0, false, false);
     }
     else{
-      m_DriveTrain.drive(lefty, leftx, () -> move1, false);
-    }
-    
-    // make this so it ONLY runs once
 
+      m_DriveTrain.drive(0, 0, 0, false, false);
+    }
   }
 
   @Override

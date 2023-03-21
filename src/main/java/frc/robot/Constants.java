@@ -8,7 +8,7 @@ public final class Constants {
     // Arm
     public static int armMotorChannel = 9;
     public static double PositionDown = 5;
-    public static double PositionPickup = 68.75; //69
+    public static double PositionPickup = 67.75; //69
     public static double PositionDrop = 86; //87
     public static double[] Positions = {PositionDown, PositionPickup, PositionDrop};
     public static double ArmTolerance = 3;
@@ -25,7 +25,7 @@ public final class Constants {
     public static int buttonRight = 6;
     public static int buttonOptions = 7;
     public static int buttonRS = 10;
-    public static double deadzone = 0.2;
+    public static double deadzone = 0.1;
 
     // Drive Train
     public static int blSteerMotorChannel = 1;

@@ -42,14 +42,13 @@ public class Robot extends TimedRobot {
 
   @Override
   public void disabledPeriodic() {
-
   }
 
   @Override
   public void autonomousInit() {
     m_robotContainer.m_Arm.ArmPosition = 1;
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
-    m_robotContainer.m_DriveTrain.startYaw = m_robotContainer.m_DriveTrain.getGyroYaw();
+   // m_robotContainer.m_DriveTrain.startYaw = m_robotContainer.m_DriveTrain.getGyroYaw();
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }
@@ -75,7 +74,7 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     //WP - Was not compiling as of 3/4, to be addressed
     //cameraTest();
-    SmartDashboard.putNumber("Start Yaw", m_robotContainer.m_DriveTrain.startYaw);
+    //SmartDashboard.putNumber("Start Yaw", m_robotContainer.m_DriveTrain.startYaw);
    
   }
 
