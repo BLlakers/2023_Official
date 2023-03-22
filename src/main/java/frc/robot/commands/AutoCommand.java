@@ -42,7 +42,7 @@ public class AutoCommand extends CommandBase {
   @Override
   public void execute() { // Runs multiple times
 
-    leftY = -0.35; // Tells controller to move backwards on the Y axis
+    leftY = -0.2; // Tells controller to move backwards on the Y axis
     leftX = 0.0; // Tells controller not to move
     rightX = 0.0; // Tells controller not to move (No RightY because it doesn't do anything)
 /* 
@@ -92,7 +92,7 @@ public class AutoCommand extends CommandBase {
       }
 
       else if (m_AutoMode == 2) {
-        if (Math.abs(m_DriveTrain.m_backRight.m_driveMotor.getEncoder().getPosition()) < 50) { // Drives until the encoder is at
+        if (Math.abs(m_DriveTrain.m_backRight.m_driveMotor.getEncoder().getPosition()) < 59) { // Drives until the encoder is at
                                                                                 // rotations on the motor. 1 motor
                                                                                 // rotation = 8.14 wheel rotation (11
                                                                                 // inches = wheel)

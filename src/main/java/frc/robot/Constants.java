@@ -25,7 +25,7 @@ public final class Constants {
     public static int buttonRight = 6;
     public static int buttonOptions = 7;
     public static int buttonRS = 10;
-    public static double deadzone = 0.1;
+    public static double deadzone = 0.085;
 
     // Drive Train
     public static int blSteerMotorChannel = 1;

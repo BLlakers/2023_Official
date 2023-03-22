@@ -69,7 +69,7 @@ public class SwerveDriveCommand extends CommandBase {
 
     // Finds the X Value of the Right Stick on the Controller and Takes Care of
     // Joystick Drift
-    if (Math.abs(rightX) < Constants.deadzone) {
+    if (Math.abs(rightX) < (2 * Constants.deadzone)) {
       rot = 0.0;
     } else {
       rot = -rightX;

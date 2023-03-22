@@ -65,7 +65,7 @@ public class DriveTrainPID extends SubsystemBase {
         Rotation2d robotRotation = new Rotation2d(navx.getRotation2d().getRadians()); //+ angleOffset); //DriverStation.getAlliance() == Alliance.Blue ? new Rotation2d(navx.getRotation2d().getDegrees() + 180) : navx.getRotation2d();
         // SmartDashboard.putNumber ( "inputRotiation", robotRotation.getDegrees());
         var swerveModuleStates = m_kinematics.toSwerveModuleStates(fieldRelative ? ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, rot, robotRotation): new ChassisSpeeds(xSpeed, ySpeed, rot));
-System.out.println(defenseHoldingMode);
+
         SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, kMaxSpeed);
         if (!defenseHoldingMode) {
             m_frontRight.setDesiredState(swerveModuleStates[1]);
