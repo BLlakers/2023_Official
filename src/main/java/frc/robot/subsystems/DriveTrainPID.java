@@ -97,6 +97,10 @@ public class DriveTrainPID extends SubsystemBase {
             }
             });
       }
+      public void resetNavxMark (double initialAngle) {
+        navx.reset(); //90 because of the feild orientation vs our driver fov
+        navx.setAngleAdjustment(0); //TODO negative because navx has a goofy coordinate system
+    }
     /**
      * Converts raw module states into chassis speeds
      * @return chassis speeds object
