@@ -24,12 +24,13 @@ public class DriveTrainPID extends SubsystemBase {
 
     private final AHRS navx = new AHRS();
 
-    private final Translation2d m_frontRightLocation = new Translation2d( 0.285, -0.285);
+    private final Translation2d m_frontRightLocation = new Translation2d( 0.285, -0.285); 
     private final Translation2d m_frontLeftLocation = new Translation2d(0.285,  0.285);
     private final Translation2d m_backLeftLocation = new Translation2d(-0.285,  0.285);
     private final Translation2d m_backRightLocation = new Translation2d( -0.285, -0.285);
 
     //constructor for each swerve module
+    //CHANGE POSITION, MAY BE REASON FOR DRIFT
     public final SwerveModule m_frontRight  = new SwerveModule(Constants.frDriveMotorChannel, Constants.frSteerMotorChannel, Constants.frEncoderChannel, 0.7341);
     public final SwerveModule m_frontLeft = new SwerveModule(Constants.flDriveMotorChannel, Constants.flSteerMotorChannel, Constants.flEncoderChannel, 0.3359);
     public final SwerveModule m_backLeft  = new SwerveModule(Constants.blDriveMotorChannel, Constants.blSteerMotorChannel, Constants.blEncoderChannel, 1.1819);
