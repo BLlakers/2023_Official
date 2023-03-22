@@ -29,10 +29,12 @@ public class Stuff extends SubsystemBase {
         // 5.7, with 9.6 being perfectly centered
         if ((camerax < 10) && (camerax > 8)) {
             isAligned = true;
+            SmartDashboard.putBoolean("Aligned?", isAligned);
             angle = 9.6;
         } 
         else if(camerax == 0 && cameray == 0){
             isAligned = false;
+            SmartDashboard.putBoolean("Aligned?", isAligned);
             angle = 9.6;
         }
         else {
