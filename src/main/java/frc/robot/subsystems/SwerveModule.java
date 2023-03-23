@@ -25,6 +25,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 
+
 /**
  * This is the code to run a single swerve module <br><br>
  * It is called by the Drivetrain subsysem
@@ -62,7 +63,10 @@ public class SwerveModule extends SubsystemBase {
          * @param turnEncoderPWMChannel DIO input for the drive encoder channel B
          * @param turnOffset offset from 0 to 1 for the home position of the encoder
          */
-        public SwerveModule(int driveMotorChannel, int turningMotorChannel, int turnEncoderPWMChannel, double turnOffset) {
+       /*  private void intizialze(){
+            m_turningPIDController.reset(new TrapezoidProfile.Constraints(kModuleMaxAngularVelocity, kModuleMaxAngularAcceleration));
+        } */
+         public SwerveModule(int driveMotorChannel, int turningMotorChannel, int turnEncoderPWMChannel, double turnOffset) {
             // can spark max motor controller objects
             m_driveMotor = new CANSparkMax(driveMotorChannel, CANSparkMaxLowLevel.MotorType.kBrushless);
             m_turningMotor = new CANSparkMax(turningMotorChannel, CANSparkMaxLowLevel.MotorType.kBrushless);
