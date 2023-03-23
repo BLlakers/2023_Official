@@ -34,7 +34,6 @@ public class DriveTrainPID extends SubsystemBase {
     public final SwerveModule m_frontLeft = new SwerveModule(Constants.flDriveMotorChannel, Constants.flSteerMotorChannel, Constants.flEncoderChannel, 0.3359);
     public final SwerveModule m_backLeft  = new SwerveModule(Constants.blDriveMotorChannel, Constants.blSteerMotorChannel, Constants.blEncoderChannel, 1.1819);
     public final SwerveModule m_backRight   = new SwerveModule(Constants.brDriveMotorChannel, Constants.brSteerMotorChannel, Constants.brEncoderChannel, 0.9262); //0.05178
-
     private final SwerveDriveKinematics m_kinematics = new SwerveDriveKinematics( m_frontLeftLocation, m_frontRightLocation,m_backLeftLocation, m_backRightLocation);
   
     //INITIAL POSITIONS to help define swerve drive odometry. THis was a headache
