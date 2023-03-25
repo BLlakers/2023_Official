@@ -30,7 +30,7 @@ public class DriveTrainPID extends SubsystemBase {
     private final Translation2d m_backRightLocation = new Translation2d( -0.285, -0.285);
 
     //constructor for each swerve module
-    public final SwerveModule m_frontRight  = new SwerveModule(Constants.frDriveMotorChannel, Constants.frSteerMotorChannel, Constants.frEncoderChannel, 0.7341);
+    public final SwerveModule m_frontRight  = new SwerveModule(Constants.frDriveMotorChannel, Constants.frSteerMotorChannel, Constants.frEncoderChannel, 0.730);
     public final SwerveModule m_frontLeft = new SwerveModule(Constants.flDriveMotorChannel, Constants.flSteerMotorChannel, Constants.flEncoderChannel, 0.3359);
     public final SwerveModule m_backLeft  = new SwerveModule(Constants.blDriveMotorChannel, Constants.blSteerMotorChannel, Constants.blEncoderChannel, 1.1819);
     public final SwerveModule m_backRight   = new SwerveModule(Constants.brDriveMotorChannel, Constants.brSteerMotorChannel, Constants.brEncoderChannel, 0.9262); //0.05178
@@ -64,7 +64,7 @@ public class DriveTrainPID extends SubsystemBase {
         Rotation2d robotRotation = new Rotation2d(navx.getRotation2d().getRadians()); //+ angleOffset); //DriverStation.getAlliance() == Alliance.Blue ? new Rotation2d(navx.getRotation2d().getDegrees() + 180) : navx.getRotation2d();
         // SmartDashboard.putNumber ( "inputRotiation", robotRotation.getDegrees());
         var swerveModuleStates = m_kinematics.toSwerveModuleStates(fieldRelative ? ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, rot, robotRotation): new ChassisSpeeds(xSpeed, ySpeed, rot));
-System.out.println(defenseHoldingMode);
+//System.out.println(defenseHoldingMode);
         SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, kMaxSpeed);
         if (!defenseHoldingMode) {
             m_frontRight.setDesiredState(swerveModuleStates[1]);

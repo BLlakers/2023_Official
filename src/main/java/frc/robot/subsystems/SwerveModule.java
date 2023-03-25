@@ -78,7 +78,12 @@ public class SwerveModule extends SubsystemBase {
             m_driveEncoder = m_driveMotor.getEncoder();
             m_driveEncoder.setVelocityConversionFactor(rpmToVelocityScaler);
 
-
+            //limit power to motors 3/25/23
+            //m_driveMotor.setSmartCurrentLimit(30, 40);
+            //m_turningMotor.setSmartCurrentLimit(30, 40);
+            //m_driveMotor.burnFlash();
+            //m_turningMotor.burnFlash();
+            
             //TODO Im changing this 
             //PWM encoder from CTRE mag encoders
             turnPWMChannel = turnEncoderPWMChannel;
