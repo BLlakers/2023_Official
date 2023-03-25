@@ -60,6 +60,7 @@ public class DriveTrainPID extends SubsystemBase {
     public void drive(double xSpeed, double ySpeed, double rot, boolean fieldRelative, boolean defenseHoldingMode) {
         SmartDashboard.putNumber("X Speed", xSpeed);
         SmartDashboard.putNumber("Y Speed", ySpeed);
+        SmartDashboard.putBoolean("Field Oriented?", fieldRelative);
         //double angleOffset = DriverStation.getAlliance().toString() == "Blue" ? Math.PI/2 : -Math.PI/2;
         //SmartDashboard.putString("isRed", DriverStation.getAlliance().toString());//NetworkTableInstance.getDefault().getTable("FMSInfo").getEntry("IsRedAlliance").getString("bruh"));
         // SmartDashboard.putNumber( "angleOffset", angleOffset);
