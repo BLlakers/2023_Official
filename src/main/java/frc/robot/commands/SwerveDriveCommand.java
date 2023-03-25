@@ -8,7 +8,7 @@ import com.revrobotics.CANSparkMax;
 import frc.robot.Constants;
 
 import frc.robot.subsystems.DriveTrainPID;
-
+import frc.robot.RobotContainer;
 public class SwerveDriveCommand extends CommandBase {
   DoubleSupplier m_leftY;
   DoubleSupplier m_leftX;
@@ -17,6 +17,7 @@ public class SwerveDriveCommand extends CommandBase {
   // double leftX;
   // double rightX;
   DriveTrainPID m_DriveTrain;
+  RobotContainer m_RobotContainer;
   // double x;
   // double y;
   // double rot;
@@ -76,8 +77,9 @@ public class SwerveDriveCommand extends CommandBase {
     }
     
     //Swerve drive uses a different Y and X than expected!
-    m_DriveTrain.drive(y,x,rot, true, m_DriveTrain.WheelLock);
-   
+    
+    m_DriveTrain.drive(y,x,rot, m_DriveTrain.FieldRelativeEnable, m_DriveTrain.WheelLock);
+     
   }
 
   // Called once the command ends or is interrupted.

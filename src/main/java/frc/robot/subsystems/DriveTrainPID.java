@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com.kauailabs.navx.frc.AHRS;
 import frc.robot.Constants;
+import frc.robot.RobotContainer;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
@@ -19,9 +20,9 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class DriveTrainPID extends SubsystemBase {
     public boolean WheelLock = false;
+    public boolean FieldRelativeEnable = true;
     public static final double kMaxSpeed = 1; //WP this seemed to work don't know why // 3.68 meters per second or 12.1 ft/s (max speed of SDS Mk3 with Neo motor)
     public static final double kMaxAngularSpeed = Math.PI/3; // 1/2 rotation per second
-
     private final AHRS navx = new AHRS();
 
     private final Translation2d m_frontRightLocation = new Translation2d( 0.285, -0.285);
@@ -44,7 +45,8 @@ public class DriveTrainPID extends SubsystemBase {
     //Constructor
     public DriveTrainPID() {
         m_initialStates = new SwerveDriveKinematics(m_frontLeftLocation, m_frontRightLocation,  m_backLeftLocation, m_backRightLocation);
-    }
+
+      }
 
     /**
      * Method to drive the robot using joystick info.
@@ -95,7 +97,33 @@ public class DriveTrainPID extends SubsystemBase {
             }
             });
       }
-    /**
+      public CommandBase ZeroGyro() {
+        // Inline construction of command goes here.
+        // Subsystem::RunOnce implicitly requires `this` subsystem.
+    
+        return runOnce(
+            () -> {
+            navx.reset();
+
+            });
+      }
+      public CommandBase toggleFieldRelativeEnable() {
+    
+        return runOnce(
+            () -> {
+             
+            // one-time action goes here
+              // WP - Add code here to toggle the gripper solenoid
+            if (FieldRelativeEnable == true){
+              FieldRelativeEnable = false;
+            }
+           else if (FieldRelativeEnable == false) {
+              FieldRelativeEnable = true;
+            }
+            });
+      }
+      /**
+
      * Converts raw module states into chassis speeds
      * @return chassis speeds object
      */
