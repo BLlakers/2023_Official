@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.math.controller.ProfiledPIDController;
+import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
@@ -21,9 +22,10 @@ import com.revrobotics.SparkMaxPIDController.AccelStrategy;
 import com.revrobotics.RelativeEncoder;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DutyCycle;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
+import edu.wpi.first.hal.simulation.EncoderDataJNI;
 
 /**
  * This is the code to run a single swerve module <br><br>
@@ -32,7 +34,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class SwerveModule extends SubsystemBase {
         private static final double kWheelDiameter = .1016; // 0.1016 M wheel diameter (4"), used to be 4 inches if this breaks it look here TODO
         private static final double kWheelCircumference = Math.PI * kWheelDiameter;
-        private static final double rpmToVelocityScaler = (kWheelCircumference / 6.12) / 60; //SDS Mk3 standard gear ratio from motor to wheel, divide by 60 to go from secs to mins
+        private static final double rpmToVelocityScaler = (kWheelCircumference / 8.14) / 60; //SDS Mk3 standard gear ratio from motor to wheel, divide by 60 to go from secs to mins. //TODO WAS 6.12
     //kWheelCircumference used to be 
         private static final double kModuleMaxAngularVelocity = DriveTrainPID.kMaxAngularSpeed;
         private static final double kModuleMaxAngularAcceleration = 2 * Math.PI; // radians per second squared
@@ -43,6 +45,7 @@ public class SwerveModule extends SubsystemBase {
         private final SparkMaxPIDController m_drivePID;
 
         private final RelativeEncoder m_driveEncoder;
+        private final RelativeEncoder m_turnEncoder;
         private final DigitalInput m_TurnEncoderInput;
         public final DutyCycle m_TurnPWMEncoder;
         private double turnEncoderOffset;
@@ -52,7 +55,9 @@ public class SwerveModule extends SubsystemBase {
 
         // Gains are for example purposes only - must be determined for your own robot!
         private final ProfiledPIDController m_turningPIDController = new ProfiledPIDController(1, 0, 0, new TrapezoidProfile.Constraints(kModuleMaxAngularVelocity, kModuleMaxAngularAcceleration) );
-
+        private final SimpleMotorFeedforward m_driveFeedforward = new SimpleMotorFeedforward(1, 3);//TODO NOT IN 11 CODE 
+        private final SimpleMotorFeedforward m_turnFeedforward = new SimpleMotorFeedforward(1, 0.5); //TODO NOT IN 11 CODE 
+      
         /**
          * Constructs a SwerveModule with a drive motor, turning motor, drive encoder and turning encoder.
          *
@@ -64,6 +69,7 @@ public class SwerveModule extends SubsystemBase {
          */
         public SwerveModule(int driveMotorChannel, int turningMotorChannel, int turnEncoderPWMChannel, double turnOffset) {
             // can spark max motor controller objects
+            
             m_driveMotor = new CANSparkMax(driveMotorChannel, CANSparkMaxLowLevel.MotorType.kBrushless);
             m_turningMotor = new CANSparkMax(turningMotorChannel, CANSparkMaxLowLevel.MotorType.kBrushless);
 
@@ -76,6 +82,9 @@ public class SwerveModule extends SubsystemBase {
 
             //spark max built-in encoder
             m_driveEncoder = m_driveMotor.getEncoder();
+            m_driveEncoder.setPositionConversionFactor( (.319) / (4096 *8.14)); // Assumes 4 inch diameter wheel, assumes encoder count (4096) and gear ratio (8.14:1)
+            m_turnEncoder = m_turningMotor.getEncoder();
+            m_turnEncoder.setPositionConversionFactor( (.319) / (4096 *8.14));
             m_driveEncoder.setVelocityConversionFactor(rpmToVelocityScaler);
 
             //limit power to motors 3/25/23
@@ -105,17 +114,21 @@ public class SwerveModule extends SubsystemBase {
          */
         public SwerveModuleState getState() {
             //the getVelocity() function normally returns RPM but is scaled in the SwerveModule constructor to return actual wheel speed
-            return new SwerveModuleState( m_driveEncoder.getVelocity(), new Rotation2d(getTurnEncoderRadians()) );
+            return new SwerveModuleState(m_driveEncoder.getVelocity(), new Rotation2d(getTurnEncoderRadians()));
         }
 
         public SwerveModuleState getDifferentState() { //TIMES 60 TO CONVERRT FROM MINUTES TO SECONDS
-            return new SwerveModuleState((m_driveEncoder.getPosition()-encoderBias)*rpmToVelocityScaler*60, new Rotation2d(getTurnEncoderRadians()));
+            return new SwerveModuleState((m_driveEncoder.getPosition()/*TODO FIX THIS*/ -encoderBias)*rpmToVelocityScaler*60, new Rotation2d(getTurnEncoderRadians()));
         }
         /**
          * Sets the desired state for the module.
          *
          * @param desiredState Desired state with speed and angle.
          */
+        public SwerveModulePosition getPosition() {
+            return new SwerveModulePosition(
+                m_driveEncoder.getPosition(), new Rotation2d(m_turnEncoder.getPosition()));
+          }
         public void setDesiredState(SwerveModuleState desiredState) {
             // Optimize the reference state to avoid spinning further than 90 degrees
             SwerveModuleState state = SwerveModuleState.optimize( desiredState, new Rotation2d(getTurnEncoderRadians()) );
