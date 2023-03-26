@@ -112,14 +112,16 @@ public class DriveTrainPID extends SubsystemBase {
     
         return runOnce(
             () -> {
-             
+             //System.out.println("I am Here");
             // one-time action goes here
               // WP - Add code here to toggle the gripper solenoid
             if (FieldRelativeEnable == true){
               FieldRelativeEnable = false;
+              //System.out.println("I am Here 2");
             }
            else if (FieldRelativeEnable == false) {
               FieldRelativeEnable = true;
+              //System.out.println("I am Here 3");
             }
             });
       }

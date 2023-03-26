@@ -35,7 +35,7 @@ public class RobotContainer {
   static XboxController manipController = new XboxController(Constants.ManipControllerChannel);
   JoystickButton driverButtonB = new JoystickButton(driverController, Constants.buttonB);
   JoystickButton manipButtonA = new JoystickButton(manipController, Constants.buttonA);
-  JoystickButton driverButtonA = new JoystickButton(manipController, Constants.buttonA);
+  JoystickButton driverButtonA = new JoystickButton(driverController, Constants.buttonA);
  
   JoystickButton driverButtonRight = new JoystickButton(driverController, Constants.buttonRight);
   JoystickButton driverButtonLeft = new JoystickButton(driverController, Constants.buttonLeft);
