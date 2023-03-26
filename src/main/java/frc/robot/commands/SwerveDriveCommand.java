@@ -78,7 +78,7 @@ public class SwerveDriveCommand extends CommandBase {
     
     //Swerve drive uses a different Y and X than expected!
     
-    m_DriveTrain.drive(y,x,rot, m_DriveTrain.FieldRelativeEnable, m_DriveTrain.WheelLock);
+    m_DriveTrain.drive(y,x,rot, false/*m_DriveTrain.FieldRelativeEnable*/, m_DriveTrain.WheelLock);
      
   }
 

@@ -35,6 +35,8 @@ public class RobotContainer {
   static XboxController manipController = new XboxController(Constants.ManipControllerChannel);
   JoystickButton driverButtonB = new JoystickButton(driverController, Constants.buttonB);
   JoystickButton manipButtonA = new JoystickButton(manipController, Constants.buttonA);
+  JoystickButton driverButtonA = new JoystickButton(manipController, Constants.buttonA);
+ 
   JoystickButton driverButtonRight = new JoystickButton(driverController, Constants.buttonRight);
   JoystickButton driverButtonLeft = new JoystickButton(driverController, Constants.buttonLeft);
   //JoystickButton manipButtonX = new JoystickButton(manipController, Constants.buttonX);
@@ -82,8 +84,8 @@ public class RobotContainer {
     //manipButtonB.whileTrue(new AprilAlignCommand(m_DriveTrain, () -> frc.robot.subsystems.Tags.tx2));
     //driverButtonB.whileTrue(new FieldAlignedCommand(m_DriveTrain));
     driverButtonRS.onTrue(m_DriveTrainPID.WheelzLock());
-    manipButtonRS.onTrue(m_DriveTrainPID.ZeroGyro());   
-    driverButtonLS.onTrue(m_DriveTrainPID.toggleFieldRelativeEnable());
+    driverButtonB.onTrue(m_DriveTrainPID.ZeroGyro());   
+    driverButtonA.onTrue(m_DriveTrainPID.toggleFieldRelativeEnable());
     //WP - DO NOT UNCOMMENT WITHOUT TALKING TO WARD
     //manipButtonOptions.whileTrue(new ManualRotateArmCommand(() -> manipController.getLeftY(), m_Arm));
     m_Arm.setDefaultCommand(new AutoRotateArmCommand (m_Arm));

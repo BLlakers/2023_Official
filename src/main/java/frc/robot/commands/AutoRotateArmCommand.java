@@ -32,6 +32,8 @@ public class AutoRotateArmCommand extends CommandBase {
       targetDegrees = Constants.Positions[1];
     } else if (m_Arm.ArmPosition == 3) {
       targetDegrees = Constants.Positions[2];
+    } else if (m_Arm.ArmPosition == 4) {
+      targetDegrees = Constants.Positions[3];
     }
     SmartDashboard.putNumber("Target", targetDegrees);
     SmartDashboard.putNumber("Arm Degrees", m_Arm.ArmDegrees);
