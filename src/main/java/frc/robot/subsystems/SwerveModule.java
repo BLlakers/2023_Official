@@ -30,7 +30,9 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
  * It is called by the Drivetrain subsysem
  */
 public class SwerveModule extends SubsystemBase {
-        private static final double kWheelDiameter = .1016; // 0.1016 M wheel diameter (4"), used to be 4 inches if this breaks it look here TODO
+       
+        private static final double kWheelDiameter = .1016;
+        private static final int kEncoderResolution = 4096; // 0.1016 M wheel diameter (4"), used to be 4 inches if this breaks it look here TODO
         private static final double kWheelCircumference = Math.PI * kWheelDiameter;
         private static final double rpmToVelocityScaler = (kWheelCircumference / 6.12) / 60; //SDS Mk3 standard gear ratio from motor to wheel, divide by 60 to go from secs to mins
     //kWheelCircumference used to be 
@@ -51,7 +53,7 @@ public class SwerveModule extends SubsystemBase {
         
 
         // Gains are for example purposes only - must be determined for your own robot!
-        private final ProfiledPIDController m_turningPIDController = new ProfiledPIDController(1, 0, 0, new TrapezoidProfile.Constraints(kModuleMaxAngularVelocity, kModuleMaxAngularAcceleration) );
+        private final ProfiledPIDController m_turningPIDController = new ProfiledPIDController(1,/* When I changed kp, when i stopped moving the controller the wheels moved back a tinse. */ 0, 0, new TrapezoidProfile.Constraints(kModuleMaxAngularVelocity, kModuleMaxAngularAcceleration) );
 
         /**
          * Constructs a SwerveModule with a drive motor, turning motor, drive encoder and turning encoder.
