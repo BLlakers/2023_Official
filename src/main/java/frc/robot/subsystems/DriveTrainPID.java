@@ -7,15 +7,20 @@ package frc.robot.subsystems;
 import edu.wpi.first.math.kinematics.*;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
+import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
+import edu.wpi.first.math.kinematics.SwerveModulePosition;
+import edu.wpi.first.wpilibj.AnalogGyro;
 import com.kauailabs.navx.frc.AHRS;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
+import com.revrobotics.RelativeEncoder;
 /** Represents a swerve drive style drivetrain. */
 
 public class DriveTrainPID extends SubsystemBase {
@@ -29,14 +34,23 @@ public class DriveTrainPID extends SubsystemBase {
     private final Translation2d m_frontLeftLocation = new Translation2d(0.285,  0.285);
     private final Translation2d m_backLeftLocation = new Translation2d(-0.285,  0.285);
     private final Translation2d m_backRightLocation = new Translation2d( -0.285, -0.285);
-
+    public Rotation2d robotRotation = new Rotation2d(navx.getRotation2d().getRadians());
     //constructor for each swerve module
     public final SwerveModule m_frontRight  = new SwerveModule(Constants.frDriveMotorChannel, Constants.frSteerMotorChannel, Constants.frEncoderChannel, 0.730);
     public final SwerveModule m_frontLeft = new SwerveModule(Constants.flDriveMotorChannel, Constants.flSteerMotorChannel, Constants.flEncoderChannel, 0.3359);
     public final SwerveModule m_backLeft  = new SwerveModule(Constants.blDriveMotorChannel, Constants.blSteerMotorChannel, Constants.blEncoderChannel, 1.1819);
     public final SwerveModule m_backRight   = new SwerveModule(Constants.brDriveMotorChannel, Constants.brSteerMotorChannel, Constants.brEncoderChannel, 0.9262); //0.05178
     private final SwerveDriveKinematics m_kinematics = new SwerveDriveKinematics( m_frontLeftLocation, m_frontRightLocation,m_backLeftLocation, m_backRightLocation);
-  
+
+    //odometry startup thingie
+    SwerveDriveOdometry m_Odometry = new SwerveDriveOdometry(m_kinematics, navx.getRotation2d(), new SwerveModulePosition[] {
+      m_frontRight.getPosition(),
+      m_frontLeft.getPosition(),
+      m_backRight.getPosition(),
+      m_backLeft.getPosition()
+    });
+
+
     //INITIAL POSITIONS to help define swerve drive odometry. THis was a headache
     public SwerveDriveKinematics m_initialStates;
     public SwerveModulePosition[] positions = new SwerveModulePosition[4];
@@ -58,13 +72,14 @@ public class DriveTrainPID extends SubsystemBase {
      */
     @SuppressWarnings("ParameterName")
     public void drive(double xSpeed, double ySpeed, double rot, boolean fieldRelative, boolean defenseHoldingMode) {
-        SmartDashboard.putNumber("X Speed", xSpeed);
+        
+      SmartDashboard.putNumber("X Speed", xSpeed);
         SmartDashboard.putNumber("Y Speed", ySpeed);
         SmartDashboard.putBoolean("Field Oriented?", fieldRelative);
         //double angleOffset = DriverStation.getAlliance().toString() == "Blue" ? Math.PI/2 : -Math.PI/2;
         //SmartDashboard.putString("isRed", DriverStation.getAlliance().toString());//NetworkTableInstance.getDefault().getTable("FMSInfo").getEntry("IsRedAlliance").getString("bruh"));
         // SmartDashboard.putNumber( "angleOffset", angleOffset);
-        Rotation2d robotRotation = new Rotation2d(navx.getRotation2d().getRadians()); //+ angleOffset); //DriverStation.getAlliance() == Alliance.Blue ? new Rotation2d(navx.getRotation2d().getDegrees() + 180) : navx.getRotation2d();
+       //+ angleOffset); //DriverStation.getAlliance() == Alliance.Blue ? new Rotation2d(navx.getRotation2d().getDegrees() + 180) : navx.getRotation2d();
         // SmartDashboard.putNumber ( "inputRotiation", robotRotation.getDegrees());
         var swerveModuleStates = m_kinematics.toSwerveModuleStates(fieldRelative ? ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, rot, robotRotation): new ChassisSpeeds(xSpeed, ySpeed, rot));
 //System.out.println(defenseHoldingMode);
@@ -82,6 +97,16 @@ public class DriveTrainPID extends SubsystemBase {
             m_frontRight.setDesiredState(new SwerveModuleState(0, new Rotation2d(3* (Math.PI / 4))));
         }
 
+    }
+    public void updateOdometry() {
+      m_Odometry.update(
+        robotRotation,
+          new SwerveModulePosition[] {
+            m_frontLeft.getPosition(),
+            m_frontRight.getPosition(),
+            m_backLeft.getPosition(),
+            m_backRight.getPosition()
+          });
     }
     public CommandBase WheelzLock() {
     
