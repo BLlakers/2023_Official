@@ -47,7 +47,7 @@ public class Arm extends SubsystemBase {
   @Override
 
   public void periodic() {
-    phCompressor.enableAnalog(60, 120);
+    // TODO compressor code phCompressor.enableAnalog(60, 120);
     SmartDashboard.putNumber("Arm Position", ArmPosition);
     SmartDashboard.putNumber("Arm Degrees", ArmDegrees);
 
