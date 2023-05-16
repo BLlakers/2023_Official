@@ -20,11 +20,11 @@ public class AutoCommand extends CommandBase {
   int m_AutoMode; // If AutoMode = 1 then run routine 1, if AutoMode = to 2 then run 2, if
                   // AutoMode equal to 3 run routine 3, otherwise don't run.
 
-  public AutoCommand(DriveTrainPID _DriveTrain, int _AutoMode) { // Creates a contrusctor for auto command (How things get
+  public AutoCommand(DriveTrainPID m_DriveTrain, int m_AutoMode) { // Creates a contrusctor for auto command (How things get
                                                               // set up)
-    m_DriveTrain = _DriveTrain;
-    m_AutoMode = _AutoMode;
-    addRequirements(m_DriveTrain);
+    this.m_DriveTrain = m_DriveTrain;
+    this.m_AutoMode = m_AutoMode;
+    addRequirements(this.m_DriveTrain);
   }
 
   @Override
