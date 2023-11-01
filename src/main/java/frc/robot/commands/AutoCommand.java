@@ -7,209 +7,122 @@ import java.util.function.DoubleSupplier;
 import com.revrobotics.CANSparkMax;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
-import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.DriveTrainPID;
+
+
 
 public class AutoCommand extends CommandBase {
-  DriveTrain m_DriveTrain; // Creates an object DriveTrain 
-  DoubleSupplier leftY; // Creates a Variable for the Left joystick Y position (fake controller)
-  DoubleSupplier leftX; // Creates a Variable for the Left joystick X position (fake controller)
-  DoubleSupplier rightX; // Creates a Variable for the right joystick X position (fake controller)
+  DriveTrainPID m_DriveTrain; // Creates an object DriveTrain
+  double leftY; // Creates a Variable for the Left joystick Y position (fake controller)
+  double leftX; // Creates a Variable for the Left joystick X position (fake controller)
+  double rightX; // Creates a Variable for the right joystick X position (fake controller)
   double counter; // Creates a Variable that counts the amount of time we keep the shooter on
-  int m_AutoMode; // If AutoMode = 1 then run routine 1, if AutoMode = to 2 then run 2, if AutoMode equal to 3 run routine 3, otherwise don't run. 
-  public AutoCommand(DriveTrain _DriveTrain, int _AutoMode) { // Creates a contrusctor for auto command (How things get set up)
+  int m_AutoMode; // If AutoMode = 1 then run routine 1, if AutoMode = to 2 then run 2, if
+                  // AutoMode equal to 3 run routine 3, otherwise don't run.
+
+  public AutoCommand(DriveTrainPID _DriveTrain, int _AutoMode) { // Creates a contrusctor for auto command (How things get
+                                                              // set up)
     m_DriveTrain = _DriveTrain;
     m_AutoMode = _AutoMode;
     addRequirements(m_DriveTrain);
   }
 
   @Override
-  public void initialize() { // Runs once at the beginning of the command 
-    m_DriveTrain.brDrive.getEncoder().setPosition(0); // Sets the position of the encoder 
-    m_DriveTrain.frDrive.getEncoder().setPosition(0);
-    m_DriveTrain.blDrive.getEncoder().setPosition(0);
-    m_DriveTrain.flDrive.getEncoder().setPosition(0);
-    m_DriveTrain.brDrive.setIdleMode(CANSparkMax.IdleMode.kBrake); // Lines 30-33 Setting SparkMax Mode (Break = completely still) (Coast = Move with extra momentum)
-    m_DriveTrain.frDrive.setIdleMode(CANSparkMax.IdleMode.kBrake);
-    m_DriveTrain.blDrive.setIdleMode(CANSparkMax.IdleMode.kBrake);
-    m_DriveTrain.flDrive.setIdleMode(CANSparkMax.IdleMode.kBrake);
+  public void initialize() { // Runs once at the beginning of the command
+    m_DriveTrain.m_backRight.m_driveMotor.getEncoder().setPosition(0);  // Sets the position of the encoder
+    m_DriveTrain.m_frontRight.m_driveMotor.getEncoder().setPosition(0);
+    m_DriveTrain.m_backLeft.m_driveMotor.getEncoder().setPosition(0); 
+    m_DriveTrain.m_frontLeft.m_driveMotor.getEncoder().setPosition(0);
     counter = 0; // Sets counter = 0
-
-    m_DriveTrain.drive(() -> 0, () -> 0, () -> 0);
+    
+    m_DriveTrain.drive(0, 0, 0, false, false); 
 
   }
 
   @Override
   public void execute() { // Runs multiple times
-    
-    if (m_AutoMode == 1) {
-    leftY = () -> -0.35; // Tells controller to move backwards on the Y axis
-    leftX = () -> 0; // Tells controller not to move
-    rightX = () -> 0; // Tells controller not to move (No RightY because it doesn't do anything)
 
-  double w1ca = (-1 * m_DriveTrain.getPosition(m_DriveTrain.frEncoder.get(), 267.4)) + 360;
-  double w2ca = (-1 * m_DriveTrain.getPosition(m_DriveTrain.flEncoder.get(), 120.7)) + 360;
-  double w3ca = (-1 * m_DriveTrain.getPosition(m_DriveTrain.blEncoder.get(), 64.7)) + 360;
-  double w4ca = (-1 * m_DriveTrain.getPosition(m_DriveTrain.brEncoder.get(), 335.2)) + 360;
-  
-  //System.out.println(w1ca);   
-  //System.out.println(w2ca);
-  //System.out.println(w3ca);
-  //System.out.println(w4ca);
-  //System.out.println(Math.abs(m_DriveTrain.brDrive.getEncoder().getPosition()));
+    leftY = -0.40; // Tells controller to move backwards on the Y axis, was -0.35
+    leftX = 0.0; // Tells controller not to move
+    rightX = 0.0; // Tells controller not to move (No RightY because it doesn't do anything)
+/* 
+    double w1ca = (-1 * m_DriveTrain.getPosition(m_DriveTrain.frEncoder.get(), 267.4)) + 360;
+    double w2ca = (-1 * m_DriveTrain.getPosition(m_DriveTrain.flEncoder.get(), 120.7)) + 360;
+    double w3ca = (-1 * m_DriveTrain.getPosition(m_DriveTrain.blEncoder.get(), 64.7)) + 360;
+    double w4ca = (-1 * m_DriveTrain.getPosition(m_DriveTrain.brEncoder.get(), 335.2)) + 360;
+ */
+    // Author: Jared
+    // Date: 1/25/2023
+    // The purpose of the following set of instructions is to re-center the wheels
+    // to face forward, based on the sensors coming from the swerve drive.
+    // If The front right wheel is > 7 degress and < 173 OR > 187 and < 353 it will
+    // tell the robot to not move foward and it will re center the wheels
 
-  
+    /*if ((w1ca > 7 && w1ca < 173) || (w1ca > 187 && w1ca < 353)) { // If The front right wheel is > 7 degress and < 173
+                                                                  // OR > 187 and < 353 it will tell the robot to not
+                                                                  // move foward and it will re center the wheels
+      m_DriveTrain.drive(0, 0, 0, false, false); // says not to drive
+    } else if ((w2ca > 7 && w2ca < 173) || (w2ca > 187 && w2ca < 353)) { // If The front left wheel is > 7 degress and
+                                                                         // < 173 OR > 187 and < 353 it will tell the
+                                                                         // robot to not move foward and it will re
+                                                                         // center the wheels
+      m_DriveTrain.drive(0, 0, 0, false, false); // says not to drive
+    } else if ((w3ca > 7 && w3ca < 173) || (w3ca > 187 && w3ca < 353)) { // If The back left wheel is > 7 degress and
+                                                                         // < 173 OR > 187 and < 353 it will tell the
+                                                                         // robot to not move foward and it will re
+                                                                         // center the wheels
+      m_DriveTrain.drive(0, 0, 0, false, false); // says not to drive
+    } else if ((w4ca > 7 && w4ca < 173) || (w4ca > 187 && w4ca < 353)) { // If The back right wheel is > 7 degress and
+                                                                         // < 173 OR > 187 and < 353 it will tell the
+                                                                         // robot to not move foward and it will re
+                                                                         // center the wheels
+      m_DriveTrain.drive(0, 0, 0, false, false); // says not to drive
+    } else {*/
 
-// Author: Jared
-// Date: 1/25/2023
-// The purpose of the following set of instructions is to re-center the wheels to face forward, based on the sensors coming from the swerve drive.
-// If The front right wheel is > 7 degress and < 173 OR > 187 and < 353 it will tell the robot to not move foward and it will re center the wheels 
-
-if ((w1ca > 7 && w1ca < 173) || (w1ca > 187 && w1ca < 353)) { // If The front right wheel is > 7 degress and < 173 OR > 187 and < 353 it will tell the robot to not move foward and it will re center the wheels 
- m_DriveTrain.drive(() -> 0, () -> 0, () -> 0); // says not to drive 
-}
-else if ((w2ca > 7 && w2ca < 173) || (w2ca > 187 && w2ca < 353)) { // If The front left wheel is > 7 degress and < 173 OR > 187 and < 353 it will tell the robot to not move foward and it will re center the wheels 
-  m_DriveTrain.drive(() -> 0, () -> 0, () -> 0); // says not to drive
- }
-else if ((w3ca > 7 && w3ca < 173) || (w3ca > 187 && w3ca < 353)) { // If The back left wheel is > 7 degress and < 173 OR > 187 and < 353 it will tell the robot to not move foward and it will re center the wheels 
-  m_DriveTrain.drive(() -> 0, () -> 0, () -> 0); // says not to drive
- }
-else if ((w4ca > 7 && w4ca < 173) || (w4ca > 187 && w4ca < 353)) { // If The back right wheel is > 7 degress and < 173 OR > 187 and < 353 it will tell the robot to not move foward and it will re center the wheels 
-  m_DriveTrain.drive(() -> 0, () -> 0, () -> 0); // says not to drive 
- }// else if (w1ca > 187 && w1ca < 353) {
- //m_DriveTrain.drive(() -> 0, () -> 0, () -> 0);
-//} 
- else {  
- 
-  if (Math.abs(m_DriveTrain.brDrive.getEncoder().getPosition()) < 125.0597) { // Drives until the encoder is at rotations on the motor. 1 motor rotation = 8.14 wheel rotation 
-      m_DriveTrain.drive(leftY, leftX, rightX);
-    } else {
-      m_DriveTrain.drive(() -> 0, () -> 0, () -> 0);
-     // m_Shooter.shoot(1750, botRPM);
-      //if (m_Shooter.shooterReady(1750, botRPM)) {
-      //  m_Shooter.ballUp();
-        counter = counter + 1;
+      if (m_AutoMode == 1) {
+        if (Math.abs(m_DriveTrain.m_backRight.m_driveMotor.getEncoder().getPosition()) < 115.0597    ) { // Drives until the encoder is at
+                                                                                    // rotations on the motor. 1 motor
+                                                                                    // rotation = 8.14 wheel rotation
+                                                                                    //115.0597
+          m_DriveTrain.drive(-leftY, leftX, rightX, false, false);
+        } else {
+          m_DriveTrain.drive(0, 0, 0, false, false);
+          counter = counter + 1;
+        }
       }
-    }
-  } 
-  if (m_AutoMode == 2) {
-    leftY = () -> -0.35; // Tells controller to move backwards on the Y axis
-    leftX = () -> 0; // Tells controller not to move
-    rightX = () -> 0; // Tells controller not to move (No RightY because it doesn't do anything)
 
-  double w1ca = (-1 * m_DriveTrain.getPosition(m_DriveTrain.frEncoder.get(), 267.4)) + 360;
-  double w2ca = (-1 * m_DriveTrain.getPosition(m_DriveTrain.flEncoder.get(), 120.7)) + 360;
-  double w3ca = (-1 * m_DriveTrain.getPosition(m_DriveTrain.blEncoder.get(), 64.7)) + 360;
-  double w4ca = (-1 * m_DriveTrain.getPosition(m_DriveTrain.brEncoder.get(), 335.2)) + 360;
-  
-  //System.out.println(w1ca);   
-  //System.out.println(w2ca);
-  //System.out.println(w3ca);
-  //System.out.println(w4ca);
-  //System.out.println(Math.abs(m_DriveTrain.brDrive.getEncoder().getPosition()));
-
-  
-
-// Author: Jared
-// Date: 1/25/2023
-// The purpose of the following set of instructions is to re-center the wheels to face forward, based on the sensors coming from the swerve drive.
-// If The front right wheel is > 7 degress and < 173 OR > 187 and < 353 it will tell the robot to not move foward and it will re center the wheels 
-
-if ((w1ca > 7 && w1ca < 173) || (w1ca > 187 && w1ca < 353)) { // If The front right wheel is > 7 degress and < 173 OR > 187 and < 353 it will tell the robot to not move foward and it will re center the wheels 
- m_DriveTrain.drive(() -> 0, () -> 0, () -> 0); // says not to drive 
-}
-else if ((w2ca > 7 && w2ca < 173) || (w2ca > 187 && w2ca < 353)) { // If The front left wheel is > 7 degress and < 173 OR > 187 and < 353 it will tell the robot to not move foward and it will re center the wheels 
-  m_DriveTrain.drive(() -> 0, () -> 0, () -> 0); // says not to drive
- }
-else if ((w3ca > 7 && w3ca < 173) || (w3ca > 187 && w3ca < 353)) { // If The back left wheel is > 7 degress and < 173 OR > 187 and < 353 it will tell the robot to not move foward and it will re center the wheels 
-  m_DriveTrain.drive(() -> 0, () -> 0, () -> 0); // says not to drive
- }
-else if ((w4ca > 7 && w4ca < 173) || (w4ca > 187 && w4ca < 353)) { // If The back right wheel is > 7 degress and < 173 OR > 187 and < 353 it will tell the robot to not move foward and it will re center the wheels 
-  m_DriveTrain.drive(() -> 0, () -> 0, () -> 0); // says not to drive 
- }// else if (w1ca > 187 && w1ca < 353) {
- //m_DriveTrain.drive(() -> 0, () -> 0, () -> 0);
-//} 
- else {  
- 
-  if (Math.abs(m_DriveTrain.brDrive.getEncoder().getPosition()) < 57.2) { // Drives until the encoder is at rotations on the motor. 1 motor rotation = 8.14 wheel rotation (11 inches = wheel) 
-      m_DriveTrain.drive(leftY, leftX, rightX);
-    } else {
-      m_DriveTrain.drive(() -> 0, () -> 0, () -> 0);
-     // m_Shooter.shoot(1750, botRPM);
-      //if (m_Shooter.shooterReady(1750, botRPM)) {
-      //  m_Shooter.ballUp();
-        counter = counter + 1;
+      else if (m_AutoMode == 2) {
+        if (Math.abs(m_DriveTrain.m_backRight.m_driveMotor.getEncoder().getPosition()) < 59.7) { // Drives until the encoder is at
+                                                                                // rotations on the motor. 1 motor
+                                                                                // rotation = 8.14 wheel rotation (11
+                                                                                // inches = wheel)
+          m_DriveTrain.drive(-leftY, leftX, rightX, false, false);
+        } else {
+          m_DriveTrain.drive(0, 0, 0, false, true);
+          counter = counter + 1;
+        }
       }
-    }
-  } 
-  if (m_AutoMode == 3) {
-    leftY = () -> -0.35; // Tells controller to move Foward on the Y axis
-    leftX = () -> 0; // Tells controller not to move
-    rightX = () -> 0; // Tells controller not to move (No RightY because it doesn't do anything)
 
-  double w1ca = (-1 * m_DriveTrain.getPosition(m_DriveTrain.frEncoder.get(), 267.4)) + 360;
-  double w2ca = (-1 * m_DriveTrain.getPosition(m_DriveTrain.flEncoder.get(), 120.7)) + 360;
-  double w3ca = (-1 * m_DriveTrain.getPosition(m_DriveTrain.blEncoder.get(), 64.7)) + 360;
-  double w4ca = (-1 * m_DriveTrain.getPosition(m_DriveTrain.brEncoder.get(), 335.2)) + 360;
-  
-  //System.out.println(w1ca);   
-  //System.out.println(w2ca);
-  //System.out.println(w3ca);
-  //System.out.println(w4ca);
-  //System.out.println(Math.abs(m_DriveTrain.brDrive.getEncoder().getPosition()));
-
-  
-
-// Author: Jared
-// Date: 1/25/2023
-// The purpose of the following set of instructions is to re-center the wheels to face forward, based on the sensors coming from the swerve drive.
-// If The front right wheel is > 7 degress and < 173 OR > 187 and < 353 it will tell the robot to not move foward and it will re center the wheels 
-
-double align_tol = Constants.spinTolerance;
-
-if ((w1ca > align_tol && w1ca < (180-align_tol)) || (w1ca > (180+align_tol) && w1ca < (360-align_tol))) { // If The front right wheel is > 7 degress and < 173 OR > 187 and < 353 it will tell the robot to not move foward and it will re center the wheels 
- m_DriveTrain.drive(() -> 0, () -> 0, () -> 0); // says not to drive 
-}
-else if ((w2ca > align_tol && w2ca < (180-align_tol)) || (w2ca > (180+align_tol) && w2ca < (360-align_tol))) { // If The front left wheel is > 7 degress and < 173 OR > 187 and < 353 it will tell the robot to not move foward and it will re center the wheels 
-  m_DriveTrain.drive(() -> 0, () -> 0, () -> 0); // says not to drive
- }
-else if ((w3ca > align_tol && w3ca < (180-align_tol)) || (w3ca > (180+align_tol) && w3ca < (360-align_tol))) { // If The back left wheel is > 7 degress and < 173 OR > 187 and < 353 it will tell the robot to not move foward and it will re center the wheels 
-  m_DriveTrain.drive(() -> 0, () -> 0, () -> 0); // says not to drive
- }
-else if ((w4ca > align_tol && w4ca < (180-align_tol)) || (w4ca > (180+align_tol) && w4ca < (360-align_tol))) { // If The back right wheel is > 7 degress and < 173 OR > 187 and < 353 it will tell the robot to not move foward and it will re center the wheels 
-  m_DriveTrain.drive(() -> 0, () -> 0, () -> 0); // says not to drive 
- }// else if (w1ca > 187 && w1ca < 353) {
- //m_DriveTrain.drive(() -> 0, () -> 0, () -> 0);
-//} 
- else {  
- 
-  if (Math.abs(m_DriveTrain.brDrive.getEncoder().getPosition()) < 125.0597) { // Drives until the encoder is at rotations on the motor. 1 motor rotation = 8.14 wheel rotation 
-      m_DriveTrain.drive(leftY, leftX, rightX);
-    } else {
-      m_DriveTrain.drive(() -> 0, () -> 0, () -> 0);
-     // m_Shooter.shoot(1750, botRPM);
-      //if (m_Shooter.shooterReady(1750, botRPM)) {
-      //  m_Shooter.ballUp();
-        counter = counter + 1;
+      else if (m_AutoMode == 3) {
+        if (Math.abs(m_DriveTrain.m_backRight.m_driveMotor.getEncoder().getPosition()) < 125.0597) { // Drives until the encoder is at
+                                                                                    // rotations on the motor. 1 motor
+                                                                                    // rotation = 8.14 wheel rotation
+          m_DriveTrain.drive(-leftY, leftX, rightX, false, false);
+        } else {
+          m_DriveTrain.drive( 0, 0, 0, false, false);
+          counter = counter + 1;
+        }
       }
-    }
-  } 
-}
-
-
-
+     //}
+  }
+ 
   @Override
   public void end(boolean interrupted) {
-    //m_Shooter.shooterOff();
-    //m_Shooter.retract();
+    m_DriveTrain.drive(0, 0, 0, false, true);
   }
 
   @Override
   public boolean isFinished() {
-    if(counter < 40) {
-      return false;
-    } else {
-      return true;
-    }
+    return false;
   }
-} 
+}
