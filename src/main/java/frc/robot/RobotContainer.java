@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.DriveTrainPID;
 import frc.robot.commands.AutoCommand;
-import frc.robot.commands.JoyFun;
+//import frc.robot.commands.JoyFun;
 import frc.robot.commands.ManualRotateArmCommand;
 import frc.robot.commands.AutoRotateArmCommand;
 import frc.robot.commands.SwerveDriveCommand;
@@ -37,7 +37,7 @@ public class RobotContainer {
 
   XboxController driverController = new XboxController(Constants.DriverControllerChannel);
   XboxController manipController = new XboxController(Constants.ManipControllerChannel);
-  XboxController vJoystick = new XboxController(Constants.vJoy);
+  //XboxController vJoystick = new XboxController(Constants.vJoy);
   JoystickButton driverButtonB = new JoystickButton(driverController, Constants.buttonB);
   JoystickButton manipButtonA = new JoystickButton(manipController, Constants.buttonA);
   JoystickButton driverButtonRight = new JoystickButton(driverController, Constants.buttonRight);
@@ -51,15 +51,14 @@ public class RobotContainer {
   JoystickButton manipButtonLeft = new JoystickButton(manipController, Constants.buttonLeft);
   JoystickButton manipButtonOptions = new JoystickButton(manipController, Constants.buttonOptions);
 
-  JoystickButton vJoystickButton1 = new JoystickButton(vJoystick, 1);
+  /*JoystickButton vJoystickButton1 = new JoystickButton(vJoystick, 1);
   JoystickButton vJoystickButton2 = new JoystickButton(vJoystick, 2);
   JoystickButton vJoystickButton3 = new JoystickButton(vJoystick, 3);
   JoystickButton vJoystickButton4 = new JoystickButton(vJoystick, 4);
   JoystickButton vJoystickButton5 = new JoystickButton(vJoystick, 5);
   JoystickButton vJoystickButton6 = new JoystickButton(vJoystick, 6);
   JoystickButton vJoystickButton7 = new JoystickButton(vJoystick, 7);
-  JoystickButton vJoystickButton8 = new JoystickButton(vJoystick, 8);
-
+  JoystickButton vJoystickButton8 = new JoystickButton(vJoystick, 8); */
 
   // A chooser for autonomous commands
   SendableChooser<Integer> m_chooser = new SendableChooser<>();
@@ -97,14 +96,14 @@ public class RobotContainer {
     //calling it
     manipButtonX.whileTrue(new AprilAlignCommand(m_DriveTrainPID, () -> frc.robot.subsystems.Tags.tx2, frc.robot.subsystems.Tags.s8));
     
-    vJoystickButton1.whileTrue(frc.robot.commands.JoyFun.vJoyFunc(1));
-    vJoystickButton2.whileTrue(frc.robot.commands.JoyFun.vJoyFunc(2));
-    vJoystickButton3.whileTrue(frc.robot.commands.JoyFun.vJoyFunc(3));
-    vJoystickButton4.whileTrue(frc.robot.commands.JoyFun.vJoyFunc(4));
-    vJoystickButton5.whileTrue(frc.robot.commands.JoyFun.vJoyFunc(5));
-    vJoystickButton6.whileTrue(frc.robot.commands.JoyFun.vJoyFunc(6));
-    vJoystickButton7.whileTrue(frc.robot.commands.JoyFun.vJoyFunc(7));
-    vJoystickButton8.whileTrue(frc.robot.commands.JoyFun.vJoyFunc(8));
+    //vJoystickButton1.whileTrue(frc.robot.commands.JoyFun.vJoyFunc(1));
+    //vJoystickButton2.whileTrue(frc.robot.commands.JoyFun.vJoyFunc(2));
+    //vJoystickButton3.whileTrue(frc.robot.commands.JoyFun.vJoyFunc(3));
+    //vJoystickButton4.whileTrue(frc.robot.commands.JoyFun.vJoyFunc(4));
+    //vJoystickButton5.whileTrue(frc.robot.commands.JoyFun.vJoyFunc(5));
+    //vJoystickButton6.whileTrue(frc.robot.commands.JoyFun.vJoyFunc(6));
+    //vJoystickButton7.whileTrue(frc.robot.commands.JoyFun.vJoyFunc(7));
+    //vJoystickButton8.whileTrue(frc.robot.commands.JoyFun.vJoyFunc(8));
 
 
 
