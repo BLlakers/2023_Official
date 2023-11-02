@@ -4,13 +4,18 @@ package frc.robot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 
+import java.util.EventListener;
+import java.awt.*;
+import java.awt.event.*;
 
+import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.DriveTrainPID;
 import frc.robot.commands.AutoCommand;
+import frc.robot.commands.JoyFun;
 import frc.robot.commands.ManualRotateArmCommand;
 import frc.robot.commands.AutoRotateArmCommand;
 import frc.robot.commands.SwerveDriveCommand;
@@ -32,6 +37,7 @@ public class RobotContainer {
 
   XboxController driverController = new XboxController(Constants.DriverControllerChannel);
   XboxController manipController = new XboxController(Constants.ManipControllerChannel);
+  XboxController vJoystick = new XboxController(Constants.vJoy);
   JoystickButton driverButtonB = new JoystickButton(driverController, Constants.buttonB);
   JoystickButton manipButtonA = new JoystickButton(manipController, Constants.buttonA);
   JoystickButton driverButtonRight = new JoystickButton(driverController, Constants.buttonRight);
@@ -44,6 +50,17 @@ public class RobotContainer {
   JoystickButton manipButtonRight = new JoystickButton(manipController, Constants.buttonRight);
   JoystickButton manipButtonLeft = new JoystickButton(manipController, Constants.buttonLeft);
   JoystickButton manipButtonOptions = new JoystickButton(manipController, Constants.buttonOptions);
+
+  JoystickButton vJoystickButton1 = new JoystickButton(vJoystick, 1);
+  JoystickButton vJoystickButton2 = new JoystickButton(vJoystick, 2);
+  JoystickButton vJoystickButton3 = new JoystickButton(vJoystick, 3);
+  JoystickButton vJoystickButton4 = new JoystickButton(vJoystick, 4);
+  JoystickButton vJoystickButton5 = new JoystickButton(vJoystick, 5);
+  JoystickButton vJoystickButton6 = new JoystickButton(vJoystick, 6);
+  JoystickButton vJoystickButton7 = new JoystickButton(vJoystick, 7);
+  JoystickButton vJoystickButton8 = new JoystickButton(vJoystick, 8);
+
+
   // A chooser for autonomous commands
   SendableChooser<Integer> m_chooser = new SendableChooser<>();
 
@@ -74,12 +91,23 @@ public class RobotContainer {
     m_DriveTrainPID.setDefaultCommand(new SwerveDriveCommand (() -> driverController.getLeftY(),
     () -> driverController.getLeftX(), () -> driverController.getRightX(), m_DriveTrainPID));
     //limelight allign works on both controllers
-    manipButtonX.whileTrue(new AlignCommand(m_DriveTrainPID, () -> frc.robot.subsystems.Stuff.angle));
-    driverButtonX.whileTrue(new AlignCommand(m_DriveTrainPID, () -> frc.robot.subsystems.Stuff.angle));
+    //manipButtonX.whileTrue(new AlignCommand(m_DriveTrainPID, () -> frc.robot.subsystems.Stuff.angle));
+    //driverButtonX.whileTrue(new AlignCommand(m_DriveTrainPID, () -> frc.robot.subsystems.Stuff.angle));
     
     //calling it
-    manipButtonB.whileTrue(new AprilAlignCommand(m_DriveTrainPID, () -> frc.robot.subsystems.Tags.tx2, frc.robot.subsystems.Tags.s8));
+    manipButtonX.whileTrue(new AprilAlignCommand(m_DriveTrainPID, () -> frc.robot.subsystems.Tags.tx2, frc.robot.subsystems.Tags.s8));
     
+    vJoystickButton1.whileTrue(frc.robot.commands.JoyFun.vJoyFunc(1));
+    vJoystickButton2.whileTrue(frc.robot.commands.JoyFun.vJoyFunc(2));
+    vJoystickButton3.whileTrue(frc.robot.commands.JoyFun.vJoyFunc(3));
+    vJoystickButton4.whileTrue(frc.robot.commands.JoyFun.vJoyFunc(4));
+    vJoystickButton5.whileTrue(frc.robot.commands.JoyFun.vJoyFunc(5));
+    vJoystickButton6.whileTrue(frc.robot.commands.JoyFun.vJoyFunc(6));
+    vJoystickButton7.whileTrue(frc.robot.commands.JoyFun.vJoyFunc(7));
+    vJoystickButton8.whileTrue(frc.robot.commands.JoyFun.vJoyFunc(8));
+
+
+
     //driverButtonB.whileTrue(new FieldAlignedCommand(m_DriveTrain));
     driverButtonRS.onTrue(m_DriveTrainPID.WheelzLock());
 

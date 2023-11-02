@@ -17,6 +17,7 @@ public final class Constants {
     // Controller
     public static int DriverControllerChannel = 0;
     public static int ManipControllerChannel = 1;
+    public static int vJoy = 2;
     public static int buttonA = 1;
     public static int buttonB = 2;
     public static int buttonX = 3;
