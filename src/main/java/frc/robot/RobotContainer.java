@@ -113,12 +113,15 @@ public class RobotContainer {
     
     //WP - DO NOT UNCOMMENT WITHOUT TALKING TO WARD
     //manipButtonOptions.whileTrue(new ManualRotateArmCommand(() -> manipController.getLeftY(), m_Arm));
+    
+    //saftey start
     m_Arm.setDefaultCommand(new AutoRotateArmCommand (m_Arm));
-    manipButtonLeft.onTrue(m_Arm.LowerArm()); // starts at 1 (5 deegrees) goes down
-    manipButtonRight.onTrue(m_Arm.RaiseArm());  //  starts at 1, when pressed goes up to 2 (82 Deegrees), when pressed again goes up to 3 (85 deegrees)
-    manipButtonA.toggleOnTrue(m_Arm.toggleArm());
-    manipButtonB.toggleOnTrue(m_Claw.toggleGripper());
-    manipButtonY.whileTrue(new AutoClawCommand(m_Claw));
+    //manipButtonLeft.onTrue(m_Arm.LowerArm()); // starts at 1 (5 deegrees) goes down
+    //manipButtonRight.onTrue(m_Arm.RaiseArm());  //  starts at 1, when pressed goes up to 2 (82 Deegrees), when pressed again goes up to 3 (85 deegrees)
+    //manipButtonA.toggleOnTrue(m_Arm.toggleArm());
+    //manipButtonB.toggleOnTrue(m_Claw.toggleGripper());
+    //manipButtonY.whileTrue(new AutoClawCommand(m_Claw));
+    //sfatey end
   }
 
   private void configureShuffleboard(){
