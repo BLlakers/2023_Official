@@ -26,15 +26,14 @@ public class Arm extends SubsystemBase {
   // AnalogIn port*/ 2, scale, offset);
 
 
-  DoubleSolenoid exampleDoublePH = new DoubleSolenoid(30, PneumaticsModuleType.REVPH, 0, 7);
+ 
   public TalonFX armRotationMtr = new TalonFX(Constants.armMotorChannel);
-  public DigitalInput ArmLimitSwitch = new DigitalInput(9);
   public int ArmPosition = 1;
   public double ArmDegrees = 0;
 
   // scaled values in psi units
   // double psi = pressureTransducer.get();
-  Compressor phCompressor = new Compressor(Constants.PHChannel, PneumaticsModuleType.REVPH);
+  
 
   // boolean pressureSwitch = phCompressor.getPressureSwitchValue();
   public Arm() {
@@ -47,7 +46,7 @@ public class Arm extends SubsystemBase {
   @Override
 
   public void periodic() {
-    phCompressor.enableAnalog(60, 120);
+  
     SmartDashboard.putNumber("Arm Position", ArmPosition);
     SmartDashboard.putNumber("Arm Degrees", ArmDegrees);
 
@@ -63,8 +62,8 @@ public class Arm extends SubsystemBase {
         () -> {
           // one-time action goes here
           ArmPosition = ArmPosition + 1;
-          if (ArmPosition == 4) {
-            ArmPosition = 3;
+          if (ArmPosition == 3) {
+            ArmPosition = 2;
           }
         }
     );
@@ -82,18 +81,5 @@ public class Arm extends SubsystemBase {
         });
   }
 
-  public CommandBase toggleArm() {
-    // Inline construction of command goes here.
-    // Subsystem::RunOnce implicitly requires `this` subsystem.
-
-    return runOnce(
-        () -> {
-          // one-time action goes here
-          // WP - Add code here to toggle the gripper solenoid
-          System.out.println(exampleDoublePH.get());
-          exampleDoublePH.set(Value.kReverse);
-          exampleDoublePH.toggle();
-        });
-  }
-
+  
 }

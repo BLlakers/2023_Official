@@ -40,15 +40,15 @@ public class ManualRotateArmCommand extends CommandBase {
       controllerValue = controllerValue * 0.5;
 
     // Limit switch is inverted logic
-    if (!m_Arm.ArmLimitSwitch.get()) {
+    
       m_Arm.armRotationMtr.setSelectedSensorPosition(5*120 *4096 /360);
       if (controllerValue >= 0) {
         m_Arm.armRotationMtr.set(ControlMode.PercentOutput, 0 * controllerValue);
       } else {
         m_Arm.armRotationMtr.set(ControlMode.PercentOutput, controllerValue);
-      }
 
-    } else {
+
+
 
       // m_Arm.armRotationMtr.set(ControlMode.PercentOutput, .5 * controllerValue);
       /*
