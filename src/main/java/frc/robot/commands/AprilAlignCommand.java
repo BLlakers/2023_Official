@@ -17,6 +17,7 @@ public class AprilAlignCommand extends CommandBase {
     m_tx2 = _tx2;
     m_s8 = _s8;
     addRequirements(m_DriveTrain);
+  }
 
 @Override
   public void initialize() { // Runs once at the beginning of the command
