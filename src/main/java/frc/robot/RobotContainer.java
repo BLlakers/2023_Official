@@ -94,7 +94,7 @@ public class RobotContainer {
     //driverButtonX.whileTrue(new AlignCommand(m_DriveTrainPID, () -> frc.robot.subsystems.Stuff.angle));
     
     //calling it
-    manipButtonX.whileTrue(new AprilAlignCommand(m_DriveTrainPID, () -> frc.robot.subsystems.Stuff.tx, () -> frc.robot.subsystems.Tags.s8));
+    manipButtonX.whileTrue(new AprilAlignCommand(m_DriveTrainPID, () -> frc.robot.subsystems.Stuff.angle, () -> frc.robot.subsystems.Tags.s8));
     
     //vJoystickButton1.whileTrue(frc.robot.commands.JoyFun.vJoyFunc(1));
     //vJoystickButton2.whileTrue(frc.robot.commands.JoyFun.vJoyFunc(2));
