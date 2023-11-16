@@ -54,7 +54,9 @@ public class AprilAlignCommand extends CommandBase {
     //fianlly drivinG
     Double move1 = move;
     //added to fix error in the last statemnt because it said move was "not final"
-
+    
+    System.out.println(move1)
+    
     if (m_tx2.getAsDouble() == 0){
       m_DriveTrain.drive(0,forwards,0, false, false);
       //now we are centered so move forwards
