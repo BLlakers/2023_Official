@@ -8,9 +8,9 @@ import frc.robot.subsystems.DriveTrainPID;
 
 public class AprilAlignCommand extends CommandBase {
   DriveTrainPID m_DriveTrain; // Creates an object DriveTrain
-  DoubleSupplier m_angle;
-  DoubleSupplier m_tx2;
-  DoubleSupplier m_s8;
+  //DoubleSupplier m_angle; unused so comment out
+  DoubleSupplier m_tx2; //x amount you need to move by
+  DoubleSupplier m_s8; //distance from tag
   public AprilAlignCommand(DriveTrainPID _DriveTrain, DoubleSupplier _tx2, DoubleSupplier _s8) { // Creates a contrusctor for auto command (How
                                                                        // things get set up)
     m_DriveTrain = _DriveTrain;
