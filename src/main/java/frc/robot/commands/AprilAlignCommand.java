@@ -16,6 +16,7 @@ public class AprilAlignCommand extends CommandBase {
     m_DriveTrain = _DriveTrain;
     m_tx2 = _tx2;
     m_s8 = _s8;
+    //s8 is the distance to move to get closer, tx2 is the x amount you need to move by
     addRequirements(m_DriveTrain);
   }
 
@@ -60,6 +61,8 @@ public class AprilAlignCommand extends CommandBase {
     if (m_tx2.getAsDouble() == 0){
       m_DriveTrain.drive(0,forwards,0, false, false);
       //now we are centered so move forwards
+      //this is currently not going to work (made it so it shouldent run) as it has not been tested yet
+      //and could go very poorly if it goes wrong
       if (m_s8.getAsDouble() <= 1.989){
         forwards = 0.1;
         //saying that if we are more than 12 inches, move forward. s8 increaces as we get closer btw
@@ -76,7 +79,7 @@ public class AprilAlignCommand extends CommandBase {
 
     }
     else{
-
+      //rotate in the correct direction, or not at all if alligned
       m_DriveTrain.drive(0, 0, move1, false, false);
     }
   }
