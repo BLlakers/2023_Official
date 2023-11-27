@@ -84,7 +84,7 @@ public class RobotContainer {
     m_Arm.setDefaultCommand(new AutoRotateArmCommand (m_Arm));
     manipButtonLeft.onTrue(m_Arm.LowerArm()); // starts at 1 (5 deegrees) goes down
     manipButtonRight.onTrue(m_Arm.RaiseArm());  //  starts at 1, when pressed goes up to 2 (82 Deegrees), when pressed again goes up to 3 (85 deegrees)
-    
+    // TODO RT Accelerate LT Deaccelerate
    
   }
 
