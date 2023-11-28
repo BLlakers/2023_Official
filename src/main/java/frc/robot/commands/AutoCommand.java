@@ -9,34 +9,35 @@ import com.revrobotics.CANSparkMax;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveTrainPID;
 
-
-
 public class AutoCommand extends CommandBase {
   DriveTrainPID m_DriveTrain; // Creates an object DriveTrain
   double leftY; // Creates a Variable for the Left joystick Y position (fake controller)
   double leftX; // Creates a Variable for the Left joystick X position (fake controller)
   double rightX; // Creates a Variable for the right joystick X position (fake controller)
   double counter; // Creates a Variable that counts the amount of time we keep the shooter on
-  double rotation; // Rotation Stuff Thingymajig 
+  double rotation; // Rotation Stuff Thingymajig
+  int a = 1; // counter if you wnat ti put it that way
   int m_AutoMode; // If AutoMode = 1 then run routine 1, if AutoMode = to 2 then run 2, if
                   // AutoMode equal to 3 run routine 3, otherwise don't run.
 
-  public AutoCommand(DriveTrainPID _DriveTrain, int _AutoMode) { // Creates a contrusctor for auto command (How things get
-                                                              // set up)
+  public AutoCommand(DriveTrainPID _DriveTrain, int _AutoMode) { // Creates a contrusctor for auto command (How things
+                                                                 // get
+    // set up)
     m_DriveTrain = _DriveTrain;
     m_AutoMode = _AutoMode;
     addRequirements(m_DriveTrain);
   }
 
+
   @Override
   public void initialize() { // Runs once at the beginning of the command
-    m_DriveTrain.m_backRight.m_driveMotor.getEncoder().setPosition(0);  // Sets the position of the encoder
+    m_DriveTrain.m_backRight.m_driveMotor.getEncoder().setPosition(0); // Sets the position of the encoder
     m_DriveTrain.m_frontRight.m_driveMotor.getEncoder().setPosition(0);
-    m_DriveTrain.m_backLeft.m_driveMotor.getEncoder().setPosition(0); 
+    m_DriveTrain.m_backLeft.m_driveMotor.getEncoder().setPosition(0);
     m_DriveTrain.m_frontLeft.m_driveMotor.getEncoder().setPosition(0);
     counter = 0; // Sets counter = 0
-    
-    m_DriveTrain.drive(0, 0, 0, false, false); 
+
+    m_DriveTrain.drive(0, 0, 0, false, false);
 
   }
 
@@ -47,6 +48,7 @@ public class AutoCommand extends CommandBase {
     leftX = 0.0; // Tells controller not to move
     rightX = 0.0; // Tells controller not to move (No RightY because it doesn't do anything)
     rotation =0.9;
+    a = 1;
 /* 
     double w1ca = (-1 * m_DriveTrain.getPosition(m_DriveTrain.frEncoder.get(), 267.4)) + 360;
     double w2ca = (-1 * m_DriveTrain.getPosition(m_DriveTrain.flEncoder.get(), 120.7)) + 360;
@@ -81,7 +83,7 @@ public class AutoCommand extends CommandBase {
       m_DriveTrain.drive(0, 0, 0, false, false); // says not to drive
     } else {*/
 
-      if (m_AutoMode == 1) {
+     /*if (m_AutoMode == 1) {
         if (Math.abs(m_DriveTrain.m_backRight.m_driveMotor.getEncoder().getPosition()) < 115.0597    ) { // Drives until the encoder is at
                                                                                     // rotations on the motor. 1 motor
                                                                                     // rotation = 8.14 wheel rotation
@@ -112,40 +114,67 @@ public class AutoCommand extends CommandBase {
           m_DriveTrain.drive(-leftY, leftX, rightX, false, false);
         } else {
           m_DriveTrain.drive( 0, 0, 0, false, false);
-          counter = counter + 1;
-        }
-      }
+          counter = counter + 1; */
+        
+      
 
-      else if (m_AutoMode == 4) {
+       if (m_AutoMode == 4) {
         if (Math.abs(m_DriveTrain.m_backRight.m_driveMotor.getEncoder().getPosition()) < 69.9379474941) {
           m_DriveTrain.drive(-leftY, leftX, rightX, false, false);
+          
         }
-        m_DriveTrain.drive( 0, 0, rotation, false, false);
+        
+        else if (a == 1){
+          m_DriveTrain.drive( 0, 0, rotation, false, false);
+          if (Math.abs(m_DriveTrain.m_backRight.m_turningMotor.getEncoder().getPosition()) < 10){
+            a = 2;
+          } 
+          
+        }
          
 
-        else if (Math.abs(m_DriveTrain.m_backRight.m_driveMotor.getEncoder().getPosition()) <163.188544153) {
+        else if (Math.abs(m_DriveTrain.m_backRight.m_driveMotor.getEncoder().getPosition()) < 163.188544153) {
           m_DriveTrain.drive(-leftY, leftX, rightX, false, false);
-        
-        m_DriveTrain.drive( 0, 0, rotation, false, false);
+          System.out.println("Reached Second Forward");
+        }
+      
+        else if (a == 2){
+          m_DriveTrain.drive( 0, 0, rotation, false, false);
+          if (Math.abs(m_DriveTrain.m_backRight.m_turningMotor.getEncoder().getPosition()) < 20){
+            a = 0;
+          }
+          
+        }
 
         
         else if (Math.abs(m_DriveTrain.m_backRight.m_driveMotor.getEncoder().getPosition()) < 46.6252983293) {
           m_DriveTrain.drive(-leftY, leftX, rightX, false, false);
         }
-
+      }
         else if (m_AutoMode == 5) {
           if (Math.abs(m_DriveTrain.m_backRight.m_driveMotor.getEncoder().getPosition()) < 132.105011933) {
             m_DriveTrain.drive(-leftY, leftX, rightX, false, false);
-          
-          m_DriveTrain.drive( 0, 0, rotation, false, false);
-           
-  
+            //m_DriveTrain.drive( 0, 0, rotation, false, false);
+          }
+
+          else if (a == 1){
+            m_DriveTrain.drive( 0, 0, rotation, false, false);
+            if (Math.abs(m_DriveTrain.m_backRight.m_turningMotor.getEncoder().getPosition())> 10){
+              a = 2;
+            }
+          }
           else if (Math.abs(m_DriveTrain.m_backRight.m_driveMotor.getEncoder().getPosition()) <163.188544153) {
             m_DriveTrain.drive(-leftY, leftX, rightX, false, false);
           
-          m_DriveTrain.drive( 0, 0, rotation, false, false);
-  
-          
+          //m_DriveTrain.drive( 0, 0, rotation, false, false);
+          }
+
+          else if (a == 2){
+            m_DriveTrain.drive( 0, 0, rotation, false, false);
+            if (Math.abs(m_DriveTrain.m_backRight.m_turningMotor.getEncoder().getPosition())> 10){
+              a = 0;
+            }
+          }
           else if (Math.abs(m_DriveTrain.m_backRight.m_driveMotor.getEncoder().getPosition()) < 46.6252983293) {
             m_DriveTrain.drive(-leftY, leftX, rightX, false, false);
           }
@@ -154,9 +183,11 @@ public class AutoCommand extends CommandBase {
 
 
       }
-     //}
-  }
- 
+    
+  
+
+
+       
   @Override
   public void end(boolean interrupted) {
     m_DriveTrain.drive(0, 0, 0, false, true);
@@ -167,3 +198,4 @@ public class AutoCommand extends CommandBase {
     return false;
   }
 }
+  

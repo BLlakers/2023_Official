@@ -94,9 +94,8 @@ public class RobotContainer {
 
   private void configureShuffleboard(){
         // Add commands to the autonomous command chooser
-        m_chooser.setDefaultOption("Auto 1", 1);
-        m_chooser.addOption("Auto 2", 2);
-        m_chooser.addOption("Auto 3", 3);
+        m_chooser.setDefaultOption("Auto 4", 4);
+        m_chooser.addOption("Auto 5", 5);
     
         SmartDashboard.putData(m_chooser);
      
