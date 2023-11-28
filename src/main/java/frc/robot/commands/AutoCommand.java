@@ -126,7 +126,8 @@ public class AutoCommand extends CommandBase {
         
         else if (a == 1){
           m_DriveTrain.drive( 0, 0, rotation, false, false);
-          if (Math.abs(m_DriveTrain.m_backRight.m_turningMotor.getEncoder().getPosition()) < 10){
+          System.out.println(m_DriveTrain.m_backRight.m_turningMotor.getEncoder().getPosition());
+          if (Math.abs(m_DriveTrain.m_backRight.m_turningMotor.getEncoder().getPosition()) > 10){
             a = 2;
           } 
           
@@ -140,7 +141,7 @@ public class AutoCommand extends CommandBase {
       
         else if (a == 2){
           m_DriveTrain.drive( 0, 0, rotation, false, false);
-          if (Math.abs(m_DriveTrain.m_backRight.m_turningMotor.getEncoder().getPosition()) < 20){
+          if (Math.abs(m_DriveTrain.m_backRight.m_turningMotor.getEncoder().getPosition()) > 20){
             a = 0;
           }
           
