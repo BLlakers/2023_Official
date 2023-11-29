@@ -46,7 +46,7 @@ public class Stuff extends SubsystemBase {
             isAligned = false;
             //it not alligned so make the global varible = the angle needed to travel. the -1 is so 
             //it knows if you are at 50 degreese, you need to move -50 to get to the right spot
-            angle = camerax * -1;
+            angle = -camerax;
             //puts on smartdashboard
             SmartDashboard.putNumber("subsystemangle", angle);
         }
