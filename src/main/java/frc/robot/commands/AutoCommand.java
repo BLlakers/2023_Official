@@ -16,7 +16,7 @@ public class AutoCommand extends CommandBase {
   double rightX; // Creates a Variable for the right joystick X position (fake controller)
   double counter; // Creates a Variable that counts the amount of time we keep the shooter on
   double rotation; // Rotation Stuff Thingymajig
-  int a = 1; // counter if you wnat ti put it that way
+  int a = 1; // counter if you wnat it put it that way
   int m_AutoMode; // If AutoMode = 1 then run routine 1, if AutoMode = to 2 then run 2, if
                   // AutoMode equal to 3 run routine 3, otherwise don't run.
 
@@ -153,30 +153,44 @@ public class AutoCommand extends CommandBase {
         }
       }
         else if (m_AutoMode == 5) {
+          //reason why numbers so high because you cant reset neo encoders back to zero. you can on talon motors, but not these.
+
           if (Math.abs(m_DriveTrain.m_backRight.m_driveMotor.getEncoder().getPosition()) < 132.105011933) {
             m_DriveTrain.drive(-leftY, leftX, rightX, false, false);
+            //moves forwards untill 132.105011933 rotations is reached. moves 132.105011933 rotations on top of 0 already travled
             //m_DriveTrain.drive( 0, 0, rotation, false, false);
           }
 
           else if (a == 1){
+            //first turn
             m_DriveTrain.drive( 0, 0, rotation, false, false);
-            if (Math.abs(m_DriveTrain.m_backRight.m_turningMotor.getEncoder().getPosition())> 10){
+            if (Math.abs(m_DriveTrain.m_backRight.m_driveMotor.getEncoder().getPosition()) < 152.097011933 ){
+              //moves 19.992 rotations on top of 132.105011933 already turned
+              //moves 19.992 rotations at the motor, but at the wheels the equates to roughly 2.45 roations which (for 8 inch circumfrance wheels) should turn you 90 degreese
+              //if wheels not 8 inch, then this number will need to change
+              //reads drive motor, not turning motor because the turning motor turns the wheels directin its facing, not the robot itself
               a = 2;
+              //this is so it goes to the second turn
             }
           }
-          else if (Math.abs(m_DriveTrain.m_backRight.m_driveMotor.getEncoder().getPosition()) <163.188544153) {
+          else if (Math.abs(m_DriveTrain.m_backRight.m_driveMotor.getEncoder().getPosition()) < 315.285556086) {
+            //moves forwards untill 315.285556086 rotations is reached. moves 163.188544153 rotations on top of 152.097011933 already travled
             m_DriveTrain.drive(-leftY, leftX, rightX, false, false);
           
           //m_DriveTrain.drive( 0, 0, rotation, false, false);
           }
 
           else if (a == 2){
+            //second turn
             m_DriveTrain.drive( 0, 0, rotation, false, false);
-            if (Math.abs(m_DriveTrain.m_backRight.m_turningMotor.getEncoder().getPosition())> 10){
+            if (Math.abs(m_DriveTrain.m_backRight.m_driveMotor.getEncoder().getPosition()) < 335.277556086){
+              //moves forwards untill 335.277556086 rotations is reached. moves 19.992 rotations on top of 315.285556086 already travled
               a = 0;
+              //resets so now no turn
             }
           }
-          else if (Math.abs(m_DriveTrain.m_backRight.m_driveMotor.getEncoder().getPosition()) < 46.6252983293) {
+          else if (Math.abs(m_DriveTrain.m_backRight.m_driveMotor.getEncoder().getPosition()) < 381.9028544153) {
+            //moves forwards untill 381.9028544153 rotations is reached. moves 46.6252983293 rotations on top of 335.277556086 already travled
             m_DriveTrain.drive(-leftY, leftX, rightX, false, false);
           }
 
