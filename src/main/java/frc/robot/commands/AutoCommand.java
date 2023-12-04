@@ -48,7 +48,7 @@ public class AutoCommand extends CommandBase {
     leftX = 0.0; // Tells controller not to move
     rightX = 0.0; // Tells controller not to move (No RightY because it doesn't do anything)
     rotation =0.9;
-    a = 1;
+
 /* 
     double w1ca = (-1 * m_DriveTrain.getPosition(m_DriveTrain.frEncoder.get(), 267.4)) + 360;
     double w2ca = (-1 * m_DriveTrain.getPosition(m_DriveTrain.flEncoder.get(), 120.7)) + 360;
