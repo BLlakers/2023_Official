@@ -1,5 +1,7 @@
 package frc.robot.commands;
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.revrobotics.CANSparkMax;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Arm;
@@ -21,17 +23,21 @@ public class AutoRotateArmCommand extends CommandBase {
 
   @Override
   public void execute() {
-    double m_sensorPosition = m_Arm.armRotationMtr.getSelectedSensorPosition(); // Variable to hold the sensor position
-    m_Arm.ArmDegrees = (m_sensorPosition * 360 * 0.72) / (120 * 2048); // 120:1 gearbox
+    // double m_sensorPosition = m_Arm.armRotationMtr.getSelectedSensorPosition(); // Variable to hold the sensor position
+    // m_Arm.ArmDegrees = (m_sensorPosition * 360 * 0.72) / (120 * 2048); // 120:1 gearbox
     double drivevalue = 0;
 
     // Determine the target position
     if (m_Arm.ArmPosition == 1) { // The target position for 0 = Lower, 1 = pickup, 2 = Drop
-      targetDegrees = Constants.Positions[0];
+      //targetDegrees = Constants.Positions[0];
+      m_Arm.armRotationMtr.set(-1);
     } else if (m_Arm.ArmPosition == 2) {
-      targetDegrees = Constants.Positions[1];
-    } 
-    SmartDashboard.putNumber("Target", targetDegrees);
+      //targetDegrees = Constants.Positions[1];
+      m_Arm.armRotationMtr.set(0);
+    } else if (m_Arm.ArmPosition == 3) { 
+      m_Arm.armRotationMtr.set(1);
+    }
+   // SmartDashboard.putNumber("Target", targetDegrees);
     SmartDashboard.putNumber("Arm Degrees", m_Arm.ArmDegrees);
     // Use bang bang control to reach the target
    
@@ -47,7 +53,7 @@ public class AutoRotateArmCommand extends CommandBase {
   }  
   @Override
   public void end(boolean interrupted) {
-    m_Arm.armRotationMtr.set(ControlMode.PercentOutput, 0);
+    m_Arm.armRotationMtr.set(0);
   }
 
   public boolean isFinished() {

@@ -7,11 +7,15 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.DigitalInput;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 public class Arm extends SubsystemBase {
 
@@ -27,10 +31,10 @@ public class Arm extends SubsystemBase {
 
 
  
-  public TalonFX armRotationMtr = new TalonFX(Constants.armMotorChannel);
+  // public TalonFX armRotationMtr = new TalonFX(Constants.armMotorChannel);
+  public CANSparkMax armRotationMtr = new CANSparkMax(Constants.armMotorChannel, MotorType.kBrushless);
   public int ArmPosition = 1;
   public double ArmDegrees = 0;
-
   // scaled values in psi units
   // double psi = pressureTransducer.get();
   
@@ -38,9 +42,12 @@ public class Arm extends SubsystemBase {
   // boolean pressureSwitch = phCompressor.getPressureSwitchValue();
   public Arm() {
     //armRotationMtr.setInverted(true);
-    armRotationMtr.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
-    armRotationMtr.setSelectedSensorPosition(85*120 *2048/360);
+    //armRotationMtr.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
+    //armRotationMtr.setSelectedSensorPosition(85*120 *2048/360);
+    RelativeEncoder encoder = armRotationMtr.getEncoder();
+    double encoderPos = encoder.getPosition();
     ArmPosition = 1;
+  
   }
 
   @Override
@@ -49,6 +56,8 @@ public class Arm extends SubsystemBase {
   
     SmartDashboard.putNumber("Arm Position", ArmPosition);
     SmartDashboard.putNumber("Arm Degrees", ArmDegrees);
+    String jared = "Jared";
+
 
   }
 
@@ -62,8 +71,8 @@ public class Arm extends SubsystemBase {
         () -> {
           // one-time action goes here
           ArmPosition = ArmPosition + 1;
-          if (ArmPosition == 3) {
-            ArmPosition = 2;
+          if (ArmPosition == 4) {
+            ArmPosition = 3;
           }
         }
     );

@@ -22,8 +22,8 @@ public class ManualRotateArmCommand extends CommandBase {
 
   @Override
   public void execute() {
-    double m_sensorPosition = -m_Arm.armRotationMtr.getSelectedSensorPosition(); // Variable to hold the sensor position
-    m_Arm.ArmDegrees = (m_sensorPosition * 360) / (120 * 4096); // 120:1 gearbox
+    // double m_sensorPosition = -m_Arm.armRotationMtr.getSelectedSensorPosition(); // Variable to hold the sensor position
+    // m_Arm.ArmDegrees = (m_sensorPosition * 360) / (120 * 4096); // 120:1 gearbox
 
     double controllerValue = m_leftY.getAsDouble();
 
@@ -41,12 +41,12 @@ public class ManualRotateArmCommand extends CommandBase {
 
     // Limit switch is inverted logic
     
-      m_Arm.armRotationMtr.setSelectedSensorPosition(5*120 *4096 /360);
+      // m_Arm.armRotationMtr.setSelectedSensorPosition(5*120 *4096 /360);
       if (controllerValue >= 0) {
-        m_Arm.armRotationMtr.set(ControlMode.PercentOutput, 0 * controllerValue);
-      } else {
-        m_Arm.armRotationMtr.set(ControlMode.PercentOutput, controllerValue);
-
+        // m_Arm.armRotationMtr.set(ControlMode.PercentOutput, 0 * controllerValue);
+       } else {
+        // m_Arm.armRotationMtr.set(ControlMode.PercentOutput, controllerValue);
+      
 
 
 
@@ -62,19 +62,19 @@ public class ManualRotateArmCommand extends CommandBase {
       if (m_Arm.ArmDegrees >= 90) {
         // Then don't go further
         if (controllerValue <= 0) {
-          m_Arm.armRotationMtr.set(ControlMode.PercentOutput, 0 * controllerValue);
+          // m_Arm.armRotationMtr.set(ControlMode.PercentOutput, 0 * controllerValue);
         } else {
-          m_Arm.armRotationMtr.set(ControlMode.PercentOutput, 1 * controllerValue);
+          // m_Arm.armRotationMtr.set(ControlMode.PercentOutput, 1 * controllerValue);
         }
       } else {
-        m_Arm.armRotationMtr.set(ControlMode.PercentOutput, 1 * controllerValue);
+        // m_Arm.armRotationMtr.set(ControlMode.PercentOutput, 1 * controllerValue);
       }
     }
   }
 
   @Override
   public void end(boolean interrupted) {
-    m_Arm.armRotationMtr.set(ControlMode.PercentOutput, 0);
+    // m_Arm.armRotationMtr.set(ControlMode.PercentOutput, 0);
   }
 
   public boolean isFinished() {
