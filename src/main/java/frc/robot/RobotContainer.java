@@ -15,8 +15,6 @@ import frc.robot.commands.ManualRotateArmCommand;
 import frc.robot.commands.AutoRotateArmCommand;
 import frc.robot.commands.SwerveDriveCommand;
 import frc.robot.commands.AlignCommand;
-import frc.robot.commands.AutoClawCommand;
-import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Tags;
 import frc.robot.subsystems.Stuff;
@@ -26,7 +24,6 @@ import frc.robot.subsystems.Stuff;
 public class RobotContainer {
   DriveTrainPID m_DriveTrainPID = new DriveTrainPID();
   Arm m_Arm = new Arm();
-  Claw m_Claw = new Claw();
   Stuff m_Stuff = new Stuff();
   Tags m_Tags = new Tags();
 
@@ -88,8 +85,6 @@ public class RobotContainer {
     manipButtonLeft.onTrue(m_Arm.LowerArm()); // starts at 1 (5 deegrees) goes down
     manipButtonRight.onTrue(m_Arm.RaiseArm());  //  starts at 1, when pressed goes up to 2 (82 Deegrees), when pressed again goes up to 3 (85 deegrees)
     manipButtonA.toggleOnTrue(m_Arm.toggleArm());
-    manipButtonB.toggleOnTrue(m_Claw.toggleGripper());
-    manipButtonY.whileTrue(new AutoClawCommand(m_Claw));
   }
 
   private void configureShuffleboard(){

@@ -16,7 +16,7 @@ public class AutoCommand extends CommandBase {
   double rightX; // Creates a Variable for the right joystick X position (fake controller)
   double counter; // Creates a Variable that counts the amount of time we keep the shooter on
   double rotation; // Rotation Stuff Thingymajig
-  int a = 1; // counter if you wnat it put it that way
+  int a = 5; // counter if you wnat it put it that way
   int m_AutoMode; // If AutoMode = 1 then run routine 1, if AutoMode = to 2 then run 2, if
                   // AutoMode equal to 3 run routine 3, otherwise don't run.
 
@@ -136,35 +136,44 @@ public class AutoCommand extends CommandBase {
    //System.out.println(Math.abs(m_DriveTrain.m_backRight.m_driveMotor.getEncoder().getPosition()));
   
     if (m_AutoMode == 4) {
-      if (Math.abs(m_DriveTrain.m_backRight.m_driveMotor.getEncoder().getPosition()) < 69.9379474941) {
+      if (a == 5){
+          System.out.println("ONE");
+        m_DriveTrain.drive(0, 0, rotation, false, false);
+        if (Math.abs(m_DriveTrain.m_backRight.m_driveMotor.getEncoder().getPosition()) > 19.5 ) {
+          System.out.println("TWO");
+          a = 1;}
+      }
+      if (Math.abs(m_DriveTrain.m_backRight.m_driveMotor.getEncoder().getPosition()) < 104.5) {
         m_DriveTrain.drive(-leftY, leftX, rightX, false, false);
-        System.out.println("ONE");
+        System.out.println("THREE");
       } else if (a == 1) {
         System.out.println("TWO");
-        m_DriveTrain.drive(0, 0, rotation, false, false);
-        if (Math.abs(m_DriveTrain.m_backRight.m_driveMotor.getEncoder().getPosition()) > 100) {
+        m_DriveTrain.drive(0, 0, -rotation, false, false);
+        if (Math.abs(m_DriveTrain.m_backRight.m_driveMotor.getEncoder().getPosition()) > 124) {
           System.out.println("THREE");
           a = 2;
         } 
       }
        
-      else if (Math.abs(m_DriveTrain.m_backRight.m_driveMotor.getEncoder().getPosition()) < 163.188544153) {
+      else if (Math.abs(m_DriveTrain.m_backRight.m_driveMotor.getEncoder().getPosition()) < 313) {
         System.out.println("FOUR");
         m_DriveTrain.drive(-leftY, leftX, rightX, false, false);
       }
       else if (a == 2) {
         System.out.println("FIVE");
-        m_DriveTrain.drive(0, 0, rotation, false, false);
-        if (Math.abs(m_DriveTrain.m_backRight.m_driveMotor.getEncoder().getPosition()) > 20) {
+        m_DriveTrain.drive(0, 0, -rotation, false, false);
+        if (Math.abs(m_DriveTrain.m_backRight.m_driveMotor.getEncoder().getPosition()) > 332.5) {
           System.out.println("SIX");
           a = 0;
         }
       }
       if (a == 0) {
-        m_DriveTrain.drive(0, 0, 0, false, false);
-        a = 0;
+        m_DriveTrain.drive(-leftY, leftX, rightX, false, false);
+        if (Math.abs(m_DriveTrain.m_backRight.m_driveMotor.getEncoder().getPosition()) > 389.5) {
+          m_DriveTrain.drive(0, 0, 0, false, true);
+        }
       }
-      } 
+      }
      if (m_AutoMode == 5) {
       // reason why numbers so high because you cant reset neo encoders back to zero.
       // you can on talon motors, but not these.
