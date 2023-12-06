@@ -30,12 +30,12 @@ public class AutoRotateArmCommand extends CommandBase {
     // Determine the target position
     if (m_Arm.ArmPosition == 1) { // The target position for 0 = Lower, 1 = pickup, 2 = Drop
       //targetDegrees = Constants.Positions[0];
-      m_Arm.armRotationMtr.set(-1);
+      m_Arm.armRotationMtr.set(ControlMode.PercentOutput, -1);
     } else if (m_Arm.ArmPosition == 2) {
       //targetDegrees = Constants.Positions[1];
-      m_Arm.armRotationMtr.set(0);
+      m_Arm.armRotationMtr.set(ControlMode.PercentOutput, 0);
     } else if (m_Arm.ArmPosition == 3) { 
-      m_Arm.armRotationMtr.set(1);
+      m_Arm.armRotationMtr.set(ControlMode.PercentOutput, 1);
     }
    // SmartDashboard.putNumber("Target", targetDegrees);
     SmartDashboard.putNumber("Arm Degrees", m_Arm.ArmDegrees);
@@ -53,7 +53,7 @@ public class AutoRotateArmCommand extends CommandBase {
   }  
   @Override
   public void end(boolean interrupted) {
-    m_Arm.armRotationMtr.set(0);
+    m_Arm.armRotationMtr.set(ControlMode.PercentOutput, 0);
   }
 
   public boolean isFinished() {

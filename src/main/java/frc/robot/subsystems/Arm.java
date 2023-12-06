@@ -31,8 +31,8 @@ public class Arm extends SubsystemBase {
 
 
  
-  // public TalonFX armRotationMtr = new TalonFX(Constants.armMotorChannel);
-  public CANSparkMax armRotationMtr = new CANSparkMax(Constants.armMotorChannel, MotorType.kBrushless);
+  public TalonFX armRotationMtr = new TalonFX(Constants.armMotor1);
+  public TalonFX armRotationMtr2 = new TalonFX(Constants.armMotor2);
   public int ArmPosition = 1;
   public double ArmDegrees = 0;
   // scaled values in psi units
@@ -41,11 +41,12 @@ public class Arm extends SubsystemBase {
 
   // boolean pressureSwitch = phCompressor.getPressureSwitchValue();
   public Arm() {
-    //armRotationMtr.setInverted(true);
-    //armRotationMtr.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
-    //armRotationMtr.setSelectedSensorPosition(85*120 *2048/360);
-    RelativeEncoder encoder = armRotationMtr.getEncoder();
-    double encoderPos = encoder.getPosition();
+    armRotationMtr.setInverted(true);
+    armRotationMtr.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
+    armRotationMtr.setSelectedSensorPosition(85*120 *2048);
+    System.out.println(armRotationMtr.getSelectedSensorPosition());
+    //RelativeEncoder encoder = armRotationMtr.getEncoder();
+    //double encoderPos = encoder.getPosition();
     ArmPosition = 1;
   
   }
