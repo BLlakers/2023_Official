@@ -63,8 +63,8 @@ public class Arm extends SubsystemBase {
         () -> {
           // one-time action goes here
           ArmPosition = ArmPosition + 1;
-          if (ArmPosition == 4) {
-            ArmPosition = 3;
+          if (ArmPosition == 5) {
+            ArmPosition = 4;
           }
         }
     );

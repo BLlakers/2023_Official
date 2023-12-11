@@ -27,15 +27,14 @@ public class Stuff extends SubsystemBase {
 
         // finding if it is within he perfect angles. perfect angles are from 13.5 to
         // 5.7, with 9.6 being perfectly centered
-        if ((camerax < 10) && (camerax > 8)) {
+        if (12 >= camerax && 6 <= camerax) {
             isAligned = true;
-            SmartDashboard.putBoolean("Aligned?", isAligned);
             angle = 9.6;
         } 
         else if(camerax == 0 && cameray == 0){
             isAligned = false;
-            SmartDashboard.putBoolean("Aligned?", isAligned);
             angle = 9.6;
+
         }
         else {
             isAligned = false;
@@ -43,7 +42,7 @@ public class Stuff extends SubsystemBase {
             // eventuly translate into motr rpm (example: 1 degree = 0.2 motor rpm) and i
             // will tell the motrs
             // to move at the rpm need to make it be as close to 9.6 as possible
-            angle = camerax;
+            angle = camerax - 9.6 * -1;
             SmartDashboard.putNumber("subsystemangle", angle);
         }
         SmartDashboard.putNumber("subsystemangle", angle);

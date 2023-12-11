@@ -8,7 +8,7 @@ import com.revrobotics.CANSparkMax;
 import frc.robot.Constants;
 
 import frc.robot.subsystems.DriveTrainPID;
-
+import frc.robot.RobotContainer;
 public class SwerveDriveCommand extends CommandBase {
   DoubleSupplier m_leftY;
   DoubleSupplier m_leftX;
@@ -17,6 +17,7 @@ public class SwerveDriveCommand extends CommandBase {
   // double leftX;
   // double rightX;
   DriveTrainPID m_DriveTrain;
+  RobotContainer m_RobotContainer;
   // double x;
   // double y;
   // double rot;
@@ -69,15 +70,16 @@ public class SwerveDriveCommand extends CommandBase {
 
     // Finds the X Value of the Right Stick on the Controller and Takes Care of
     // Joystick Drift
-    if (Math.abs(rightX) < (2 * Constants.deadzone)) {
+    if (Math.abs(rightX) < Constants.deadzone) {
       rot = 0.0;
     } else {
       rot = -rightX;
     }
     
     //Swerve drive uses a different Y and X than expected!
-    m_DriveTrain.drive(y,x,rot, false, m_DriveTrain.WheelLock);
-   
+    
+    m_DriveTrain.drive(y,x,rot, m_DriveTrain.FieldRelativeEnable, m_DriveTrain.WheelLock);
+     
   }
 
   // Called once the command ends or is interrupted.

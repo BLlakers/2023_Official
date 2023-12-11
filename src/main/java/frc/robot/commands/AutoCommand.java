@@ -20,11 +20,11 @@ public class AutoCommand extends CommandBase {
   int m_AutoMode; // If AutoMode = 1 then run routine 1, if AutoMode = to 2 then run 2, if
                   // AutoMode equal to 3 run routine 3, otherwise don't run.
 
-  public AutoCommand(DriveTrainPID _DriveTrain, int _AutoMode) { // Creates a contrusctor for auto command (How things get
+  public AutoCommand(DriveTrainPID m_DriveTrain, int m_AutoMode) { // Creates a contrusctor for auto command (How things get
                                                               // set up)
-    m_DriveTrain = _DriveTrain;
-    m_AutoMode = _AutoMode;
-    addRequirements(m_DriveTrain);
+    this.m_DriveTrain = m_DriveTrain;
+    this.m_AutoMode = m_AutoMode;
+    addRequirements(this.m_DriveTrain);
   }
 
   @Override
@@ -42,7 +42,7 @@ public class AutoCommand extends CommandBase {
   @Override
   public void execute() { // Runs multiple times
 
-    leftY = -0.2; // Tells controller to move backwards on the Y axis
+    leftY = -0.40; // Tells controller to move backwards on the Y axis, was -0.35
     leftX = 0.0; // Tells controller not to move
     rightX = 0.0; // Tells controller not to move (No RightY because it doesn't do anything)
 /* 
@@ -84,7 +84,7 @@ public class AutoCommand extends CommandBase {
                                                                                     // rotations on the motor. 1 motor
                                                                                     // rotation = 8.14 wheel rotation
                                                                                     //115.0597
-          m_DriveTrain.drive(leftY, leftX, rightX, false, false);
+          m_DriveTrain.drive(-leftY, leftX, rightX, false, false);
         } else {
           m_DriveTrain.drive(0, 0, 0, false, false);
           counter = counter + 1;
@@ -92,11 +92,11 @@ public class AutoCommand extends CommandBase {
       }
 
       else if (m_AutoMode == 2) {
-        if (Math.abs(m_DriveTrain.m_backRight.m_driveMotor.getEncoder().getPosition()) < 59) { // Drives until the encoder is at
+        if (Math.abs(m_DriveTrain.m_backRight.m_driveMotor.getEncoder().getPosition()) < 59.7) { // Drives until the encoder is at
                                                                                 // rotations on the motor. 1 motor
                                                                                 // rotation = 8.14 wheel rotation (11
                                                                                 // inches = wheel)
-          m_DriveTrain.drive(leftY, leftX, rightX, false, false);
+          m_DriveTrain.drive(-leftY, leftX, rightX, false, false);
         } else {
           m_DriveTrain.drive(0, 0, 0, false, true);
           counter = counter + 1;
@@ -107,7 +107,7 @@ public class AutoCommand extends CommandBase {
         if (Math.abs(m_DriveTrain.m_backRight.m_driveMotor.getEncoder().getPosition()) < 125.0597) { // Drives until the encoder is at
                                                                                     // rotations on the motor. 1 motor
                                                                                     // rotation = 8.14 wheel rotation
-          m_DriveTrain.drive(leftY, leftX, rightX, false, false);
+          m_DriveTrain.drive(-leftY, leftX, rightX, false, false);
         } else {
           m_DriveTrain.drive( 0, 0, 0, false, false);
           counter = counter + 1;
