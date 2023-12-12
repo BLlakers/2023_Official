@@ -44,12 +44,12 @@ public class AprilAlignCommand extends CommandBase {
     //figuring out which way to drive
     if (m_tx2.getAsDouble() >= 3){
       //too far to right so it slowly moves to the left
-      move = -0.2;
+      move = 0.2;
     }
 
     else if (m_tx2.getAsDouble() <= -3){
       //too far to the left so it slowly moves to the right
-      move = 0.2;
+      move = -0.2;
     }
 
     //fianlly drivinG
@@ -80,7 +80,7 @@ public class AprilAlignCommand extends CommandBase {
     }
     else{
       //rotate in the correct direction, or not at all if alligned
-      m_DriveTrain.drive(0, 0, move1, false, false);
+      m_DriveTrain.drive(0, move1, 0, false, false);
     }
   }
 

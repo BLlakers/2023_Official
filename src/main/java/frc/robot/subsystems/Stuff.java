@@ -11,7 +11,7 @@ public class Stuff extends SubsystemBase {
     public static Double angle = 0.0;
     //public Double aligncamera; unsued so commented it out
     public boolean isAligned;
-
+    
     @Override
     public void periodic() {
         // camera stuff, from the documentation
@@ -20,10 +20,11 @@ public class Stuff extends SubsystemBase {
         //gets its network key
         NetworkTableEntry tx = table.getEntry("tx");
         NetworkTableEntry ty = table.getEntry("ty");
+   
         //camera x and y from network values becoming varables
         double camerax = tx.getDouble(0.0);
         double cameray = ty.getDouble(0.0);
-
+        
         //puts on smartdashboard
         SmartDashboard.putNumber("Limelight X", camerax);
         SmartDashboard.putNumber("Limelight Y", cameray);
