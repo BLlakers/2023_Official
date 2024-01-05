@@ -61,7 +61,7 @@ public class Arm extends SubsystemBase {
     //System.out.println(armRotationMtr.getSelectedSensorPosition());
     //RelativeEncoder encoder = armRotationMtr.getEncoder();
     //double encoderPos = encoder.getPosition();
-    ArmPosition = 1;
+
   
   }
 
@@ -87,8 +87,8 @@ public class Arm extends SubsystemBase {
         () -> {
           // one-time action goes here
           ArmPosition = ArmPosition + 1;
-          if (ArmPosition == 5) {
-            ArmPosition = 4;
+          if (ArmPosition == 4) {
+            ArmPosition = 3;
           }
         }
     );
