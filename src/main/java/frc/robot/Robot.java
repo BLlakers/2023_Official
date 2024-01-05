@@ -6,14 +6,14 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-
+import frc.robot.subsystems.Arm;
 
 //some imports no longer needed but leaving them here untill final version
 
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
   private RobotContainer m_robotContainer;
-
+  private Arm m_Arm;
   String codeVersion = "0.0";
 //commit
   @Override
@@ -47,7 +47,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
-    m_robotContainer.m_Arm.ArmPosition = 1;
+   // m_robotContainer.m_Arm.ArmPosition = 1;
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
    // m_robotContainer.m_DriveTrain.startYaw = m_robotContainer.m_DriveTrain.getGyroYaw();
     if (m_autonomousCommand != null) {
@@ -62,7 +62,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-   m_robotContainer.m_Arm.ArmPosition = 1;
+   //m_robotContainer.m_Arm.ArmPosition = 1;
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
       
@@ -76,7 +76,7 @@ public class Robot extends TimedRobot {
     //WP - Was not compiling as of 3/4, to be addressed
     //cameraTest();
     //SmartDashboard.putNumber("Start Yaw", m_robotContainer.m_DriveTrain.startYaw);
-   
+  
   }
 
   @Override

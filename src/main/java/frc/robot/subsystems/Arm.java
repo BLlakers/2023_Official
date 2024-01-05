@@ -7,11 +7,15 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.DigitalInput;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 public class Arm extends SubsystemBase {
 
@@ -26,30 +30,50 @@ public class Arm extends SubsystemBase {
   // AnalogIn port*/ 2, scale, offset);
 
 
-  DoubleSolenoid exampleDoublePH = new DoubleSolenoid(30, PneumaticsModuleType.REVPH, 0, 7);
-  public TalonFX armRotationMtr = new TalonFX(Constants.armMotorChannel);
-  public DigitalInput ArmLimitSwitch = new DigitalInput(9);
+ 
+  // public TalonFX armRotationMtr = new TalonFX(Constants.armMotorChannel);
+  public CANSparkMax armRotationMtr1 = new CANSparkMax(Constants.armMotorChannel1, MotorType.kBrushless);
+  public CANSparkMax armRotationMtr2 = new CANSparkMax(Constants.armMotorChannel2, MotorType.kBrushless);
+  
+
+ // public int ArmPosition = 2;
+  //public TalonFX armRotationMtr = new TalonFX(Constants.armMotor1);
+  //public TalonFX armRotationMtr2 = new TalonFX(Constants.armMotor2);
   public int ArmPosition = 1;
   public double ArmDegrees = 0;
-
   // scaled values in psi units
   // double psi = pressureTransducer.get();
-  Compressor phCompressor = new Compressor(Constants.PHChannel, PneumaticsModuleType.REVPH);
+  
 
   // boolean pressureSwitch = phCompressor.getPressureSwitchValue();
   public Arm() {
+    //armRotationMtr1.setInverted(true);
+    //armRotationMtr2.setInverted(true);
+    //armRotationMtr.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
+    //armRotationMtr.setSelectedSensorPosition(85*120 *2048/360);
+    //RelativeEncoder encoder = armRotationMtr.getEncoder();
+    //double encoderPos = encoder.getPosition();
+  
+
     //armRotationMtr.setInverted(true);
-    armRotationMtr.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
-    armRotationMtr.setSelectedSensorPosition(85*120 *2048/360);
+    //armRotationMtr.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
+    //armRotationMtr.setSelectedSensorPosition(85*120 *2048);
+    //System.out.println(armRotationMtr.getSelectedSensorPosition());
+    //RelativeEncoder encoder = armRotationMtr.getEncoder();
+    //double encoderPos = encoder.getPosition();
     ArmPosition = 1;
+  
   }
 
   @Override
 
   public void periodic() {
-    phCompressor.enableAnalog(60, 120);
+   //armRotationMtr1.follow(armRotationMtr2);
+   
     SmartDashboard.putNumber("Arm Position", ArmPosition);
     SmartDashboard.putNumber("Arm Degrees", ArmDegrees);
+    String jared = "Jared";
+
 
   }
 
@@ -82,18 +106,5 @@ public class Arm extends SubsystemBase {
         });
   }
 
-  public CommandBase toggleArm() {
-    // Inline construction of command goes here.
-    // Subsystem::RunOnce implicitly requires `this` subsystem.
-
-    return runOnce(
-        () -> {
-          // one-time action goes here
-          // WP - Add code here to toggle the gripper solenoid
-          System.out.println(exampleDoublePH.get());
-          exampleDoublePH.set(Value.kReverse);
-          exampleDoublePH.toggle();
-        });
-  }
-
+  
 }

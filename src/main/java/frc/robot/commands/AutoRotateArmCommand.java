@@ -1,5 +1,7 @@
 package frc.robot.commands;
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.revrobotics.CANSparkMax;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Arm;
@@ -21,66 +23,53 @@ public class AutoRotateArmCommand extends CommandBase {
 
   @Override
   public void execute() {
-    double m_sensorPosition = m_Arm.armRotationMtr.getSelectedSensorPosition(); // Variable to hold the sensor position
-    m_Arm.ArmDegrees = (m_sensorPosition * 360 * 0.72) / (120 * 2048); // 120:1 gearbox
-    double drivevalue = 0;
+    // double m_sensorPosition = m_Arm.armRotationMtr.getSelectedSensorPosition(); // Variable to hold the sensor position
+    // m_Arm.ArmDegrees = (m_sensorPosition * 360 * 0.72) / (120 * 2048); // 120:1 gearbox
+    
 
     // Determine the target position
     if (m_Arm.ArmPosition == 1) { // The target position for 0 = Lower, 1 = pickup, 2 = Drop
-      targetDegrees = Constants.Positions[0];
+      //targetDegrees = Constants.Positions[0];
+      //m_Arm.armRotationMtr.set(ControlMode.PercentOutput, -1);
+      m_Arm.armRotationMtr2.set(-1);
+      //m_Arm.armRotationMtr1.set(-1);
+      System.out.println("JGANG$:");
+      //System.out.println(m_Arm.armRotationMtr2.get());
     } else if (m_Arm.ArmPosition == 2) {
-      targetDegrees = Constants.Positions[1];
-    } else if (m_Arm.ArmPosition == 3) {
-      targetDegrees = Constants.Positions[2];
-    } else if (m_Arm.ArmPosition == 4) {
-      targetDegrees = Constants.Positions[3];
+      //targetDegrees = Constants.Positions[1];
+      //m_Arm.armRotationMtr.set(ControlMode.PercentOutput, 0);
+      m_Arm.armRotationMtr2.set(0);
+      //m_Arm.armRotationMtr1.set(0);
+      System.out.println("KKKKKKKKKKKKKKKKKKK");
+      //System.out.println(m_Arm.armRotationMtr2.get());
+    } else if (m_Arm.ArmPosition == 3) { 
+      m_Arm.armRotationMtr2.set(1);
+      //m_Arm.armRotationMtr1.set(1);
+      System.out.println("JAJSJSJDJASJD");
+      //System.out.println(m_Arm.armRotationMtr2.get());
+      //m_Arm.armRotationMtr.set(ControlMode.PercentOutput, 1);
     }
-    SmartDashboard.putNumber("Target", targetDegrees);
+   // SmartDashboard.putNumber("Target", targetDegrees);
     SmartDashboard.putNumber("Arm Degrees", m_Arm.ArmDegrees);
     // Use bang bang control to reach the target
-    if (m_Arm.ArmDegrees <= (targetDegrees - Constants.ArmTolerance)) {
-      drivevalue = drivevalue + 0.25;
-    } else if (m_Arm.ArmDegrees >= (targetDegrees + Constants.ArmTolerance)) {
-      drivevalue = drivevalue - 0.25;
-    } else {
-
-    }
+   
 
     // Apply a feedforward constant to hold the arm in position
-    drivevalue = drivevalue + 0.14 * Math.sin(m_Arm.ArmDegrees * Math.PI / 180);
-    SmartDashboard.putNumber("Drive Value", drivevalue);
+    
+  
 
-    if (!m_Arm.ArmLimitSwitch.get()) {
+    //if (!m_Arm.ArmLimitSwitch.get()) {
       // Logic if the limit switch is pressed
       // Set the encoder to the lower position, update the position we are at
       // accordingly
-      m_Arm.armRotationMtr.setSelectedSensorPosition(Constants.Positions[0] * 120 * 2048 / (360 * 0.72));
 
-      if (drivevalue <= 0) {
-        m_Arm.armRotationMtr.set(ControlMode.PercentOutput, 0 * drivevalue);
-      } else {
-        m_Arm.armRotationMtr.set(ControlMode.PercentOutput, drivevalue);
-      }
-
-    } else {
-      // Logic if the limit switch is NOT pressed
-      if (m_Arm.ArmDegrees >= 90) {
-        // Then don't go further
-        if (drivevalue >= 0) {
-          // then if the motor drivevalue is greater than 0. DONT LET MOTOR OVERDRIVE 90 deegrees. 
-          m_Arm.armRotationMtr.set(ControlMode.PercentOutput, 0 * drivevalue); // dont drive
-        } else {
-          m_Arm.armRotationMtr.set(ControlMode.PercentOutput, 1 * drivevalue); // drive like normal
-        }
-      } else {
-        m_Arm.armRotationMtr.set(ControlMode.PercentOutput, 1 * drivevalue); // drive like normal
-      }
-    }
   }
-
   @Override
   public void end(boolean interrupted) {
-    m_Arm.armRotationMtr.set(ControlMode.PercentOutput, 0);
+    //m_Arm.armRotationMtr.set(ControlMode.PercentOutput, 0);
+    m_Arm.armRotationMtr1.set(0);
+    m_Arm.armRotationMtr2.set(0);
+    System.out.println("??????");
   }
 
   public boolean isFinished() {

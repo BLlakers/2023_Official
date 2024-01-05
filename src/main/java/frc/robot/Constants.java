@@ -6,12 +6,14 @@ public final class Constants {
     public static int PDHChannel = 20; // REV Power Distribution Hub
 
     // Arm
-    public static int armMotorChannel = 9;
-    public static double PositionDown = 5;
-    public static double PickupGround = 30;
-    public static double PositionPickup = 67.75; //69
-    public static double PositionDrop = 86; //87
-    public static double[] Positions = {PositionDown, PickupGround, PositionPickup, PositionDrop};
+    public static int armMotorChannel1 = 9;
+    public static int armMotorChannel2 = 10;
+    //public static int armMotor1 = 9;
+    //public static int armMotor2 = 10;
+    public static double PositionDown = 0;
+    public static double PositionPickup = 30; //69
+   
+    public static double[] Positions = {PositionDown, PositionPickup};
     public static double ArmTolerance = 3;
    
 
@@ -45,5 +47,6 @@ public final class Constants {
     public static double spinTolerance = 4.2;
     public static double length = 0.58;
     public static double width = 0.58;
+   
 
 }
