@@ -25,17 +25,26 @@ public class AutoRotateArmCommand extends CommandBase {
   public void execute() {
     // double m_sensorPosition = m_Arm.armRotationMtr.getSelectedSensorPosition(); // Variable to hold the sensor position
     // m_Arm.ArmDegrees = (m_sensorPosition * 360 * 0.72) / (120 * 2048); // 120:1 gearbox
-    double drivevalue = 0;
+    
 
     // Determine the target position
     if (m_Arm.ArmPosition == 1) { // The target position for 0 = Lower, 1 = pickup, 2 = Drop
       //targetDegrees = Constants.Positions[0];
-      m_Arm.armRotationMtr.set(-1);
+      m_Arm.armRotationMtr2.set(-1);
+      //m_Arm.armRotationMtr1.set(-1);
+      System.out.println("JGANG$:");
+      //System.out.println(m_Arm.armRotationMtr2.get());
     } else if (m_Arm.ArmPosition == 2) {
       //targetDegrees = Constants.Positions[1];
-      m_Arm.armRotationMtr.set(0);
+      m_Arm.armRotationMtr2.set(0);
+      //m_Arm.armRotationMtr1.set(0);
+      System.out.println("KKKKKKKKKKKKKKKKKKK");
+      //System.out.println(m_Arm.armRotationMtr2.get());
     } else if (m_Arm.ArmPosition == 3) { 
-      m_Arm.armRotationMtr.set(1);
+      m_Arm.armRotationMtr2.set(1);
+      //m_Arm.armRotationMtr1.set(1);
+      System.out.println("JAJSJSJDJASJD");
+      //System.out.println(m_Arm.armRotationMtr2.get());
     }
    // SmartDashboard.putNumber("Target", targetDegrees);
     SmartDashboard.putNumber("Arm Degrees", m_Arm.ArmDegrees);
@@ -44,16 +53,19 @@ public class AutoRotateArmCommand extends CommandBase {
 
     // Apply a feedforward constant to hold the arm in position
     
-    SmartDashboard.putNumber("Drive Value", drivevalue);
+  
 
     //if (!m_Arm.ArmLimitSwitch.get()) {
       // Logic if the limit switch is pressed
       // Set the encoder to the lower position, update the position we are at
       // accordingly
-  }  
+
+  }
   @Override
   public void end(boolean interrupted) {
-    m_Arm.armRotationMtr.set(0);
+    m_Arm.armRotationMtr1.set(0);
+    m_Arm.armRotationMtr2.set(0);
+    System.out.println("??????");
   }
 
   public boolean isFinished() {

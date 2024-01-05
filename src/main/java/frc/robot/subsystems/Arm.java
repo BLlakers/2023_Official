@@ -32,8 +32,11 @@ public class Arm extends SubsystemBase {
 
  
   // public TalonFX armRotationMtr = new TalonFX(Constants.armMotorChannel);
-  public CANSparkMax armRotationMtr = new CANSparkMax(Constants.armMotorChannel, MotorType.kBrushless);
-  public int ArmPosition = 1;
+  public CANSparkMax armRotationMtr1 = new CANSparkMax(Constants.armMotorChannel1, MotorType.kBrushless);
+  public CANSparkMax armRotationMtr2 = new CANSparkMax(Constants.armMotorChannel2, MotorType.kBrushless);
+  
+
+  public int ArmPosition = 2;
   public double ArmDegrees = 0;
   // scaled values in psi units
   // double psi = pressureTransducer.get();
@@ -41,19 +44,22 @@ public class Arm extends SubsystemBase {
 
   // boolean pressureSwitch = phCompressor.getPressureSwitchValue();
   public Arm() {
-    //armRotationMtr.setInverted(true);
+    //armRotationMtr1.setInverted(true);
+    //armRotationMtr2.setInverted(true);
     //armRotationMtr.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
     //armRotationMtr.setSelectedSensorPosition(85*120 *2048/360);
-    RelativeEncoder encoder = armRotationMtr.getEncoder();
-    double encoderPos = encoder.getPosition();
-    ArmPosition = 1;
+    //RelativeEncoder encoder = armRotationMtr.getEncoder();
+    //double encoderPos = encoder.getPosition();
+  
+
   
   }
 
   @Override
 
   public void periodic() {
-  
+   //armRotationMtr1.follow(armRotationMtr2);
+   
     SmartDashboard.putNumber("Arm Position", ArmPosition);
     SmartDashboard.putNumber("Arm Degrees", ArmDegrees);
     String jared = "Jared";
