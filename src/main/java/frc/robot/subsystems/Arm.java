@@ -36,7 +36,10 @@ public class Arm extends SubsystemBase {
   public CANSparkMax armRotationMtr2 = new CANSparkMax(Constants.armMotorChannel2, MotorType.kBrushless);
   
 
-  public int ArmPosition = 2;
+ // public int ArmPosition = 2;
+  //public TalonFX armRotationMtr = new TalonFX(Constants.armMotor1);
+  //public TalonFX armRotationMtr2 = new TalonFX(Constants.armMotor2);
+  public int ArmPosition = 1;
   public double ArmDegrees = 0;
   // scaled values in psi units
   // double psi = pressureTransducer.get();
@@ -52,6 +55,13 @@ public class Arm extends SubsystemBase {
     //double encoderPos = encoder.getPosition();
   
 
+    //armRotationMtr.setInverted(true);
+    //armRotationMtr.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
+    //armRotationMtr.setSelectedSensorPosition(85*120 *2048);
+    //System.out.println(armRotationMtr.getSelectedSensorPosition());
+    //RelativeEncoder encoder = armRotationMtr.getEncoder();
+    //double encoderPos = encoder.getPosition();
+    ArmPosition = 1;
   
   }
 
